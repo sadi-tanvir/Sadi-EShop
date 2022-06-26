@@ -17,13 +17,13 @@ const Navbar = () => {
                 </div>
                 <div className="flex-none">
                     <Link href="/">
-                        <a className={`${router.pathname == '/' ? 'text-primary border-b-4 border-primary' : 'text-primary'} font-bold p-2`}>
+                        <a className={`${router.pathname == '/' ? 'text-primary border-b-4 border-primary' : 'text-primary'} font-bold  px-4 py-2`}>
                             Home
                         </a>
                     </Link>
-                    <Link href="/blogs">
-                        <a className={`${router.pathname == '/blogs' ? 'text-primary border-b-4 border-primary' : 'text-primary'} font-bold ml-5`}>
-                            Shop
+                    <Link href="/vegetables">
+                        <a className={`${router.pathname == '/vegetables' ? 'text-primary border-b-4 border-primary' : 'text-primary'} font-bold px-4 py-2`}>
+                            Vegetables
                         </a>
                     </Link>
 
