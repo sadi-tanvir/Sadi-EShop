@@ -1,7 +1,6 @@
 import Link from "next/link"
 import { useRouter } from "next/router"
-import CartSidebar from "../CartSidebar";
-import CartIcon from "../shared/Icon";
+import CartItem from "../CartItem";
 
 
 const Navbar = () => {
@@ -63,26 +62,11 @@ const Navbar = () => {
                                 </Link>
                             </ul>
                         </div>
-
                         <a className="text-secondary font-bold ml-5">About</a>
                         <a className="text-secondary font-bold ml-5">Contact</a>
-
-
                     </div>
                 </div>
-                <div className="indicator ml-5">
-                    <span className="indicator-item badge badge-secondary text-white font-bold">2</span>
-                    <CartIcon iconClass="w-8 h-8 text-primary" />
-                </div>
-                <div className="dropdown">
-                    <label tabIndex="0" className="btn m-1">Click</label>
-                    <div tabIndex="0" className="dropdown-content card card-compact w-64 p-2 shadow bg-primary text-primary-content">
-                        <div className="card-body">
-                            <h3 className="card-title">Card title!</h3>
-                            <p>you can use any element as a dropdown.</p>
-                        </div>
-                    </div>
-                </div>
+                <CartItem />
             </nav>
         </>
     );
