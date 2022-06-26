@@ -1,11 +1,12 @@
 import Link from "next/link"
 import { useRouter } from "next/router"
+import CartIcon from "../shared/Icon";
 
 
 const Navbar = () => {
     // router
     const router = useRouter()
- 
+
     return (
         <nav className="navbar bg-base-100 flex justify-center items-center">
             <div className="w-10/12 flex justify-between items-center">
@@ -28,7 +29,13 @@ const Navbar = () => {
 
                     <a className="text-primary font-bold ml-5">About</a>
                     <a className="text-primary font-bold ml-5">Contact</a>
+
+
                 </div>
+            </div>
+            <div className="indicator ml-5">
+                <span className="indicator-item badge badge-primary text-white font-bold">2</span>
+                <CartIcon />
             </div>
         </nav>
     );
