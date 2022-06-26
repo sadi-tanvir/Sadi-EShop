@@ -1,11 +1,15 @@
 import React from 'react';
-import Products from '../components/Products/Products';
+import FruitSlider from '../components/Products/productSlider/FruitSlider';
+import VegetableSlider from '../components/Products/productSlider/VegetableSlider';
 
 const Food = () => {
     return (
-        <div>
-            <Products />
+        <>
+        <div className="my-14">
+            <VegetableSlider />
+            <FruitSlider />
         </div>
+        </>
     );
 };
 

@@ -1,6 +1,6 @@
 import Banner from "../components/Banner";
 import HeadInfo from "../components/HeadInfo"
-import HomeProducts from "../components/Products/HomeProducts/HomeProducts";
+import HomeProducts from "../components/Products/HomeProducts";
 
 
 const Home = () => {
