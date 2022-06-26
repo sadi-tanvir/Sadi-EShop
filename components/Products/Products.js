@@ -5,7 +5,7 @@ const Products = () => {
     return (
         <>
             <div className="w-full flex flex-row justify-center items-center my-10">
-                <div className="w-11/12 grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="w-11/12 grid grid-cols-1 md:grid-cols-4 gap-4">
                     {
                         [...Array(9)].map((elem, index) => <ProductCard key={index} />)
                     }

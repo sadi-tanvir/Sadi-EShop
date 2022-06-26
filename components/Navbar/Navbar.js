@@ -21,10 +21,20 @@ const Navbar = () => {
                             Home
                         </a>
                     </Link>
-                    <Link href="/vegetables">
-                        <a className={`${router.pathname == '/vegetables' ? 'text-primary border-b-4 border-primary' : 'text-primary'} font-bold px-4 py-2`}>
-                            Vegetables
-                        </a>
+                    {/* <a className={`${router.pathname == '/vegetables' ? 'text-primary border-b-4 border-primary' : 'text-primary'} font-bold px-4 py-2`}>
+                        Vegetables
+                    </a> */}
+
+                    <Link href="/food">
+                        <div className="dropdown dropdown-end">
+                            <label tabIndex="0" className={`${router.pathname == '/food' ? 'text-primary border-b-4 border-primary' : 'text-primary'} font-bold px-4 py-2  cursor-pointer`}>Food</label>
+                            <ul tabIndex="0" className="menu dropdown-content p-2 shadow bg-base-100 w-52 mt-4">
+                                <li className="bg-primary rounded-md">
+                                    <a className="">Vegetables</a>
+                                </li>
+                                <li><a>Fruits</a></li>
+                            </ul>
+                        </div>
                     </Link>
 
                     <a className="text-primary font-bold ml-5">About</a>
