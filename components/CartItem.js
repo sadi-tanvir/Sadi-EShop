@@ -41,7 +41,10 @@ const CartItem = () => {
                                 <h1 className="text-xl font-semibold text-secondary">Order Total</h1>
                                 <h1 className="text-xl font-semibold text-primary">$500</h1>
                             </div>
-                            <div className="flex flex-col justify-center items-center px-4">
+                            <div className="grid grid-cols-2 gap-x-3 px-4">
+                                <button className="style_btn btn btn-accent w-full text-white font-bold flex justify-center items-center">
+                                    Clear Cart
+                                </button>
                                 <button className="style_btn btn btn-primary w-full text-white font-bold flex justify-center items-center">
                                     Checkout
                                 </button>
