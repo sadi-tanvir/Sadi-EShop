@@ -19,7 +19,14 @@ a {
   box-sizing: border-box;
 }
 
-.sadi {
-  background-color: red;
-  color: orange;
+.style_btn {
+  transition: .3s ease-in-out;
+}
+.style_btn:hover {
+  transform: scale(.95);
+  transition: .4s ease-in-out;
+}
+.style_btn:active {
+  transform: scale(1.05);
+  transition: .4s ease-in-out;
 }
