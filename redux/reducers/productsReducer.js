@@ -7,11 +7,11 @@ import { createReducer } from "@reduxjs/toolkit"
 
 const initialState = {
     cart: {},
-    subTotal: 0
 }
 
 
 const productsReducer = createReducer(initialState, {
+    // add product to the cart
     addToCart: (state, action) => {
         const { productId, qty } = action.payload;
         let newCart = state.cart;
@@ -25,6 +25,8 @@ const productsReducer = createReducer(initialState, {
         state.cart = newCart
         localStorage.setItem('cart', JSON.stringify(state.cart))
     },
+
+    // remove product or decrement quantity from the cart  
     removeFromCart: (state, action) => {
         const newCart = state.cart;
         const { productId, qty } = action.payload;
@@ -38,11 +40,15 @@ const productsReducer = createReducer(initialState, {
         state.cart = newCart
         localStorage.setItem('cart', JSON.stringify(state.cart))
     },
+
+    // clear cart data
     clearCart: (state, action) => {
         state.cart = {}
         localStorage.removeItem('cart')
         console.log('cart has been cleared')
     },
+
+
     reloadCart: (state, action) => {
         state.cart = action.payload
     }

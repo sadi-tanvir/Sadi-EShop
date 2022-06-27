@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import CartIcon, { DeleteIcon, InfoIcon } from '../shared/Icon';
 import { useSelector, useDispatch } from "react-redux"
 import CartItem from './CartItem';
@@ -8,9 +8,17 @@ const Cart = () => {
     // redux
     const dispatch = useDispatch()
     const { cart } = useSelector(state => state.productsReducer)
-
     // next router
     const router = useRouter()
+
+    // total cart's product price
+    const sub = Object.keys(cart).map(k => {
+        return cart[k].qty * cart[k].price
+    })
+    const totalPrice = sub.reduce((pre, curr) => pre + curr, 0)
+    
+
+
 
     // re set cart data to redux store
     useEffect(() => {
@@ -37,7 +45,7 @@ const Cart = () => {
                         <div className="w-full absolute bottom-2">
                             <div className="flex justify-between items-center px-10 pb-2">
                                 <h1 className="text-xl font-semibold text-secondary">Order Total</h1>
-                                <h1 className="text-xl font-semibold text-primary">$500</h1>
+                                <h1 className="text-xl font-semibold text-primary">${totalPrice}</h1>
                             </div>
                             <div className="card-actions justify-end grid grid-cols-2 mt-4 pr-4">
                                 <button onClick={() => dispatch({ type: 'clearCart' })} className="style_btn py-1 bg-accent px-6 rounded-md text-white font-bold flex justify-center items-center">

@@ -8,7 +8,7 @@ const Product = () => {
 
     // Add Item To the cart
     const addToCart = () => {
-        dispatch({ type: 'addToCart', payload: { name: 'Sound Box', price: 600, qty: 1, productId: 4, size: "xxxl", variant: "red" } })
+        dispatch({ type: 'addToCart', payload: { name: 'Stand', price: 50, qty: 1, productId: 2, size: "xxxl", variant: "red" } })
     }
 
     return (
