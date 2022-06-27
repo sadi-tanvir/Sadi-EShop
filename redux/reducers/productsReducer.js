@@ -13,13 +13,13 @@ const initialState = {
 
 const productsReducer = createReducer(initialState, {
     addToCart: (state, action) => {
-        const { itemCode, qty } = action.payload;
+        const { productId, qty } = action.payload;
         let newCart = state.cart;
 
-        if (itemCode in state.cart) {
-            newCart[itemCode].qty = newCart[itemCode].qty + qty
+        if (productId in state.cart) {
+            newCart[productId].qty = newCart[productId].qty + qty
         } else {
-            newCart[itemCode] = { ...action.payload }
+            newCart[productId] = { ...action.payload }
         }
 
         state.cart = newCart
@@ -27,13 +27,13 @@ const productsReducer = createReducer(initialState, {
     },
     removeFromCart: (state, action) => {
         const newCart = state.cart;
-        const { itemCode, qty } = action.payload;
-        if (itemCode in newCart) {
-            newCart[itemCode]["qty"] = newCart[itemCode]["qty"] - qty
+        const { productId, qty } = action.payload;
+        if (productId in newCart) {
+            newCart[productId]["qty"] = newCart[productId]["qty"] - qty
         }
 
-        if (newCart[itemCode]["qty"] <= 0) {
-            delete newCart[itemCode]
+        if (newCart[productId]["qty"] <= 0) {
+            delete newCart[productId]
         }
         state.cart = newCart
         localStorage.setItem('cart', JSON.stringify(state.cart))
@@ -42,6 +42,9 @@ const productsReducer = createReducer(initialState, {
         state.cart = {}
         localStorage.removeItem('cart')
         console.log('cart has been cleared')
+    },
+    reloadCart: (state, action) => {
+        state.cart = action.payload
     }
 })
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import CartIcon, { DownArrowIcon, FacebookIcon, HeartIcon, MessageIcon, StarHalfIcon, StarIcon, TwitterIcon } from '../../components/shared/Icon';
-import {useDispatch} from "react-redux"
+import { useDispatch } from "react-redux"
 
 const Product = () => {
     // redux
@@ -8,7 +8,7 @@ const Product = () => {
 
     // Add Item To the cart
     const addToCart = () => {
-        dispatch({type: 'addToCart', payload: {name: 'pc', price:5000, qty:1, itemCode:2, size:"xxxl", variant: "red"}})
+        dispatch({ type: 'addToCart', payload: { name: 'Sound Box', price: 600, qty: 1, productId: 4, size: "xxxl", variant: "red" } })
     }
 
     return (
@@ -64,15 +64,23 @@ const Product = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="flex">
-                                <span className="title-font font-medium text-2xl text-gray-900">$58.00</span>
-                                <button onClick={addToCart} className="flex ml-auto text-white bg-primary border-0 py-2 px-6 focus:outline-none hover:bg-primary style_btn rounded">
-                                    Add To Cart
-                                    <CartIcon iconClass="h-7 w-7" />
-                                </button>
-                                <button className="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4">
-                                    <HeartIcon />
-                                </button>
+                            <div className="flex flex-col">
+                                <div className="flex justify-start items-center">
+                                    <span className="text-2xl text-secondary font-bold">$58.00</span>
+                                    <button className="rounded-full ml-32 w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500">
+                                        <HeartIcon />
+                                    </button>
+                                </div>
+                                <div className="flex justify-start items-center mt-10">
+                                    <button className="flex text-white bg-secondary border-0 py-2 px-6 focus:outline-none hover:bg-primary style_btn rounded">
+                                        Buy Now
+                                        {/* <CartIcon iconClass="h-7 w-7" /> */}
+                                    </button>
+                                    <button onClick={addToCart} className="flex ml-10 text-white bg-primary border-0 py-2 px-6 focus:outline-none hover:bg-primary style_btn rounded">
+                                        Add To Cart
+                                        <CartIcon iconClass="h-7 w-7" />
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
