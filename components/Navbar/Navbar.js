@@ -1,7 +1,7 @@
 import Link from "next/link"
 import { useRouter } from "next/router"
 import CartItem from "../Cart/Cart";
-
+import { MdAccountCircle } from 'react-icons/md';
 
 const Navbar = () => {
     // router
@@ -66,7 +66,10 @@ const Navbar = () => {
                         <a className="text-secondary font-bold ml-5">Contact</a>
                     </div>
                 </div>
-
+                
+                {/* login icon */}
+                <MdAccountCircle onClick={() => router.push('/login')} className="text-3xl ml-3 cursor-pointer style_btn" />
+                
                 {/* cart items */}
                 <CartItem />
             </nav>

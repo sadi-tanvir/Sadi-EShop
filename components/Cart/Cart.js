@@ -30,7 +30,7 @@ const Cart = () => {
             <div className="dropdown dropdown-end">
                 <label tabIndex="0">
                     <div className="indicator ml-5">
-                        <span className="indicator-item badge badge-secondary text-white font-bold">2</span>
+                        <span className="indicator-item badge badge-secondary text-white font-bold">{Object.keys(cart).length}</span>
                         <CartIcon iconClass="w-8 h-8 text-primary" />
                     </div>
                 </label>
