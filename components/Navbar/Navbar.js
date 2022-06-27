@@ -66,6 +66,8 @@ const Navbar = () => {
                         <a className="text-secondary font-bold ml-5">Contact</a>
                     </div>
                 </div>
+                
+                {/* cart items */}
                 <CartItem />
             </nav>
         </>

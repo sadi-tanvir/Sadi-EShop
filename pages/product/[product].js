@@ -1,7 +1,16 @@
 import React from 'react';
 import CartIcon, { DownArrowIcon, FacebookIcon, HeartIcon, MessageIcon, StarHalfIcon, StarIcon, TwitterIcon } from '../../components/shared/Icon';
+import {useDispatch} from "react-redux"
 
 const Product = () => {
+    // redux
+    const dispatch = useDispatch()
+
+    // Add Item To the cart
+    const addToCart = () => {
+        dispatch({type: 'addToCart', payload: {name: 'pc', price:5000, qty:1, itemCode:2, size:"xxxl", variant: "red"}})
+    }
+
     return (
         <>
             <section className="text-gray-600 body-font overflow-hidden">
@@ -57,7 +66,7 @@ const Product = () => {
                             </div>
                             <div className="flex">
                                 <span className="title-font font-medium text-2xl text-gray-900">$58.00</span>
-                                <button className="flex ml-auto text-white bg-primary border-0 py-2 px-6 focus:outline-none hover:bg-primary style_btn rounded">
+                                <button onClick={addToCart} className="flex ml-auto text-white bg-primary border-0 py-2 px-6 focus:outline-none hover:bg-primary style_btn rounded">
                                     Add To Cart
                                     <CartIcon iconClass="h-7 w-7" />
                                 </button>

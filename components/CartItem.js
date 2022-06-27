@@ -1,7 +1,17 @@
 import React from 'react';
 import CartIcon, { DeleteIcon, InfoIcon } from './shared/Icon';
+import { useSelector, useDispatch } from "react-redux"
 
 const CartItem = () => {
+    // redux
+    const dispatch = useDispatch()
+    const { cart } = useSelector(state => state.productsReducer)
+
+
+    const handleClear = () => {
+        dispatch({ type: 'clearCart' })
+    }
+
     return (
         <>
             <div className="dropdown dropdown-end">
@@ -21,8 +31,8 @@ const CartItem = () => {
                                 <div className="ml-3">
                                     <h2 className="text-sm font-bold text-secondary">Vegitables Tomato</h2>
                                     {/* <div className="flex justify-start items-center mt-2"> */}
-                                        <p className="text-sm text-bold">Qty: 5pcs</p>
-                                        <p className="text-primary font-semibold text-md">$550</p>
+                                    <p className="text-sm text-bold">Qty: 5pcs</p>
+                                    <p className="text-primary font-semibold text-md">$550</p>
                                     {/* </div> */}
                                 </div>
                                 <div className="mt-5 ml-5">
@@ -34,7 +44,7 @@ const CartItem = () => {
                                         <option>4</option>
                                         <option>5</option>
                                     </select> */}
-                                    <DeleteIcon iconClass="w-7 h-7 text-accent" />
+                                    <DeleteIcon iconClass="w-7 h-7 text-accent style_btn" />
                                 </div>
                             </div>
                         </div>
@@ -45,7 +55,7 @@ const CartItem = () => {
                                 <h1 className="text-xl font-semibold text-primary">$500</h1>
                             </div>
                             <div className="card-actions justify-end grid grid-cols-2 mt-4 pr-4">
-                                <button className="style_btn py-1 bg-accent px-6 rounded-md text-white font-bold flex justify-center items-center">
+                                <button onClick={handleClear} className="style_btn py-1 bg-accent px-6 rounded-md text-white font-bold flex justify-center items-center">
                                     Clear Cart <DeleteIcon iconClass="w-7 h-7 text-white" />
                                 </button>
                                 <button className="style_btn px-6 py-1 bg-primary rounded-md text-white font-bold flex justify-center items-center">
