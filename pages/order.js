@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 const order = () => {
     // redux
     const { cart } = useSelector(state => state.productsReducer)
+    
     // total cart's product price
     const sub = Object.keys(cart).map(k => {
         return cart[k].qty * cart[k].price
@@ -17,7 +18,8 @@ const order = () => {
                     <div className="lg:w-4/5 mx-auto flex flex-wrap">
                         <div className="lg:w-1/2 w-full lg:pr-10 lg:py-6 mb-6 lg:mb-0">
                             <h2 className="text-sm title-font text-gray-500 tracking-widest">Sadi EShop</h2>
-                            <h1 className="text-gray-900 text-3xl title-font font-medium mb-4">Your Order ID #55568</h1>
+                            <h1 className="text-gray-900 text-3xl title-font font-medium ">Your Order ID #55568</h1>
+                            <small className="mb-4 inline-block">your order has been  placed successfully</small>
                             <div className="flex mb-4">
                                 <a className="flex-grow text-secondary border-b-2 border-gray-300 py-2 text-lg px-1">Product Name</a>
                                 <a className="flex-grow border-b-2 border-gray-300 py-2 text-lg px-1">Quantity</a>
