@@ -1,6 +1,7 @@
 import { EmailIcon, PasswordIcon } from '../components/shared/Icon';
 import Link from "next/link"
 import SocialLogin from '../components/SocialLogin';
+import ForgetPassword from '../components/ForgetPassword';
 
 const Login = () => {
 
@@ -27,7 +28,8 @@ const Login = () => {
                             </div>
                             <button type="submit" className="block w-full bg-primary mt-5 py-2 rounded-2xl hover:bg-primary hover:-translate-y-1 transition-all duration-500 text-white font-semibold mb-2">Login</button>
                             <div className="flex justify-between mt-4">
-                                <span className="text-sm ml-2 hover:primary cursor-pointer hover:-translate-y-1 duration-500 transition-all">Forgot Password ?</span>
+                                <label htmlFor="my-modal-3" className="text-sm ml-2 hover:primary cursor-pointer hover:-translate-y-1 duration-500 transition-all">Forgot Password ?</label>
+                                <ForgetPassword />
                                 <Link href="/register" >
                                     <span className="text-sm ml-2 hover:primary cursor-pointer hover:-translate-y-1 duration-500 transition-all">
                                         Do not have an account yet?

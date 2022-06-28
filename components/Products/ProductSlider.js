@@ -18,10 +18,10 @@ const ProductSlider = ({children}) => {
             spaceBetween={50}
             slidesPerView={4}
             navigation
-            pagination={{ clickable: true }}
+            // pagination={{ clickable: true }} 
             // scrollbar={{ draggable: true }}
-            onSwiper={(swiper) => console.log(swiper)}
-            onSlideChange={() => console.log('slide change')}
+            // onSwiper={(swiper) => console.log(swiper)}
+            // onSlideChange={() => console.log('slide change')}
         >
             {
                 [...Array(9)].map((elem, index) => {
