@@ -1,8 +1,8 @@
-import { Schema, model } from "mongoose"
+import mongoose from "mongoose"
 
 
 
-const orderSchema = new Schema({
+const orderSchema = new mongoose.Schema({
     userId: {
         type: String,
         required: true
@@ -32,6 +32,8 @@ const orderSchema = new Schema({
     }
 }, { timestamps: true })
 
-const Order = model('Order', orderSchema)
+mongoose.models = {}
+
+const Order = mongoose.model('Order', orderSchema)
 
 export default Order;

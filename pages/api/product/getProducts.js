@@ -1,12 +1,10 @@
-import connectMongo from '../../../middleware/connectDB';
 import Product from '../../../model/Product';
+import connectDB from "../../../middleware/mongoConnect"
 
 
 
-const getProducts = async (req, res) => {
+const handler = async (req, res) => {
     try {
-        // connect mongodb
-        await connectMongo();
 
         console.log(req.method)
         if (req.method !== 'GET') return res.status(400).json({ message: 'Method not allowed' });
@@ -21,4 +19,4 @@ const getProducts = async (req, res) => {
     }
 }
 
-export default getProducts;
+export default connectDB(handler);

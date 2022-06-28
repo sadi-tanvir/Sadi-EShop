@@ -1,18 +1,12 @@
-import connectMongo from '../../../middleware/connectDB';
 import Product from '../../../model/Product';
+import connectDB from "../../../middleware/mongoConnect"
 
 
-//  import('next').NextApiRequest
-//  import('next').NextApiResponse
 
-const addProduct = async (req, res) => {
+
+const handler = async (req, res) => {
     try {
-        // connect mongodb
-        await connectMongo();
-
-        console.log(req.method)
         if (req.method !== 'POST') return res.status(400).json({ message: 'Method not allowed' });
-
 
         const product = await Product.create(req.body);
         res.json({ product });
@@ -23,4 +17,4 @@ const addProduct = async (req, res) => {
     }
 }
 
-export default addProduct
+export default connectDB(handler)
