@@ -13,11 +13,11 @@ const initialState = {
 const productsReducer = createReducer(initialState, {
     // add product to the cart
     addToCart: (state, action) => {
-        const { productId, qty } = action.payload;
+        const { productId } = action.payload;
         let newCart = state.cart;
 
         if (productId in state.cart) {
-            newCart[productId].qty = newCart[productId].qty + qty
+            newCart[productId].qty = newCart[productId].qty + 1
         } else {
             newCart[productId] = { ...action.payload }
         }
@@ -29,9 +29,9 @@ const productsReducer = createReducer(initialState, {
     // remove product or decrement quantity from the cart  
     removeFromCart: (state, action) => {
         const newCart = state.cart;
-        const { productId, qty } = action.payload;
+        const { productId } = action.payload;
         if (productId in newCart) {
-            newCart[productId]["qty"] = newCart[productId]["qty"] - qty
+            newCart[productId]["qty"] = newCart[productId]["qty"] - 1
         }
 
         if (newCart[productId]["qty"] <= 0) {
@@ -50,7 +50,7 @@ const productsReducer = createReducer(initialState, {
 
 
     reloadCart: (state, action) => {
-        state.cart = action.payload
+        state.cart = action.payload || {}
     }
 })
 

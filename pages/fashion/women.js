@@ -1,6 +1,8 @@
 import ProductCard from "../../components/Products/ProductCard";
+import axios from "axios"
 
-const WomenFashion = () => {
+
+const WomenFashion = ({ products }) => {
     return (
         <>
             <div className="my-14 w-11/12 m-auto">
@@ -9,15 +11,32 @@ const WomenFashion = () => {
                         Womens Fashion
                     </h1>
                 </div>
-                
+
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
                     {
-                        [...Array(9)].map((elem, index) => <ProductCard img="https://static-01.daraz.com.bd/p/8f4c8716c7aee87af057f6b643ee806d.jpg" key={index} />)
+                        Object.keys(products).map((elem, index) => {
+                            // console.log(products[elem].color);
+                            return <ProductCard
+                                product={products[elem]}
+                                colors={products[elem].color}
+                                key={index}
+                            />
+                        })
                     }
                 </div>
             </div>
         </>
     );
 };
+
+// This gets called on every request
+export async function getServerSideProps() {
+
+    const products = await axios('http://localhost:3000/api/product/getWomenFashion')
+
+
+    // Pass data to the page via props
+    return { props: { products: products.data.tshirts } }
+}
 
 export default WomenFashion;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-const order = () => {
+const Order = () => {
     // redux
     const { cart } = useSelector(state => state.productsReducer)
     
@@ -59,4 +59,4 @@ const order = () => {
     );
 };
 
-export default order;
+export default Order;

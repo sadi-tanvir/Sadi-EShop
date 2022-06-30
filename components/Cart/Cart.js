@@ -16,7 +16,7 @@ const Cart = () => {
         return cart[k].qty * cart[k].price
     })
     const totalPrice = sub.reduce((pre, curr) => pre + curr, 0)
-    
+
 
 
 
@@ -35,23 +35,23 @@ const Cart = () => {
                     </div>
                 </label>
                 <ul tabIndex="0" className="menu dropdown-content p-2 bg-base-100 w-[330px] mt-4 shadow-2xl rounded-lg">
-                    <div className="min-h-[500px]">
-                        <div className="flex flex-col justify-center items-start">
+                    <div className="h-[80vh] overflow-auto">
+                        <div className="flex flex-col justify-center items-start mb-32">
                             {
                                 Object.keys(cart).map(productKey => <CartItem key={productKey} productKey={productKey} />)
                             }
                         </div>
 
-                        <div className="w-full absolute bottom-2">
-                            <div className="flex justify-between items-center px-10 pb-2">
-                                <h1 className="text-xl font-semibold text-secondary">Order Total</h1>
-                                <h1 className="text-xl font-semibold text-primary">${totalPrice}</h1>
+                        <div className="w-[95%] absolute bottom-2 bg-white pt-3">
+                            <div className="flex justify-between items-center px-10 pb-2  pt-3">
+                                <h1 className="text-xl font-bold text-secondary">Order Total</h1>
+                                <h1 className="text-xl font-bold text-primary">${parseFloat(totalPrice).toFixed(2)}</h1>
                             </div>
-                            <div className="card-actions justify-end grid grid-cols-2 mt-4 pr-4">
-                                <button onClick={() => dispatch({ type: 'clearCart' })} className="style_btn py-1 bg-accent px-6 rounded-md text-white font-bold flex justify-center items-center">
+                            <div className="card-actions justify-end grid grid-cols-2 px-3 pb-4">
+                                <button onClick={() => dispatch({ type: 'clearCart' })} className="style_btn py-1 bg-accent px-4 rounded-md text-white font-bold flex justify-center items-center">
                                     Clear Cart <DeleteIcon iconClass="w-7 h-7 text-white" />
                                 </button>
-                                <button onClick={() => router.push('/checkout')} className="style_btn px-6 py-1 bg-primary rounded-md text-white font-bold flex justify-center items-center">
+                                <button onClick={() => router.push('/checkout')} className="style_btn px-5 py-1 bg-primary rounded-md text-white font-bold flex justify-center items-center">
                                     Checkout <CartIcon iconClass="w-7 h-7 text-white" />
                                 </button>
                             </div>
