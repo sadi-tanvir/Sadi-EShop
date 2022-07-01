@@ -17,9 +17,6 @@ const Cart = () => {
     })
     const totalPrice = sub.reduce((pre, curr) => pre + curr, 0)
 
-
-
-
     // re set cart data to redux store
     useEffect(() => {
         dispatch({ type: 'reloadCart', payload: JSON.parse(localStorage.getItem('cart')) })

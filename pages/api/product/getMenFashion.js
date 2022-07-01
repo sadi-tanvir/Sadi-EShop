@@ -5,8 +5,6 @@ import connectDB from "../../../middleware/mongoConnect"
 
 const handler = async (req, res) => {
     try {
-
-        console.log(req.method)
         if (req.method !== 'GET') return res.status(400).json({ message: 'Method not allowed' });
         const products = await Product.find({ category: "fashion/men" });
 

@@ -1,12 +1,13 @@
 import React from 'react';
-import FruitSlider from './productSlider/FruitSlider';
-import VegetableSlider from './productSlider/VegetableSlider';
+import MenFashion from "./productSlider/MenFashion"
+import WomenFashion from './productSlider/WomenFashion.js';
+
 
 const HomeProducts = () => {
     return (
         <>
-            <VegetableSlider />
-            <FruitSlider />
+            <MenFashion />
+            <WomenFashion />
         </>
     );
 };

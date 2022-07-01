@@ -3,7 +3,6 @@ import ProductCard from "../../components/Products/ProductCard";
 import axios from "axios"
 
 const MenFashion = ({ products }) => {
-    // console.log(Object.keys(products))
 
 
     return (

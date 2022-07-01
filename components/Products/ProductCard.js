@@ -2,11 +2,20 @@ import React from 'react';
 import Image from "next/image"
 import { useRouter } from "next/router"
 import CartIcon, { InfoIcon } from '../shared/Icon';
+import { useDispatch } from "react-redux"
+
 
 const ProductCard = ({ colors, product }) => {
+    // redux
+    const dispatch = useDispatch()
+
     // next router
     const router = useRouter()
 
+    // Add Item To the cart
+    const addToCart = () => {
+        dispatch({ type: 'addToCart', payload: { name: product.name, img: product.img, price: product.price, qty: 1, productId: product._id, size: product['size'][0], variant: product["color"][0] } })
+    }
 
     return (
         <>
@@ -23,7 +32,7 @@ const ProductCard = ({ colors, product }) => {
                         <button onClick={() => router.push(`/product/${product["_id"]}`)} className="style_btn bg-slate-600 px-3 rounded-md text-white font-bold flex justify-center items-center">
                             Details <InfoIcon iconClass="w-8 h-8 text-white" />
                         </button>
-                        <button className="style_btn bg-primary px-5 rounded-md text-white font-bold flex justify-center items-center">
+                        <button onClick={addToCart} className="style_btn bg-primary px-5 rounded-md text-white font-bold flex justify-center items-center">
                             Cart <CartIcon iconClass="w-8 h-8 text-white" />
                         </button>
                     </div>

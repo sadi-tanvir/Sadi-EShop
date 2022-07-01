@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { MinusIcon, PlusIcon } from '../shared/Icon';
@@ -5,7 +6,7 @@ import classes from "../../styles/Cart.module.css"
 
 const CartItem = ({ productKey }) => {
     const { cart } = useSelector(state => state.productsReducer)
-    const { productId, name, qty, price, size, variant } = cart[productKey]
+    const { productId, name, img, qty, price, size, variant } = cart[productKey]
 
     // redux
     const dispatch = useDispatch()
@@ -14,7 +15,11 @@ const CartItem = ({ productKey }) => {
         <>
             <div className={`${classes.cartItem} flex mx-auto mt-3 py-1 px-5 shadow`}>
                 <div>
-                    <img className="w-16 h-16 rounded-lg" src="https://static-01.daraz.com.bd/p/8f4c8716c7aee87af057f6b643ee806d.jpg" alt="" />
+                    <img
+                        className="w-16 h-full rounded-lg"
+                        src={img}
+                        alt=""
+                    />
                 </div>
                 <div className="ml-3">
                     <h2 className="text-sm font-bold text-secondary">{name.slice(0, 8)}...</h2>

@@ -1,16 +1,19 @@
 // import Swiper core and required modules
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
-
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 
+import ProductCard from './ProductCard';
 
 
-const ProductSlider = ({children}) => {
+
+const ProductSlider = ({products}) => {
+
+
     return (
         <Swiper
             // install Swiper modules
@@ -18,17 +21,20 @@ const ProductSlider = ({children}) => {
             spaceBetween={50}
             slidesPerView={4}
             navigation
-            // pagination={{ clickable: true }} 
-            // scrollbar={{ draggable: true }}
-            // onSwiper={(swiper) => console.log(swiper)}
-            // onSlideChange={() => console.log('slide change')}
+        // pagination={{ clickable: true }} 
+        // scrollbar={{ draggable: true }}
+        // onSwiper={(swiper) => console.log(swiper)}
+        // onSlideChange={() => console.log('slide change')}
         >
             {
-                [...Array(9)].map((elem, index) => {
+                Object.keys(products).map((elem, index) => {
                     return (
                         <>
-                            <SwiperSlide>
-                                {children}
+                            <SwiperSlide key={index}>
+                                <ProductCard
+                                    product={products[elem]}
+                                    colors={products[elem].color}
+                                />
                             </SwiperSlide>
                         </>
                     )
