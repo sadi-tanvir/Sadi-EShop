@@ -2,10 +2,77 @@ import React, { useState } from 'react';
 import { EmailIcon, PasswordIcon, UploadIcon, UserIcon } from '../components/shared/Icon';
 import Link from "next/link"
 import SocialLogin from "../components/SocialLogin"
-import { ToastContainer, toast } from "react-toastify"
+import axios from "axios"
+import { ToastContainer, toast } from 'react-toastify';
 
 const Register = () => {
-    
+    const [picture, setPicture] = useState("")
+    const [loading, setLoading] = useState(false)
+    const [info, setInfo] = useState({
+        name: '',
+        email: '',
+        password: ''
+    })
+
+    // upload picture
+    const postPicture = (pic) => {
+        setLoading(true)
+        if (pic === undefined) {
+            toast.error('file upload failed');
+            return;
+        }
+
+        if (pic.type === "image/jpeg" || pic.type === "image/png" || pic.type === "image/jpg") {
+            const data = new FormData()
+            data.append("file", pic)
+            data.append("upload_preset", "Sadi-Eshop")
+            data.append("cloud_name", "dhiatzlib")
+            fetch('https://api.cloudinary.com/v1_1/dhiatzlib/image/upload', {
+                method: 'POST',
+                body: data
+            }).then(res => res.json())
+                .then(data => {
+                    setPicture(data.url.toString())
+                    setLoading(false)
+                })
+        } else {
+            toast.error('file type not supported');
+            setLoading(false)
+            return;
+        }
+    }
+
+    // handle input change
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setInfo({ ...info, [name]: value })
+    }
+
+
+    // handle submit
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        try {
+            const { name, email, password } = info;
+            const res = await axios.post(`http://localhost:3000/api/user/register`, { name, email, password, img: picture })
+            if (res.data.user) {
+                localStorage.setItem("userInfo", JSON.stringify(res.data.user))
+                // localStorage.setItem("accessToken", JSON.stringify(res.data.token))
+                // dispatch({ type: 'loginUser' })
+                // dispatch({ type: 'userInfo', payload: res.data.user })
+                // dispatch({ type: "accessToken", payload: res.data.token })
+                // setAuthToken(res.data.token)
+            }
+            if (res.data.message) {
+                toast.success(res.data.message)
+            }
+
+        } catch (error) {
+            console.log(error);
+            toast.error(error.response.data.message);
+        }
+    }
+
 
     return (
         <>
@@ -56,7 +123,8 @@ const Register = () => {
                     </div>
                 </div>
             </div>
-            <ToastContainer />
+
+
         </>
     );
 };
