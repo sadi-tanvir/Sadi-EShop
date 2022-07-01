@@ -2,11 +2,49 @@ import { EmailIcon, PasswordIcon } from '../components/shared/Icon';
 import Link from "next/link"
 import SocialLogin from '../components/SocialLogin';
 import ForgetPassword from '../components/ForgetPassword';
+import { toast } from "react-toastify"
+import axios from 'axios';
 
 const Login = () => {
+    // state
+    const [info, setInfo] = useState({
+        email: '',
+        password: ''
+    })
 
-    const handleSubmit = () => { }
-    const handleChange = () => { }
+    // handle input change
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setInfo({ ...info, [name]: value })
+    }
+
+
+    // handle form submit
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        try {
+            const {email, password} = info;
+            const res  = await axios.post(`http://localhost:3000/api/user/login`, {email, password})
+
+            if (res.data.user) {
+                localStorage.setItem("userInfo", JSON.stringify(res.data.user))
+                // localStorage.setItem("accessToken", JSON.stringify(res.data.token))
+                // dispatch({ type: 'loginUser' })
+                // dispatch({ type: 'userInfo', payload: res.data.user })
+                // dispatch({ type: "accessToken", payload: res.data.token })
+                // setAuthToken(res.data.token)
+            }
+
+            if (res.data.message) {
+                toast.success(res.data.message)
+            }
+
+        } catch (error) {
+            toast.error(error.response.data.message);
+            console.log(error);
+        }
+    }
+
 
     return (
         <div>

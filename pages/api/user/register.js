@@ -1,6 +1,7 @@
 import connectDB from "../../../middleware/mongoConnect"
 import User from '../../../model/User';
 import bcrypt from 'bcryptjs';
+import registerValidator from "../../../middleware/validator"
 
 
 
@@ -9,6 +10,9 @@ const handler = async (req, res) => {
         if (req.method !== 'POST') return res.status(400).json({ message: 'Method not allowed' });
 
         const { name, email, password, img } = req.body;
+
+        const validate = registerValidator({name, email, password})
+        if(!validate.isValid) return res.status(400).json(validate.error)
 
         // is user already exist
         const userExist = await User.findOne({ email })
@@ -20,7 +24,7 @@ const handler = async (req, res) => {
 
         // create new user
         const newUser = await new User({
-            name, email, password:hash, img
+            name, email, password: hash, img
         })
         const user = await newUser.save()
 
