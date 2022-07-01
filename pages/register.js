@@ -2,12 +2,10 @@ import React, { useState } from 'react';
 import { EmailIcon, PasswordIcon, UploadIcon, UserIcon } from '../components/shared/Icon';
 import Link from "next/link"
 import SocialLogin from "../components/SocialLogin"
-
+import { ToastContainer, toast } from "react-toastify"
 
 const Register = () => {
-
-    const handleSubmit = () => {}
-    const handleChange = () => {}
+    
 
     return (
         <>
@@ -39,14 +37,14 @@ const Register = () => {
                                         <UploadIcon />
                                         <p className="mb-2 text-sm text-gray-500 dark:text-gray-400"><span className="font-semibold">Click to upload</span> or drag and drop</p>
                                     </div>
-                                    <input id="dropzone-file" type="file" className="hidden" />
+                                    <input onChange={(e) => postPicture(e.target.files[0])} id="dropzone-file" type="file" className="hidden" />
                                 </label>
                             </div>
-                            <button type="submit" className="block w-full bg-primary mt-5 py-2 rounded-2xl hover:bg-primary hover:-translate-y-1 transition-all duration-500 text-white font-semibold mb-2">Register</button>
+                            <button disabled={loading ? true : false} type="submit" className="block w-full bg-primary mt-5 py-2 rounded-2xl hover:bg-primary hover:-translate-y-1 transition-all duration-500 text-white font-semibold mb-2">Register</button>
                             <div className="flex justify-between mt-4">
                                 <Link href="/login">
                                     <span className="text-sm ml-2 hover:primary cursor-pointer hover:-translate-y-1 duration-500 transition-all">
-                                    Already have an account?
+                                        Already have an account?
                                     </span>
                                 </Link>
                             </div>
@@ -58,6 +56,7 @@ const Register = () => {
                     </div>
                 </div>
             </div>
+            <ToastContainer />
         </>
     );
 };
