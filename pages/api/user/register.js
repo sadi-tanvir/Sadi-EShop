@@ -1,6 +1,6 @@
 import connectDB from "../../../middleware/mongoConnect"
 import User from '../../../model/User';
-
+import bcrypt from 'bcryptjs';
 
 
 
@@ -15,12 +15,12 @@ const handler = async (req, res) => {
         if (userExist) return res.status(409).json({ message: 'User already exist.' })
 
         // hash password
-        // const salt = bcrypt.genSaltSync(10);
-        // const hash = bcrypt.hashSync(password, salt);
+        const salt = bcrypt.genSaltSync(10);
+        const hash = bcrypt.hashSync(password, salt);
 
         // create new user
         const newUser = await new User({
-            name, email, password, img
+            name, email, password:hash, img
         })
         const user = await newUser.save()
 
