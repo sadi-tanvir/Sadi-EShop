@@ -5,14 +5,28 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useDispatch } from "react-redux"
 import { ToastContainer } from 'react-toastify';
 import wrapper from '../redux/store'
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import LoadingBar from 'react-top-loading-bar'
+import { useRouter } from "next/router"
 
 
-
+// routeChangeComplete(url, { shallow })
 function MyApp({ Component, pageProps }) {
   // redux
   const dispatch = useDispatch();
-  
+
+  // state
+  const [progress, setProgress] = useState(0)
+
+  const router = useRouter()
+
+  useEffect(() => {
+    router.events.on('routeChangeComplete', () => {
+      setProgress(100)
+    })
+  }, [])
+
+
 
   // reload data
   useEffect(() => {
@@ -23,14 +37,17 @@ function MyApp({ Component, pageProps }) {
     }
   }, [dispatch])
 
-  
+
   return (
     <>
-      {/* <Provider store={store}> */}
+      <LoadingBar
+        color='#34d399'
+        progress={progress}
+        onLoaderFinished={() => setProgress(0)}
+      />
       <Navbar />
       <Component {...pageProps} />
       <Footer />
-      {/* </Provider> */}
 
       <ToastContainer
         position="top-right"

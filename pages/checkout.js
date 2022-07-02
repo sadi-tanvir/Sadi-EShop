@@ -22,8 +22,6 @@ const Checkout = () => {
     })
     const totalPrice = sub.reduce((pre, curr) => pre + curr, 0)
 
-
-
     // check authentication
     useEffect(() => {
         const decoded = jwt.decode(accessToken, { complete: true })

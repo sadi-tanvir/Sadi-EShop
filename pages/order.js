@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import HeadInfo from '../components/HeadInfo';
 
 const Order = () => {
     // redux
@@ -10,9 +11,10 @@ const Order = () => {
         return cart[k].qty * cart[k].price
     })
     const totalPrice = sub.reduce((pre, curr) => pre + curr, 0)
-    
+
     return (
         <>
+            <HeadInfo title="Order - Sadi EShop" />
             <section className="text-gray-600 body-font overflow-hidden">
                 <div className="container px-5 py-24 mx-auto">
                     <div className="lg:w-4/5 mx-auto flex flex-wrap">

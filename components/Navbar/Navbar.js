@@ -5,6 +5,8 @@ import { useRouter } from "next/router"
 import CartItem from "../Cart/Cart";
 import { MdAccountCircle } from 'react-icons/md';
 import jwt from "jsonwebtoken"
+import DropdownMenuAccount from "../shared/DropdownMenuAccount";
+import DropdownMenu from "../shared/DropdownMenu";
 
 const Navbar = () => {
     // redux
@@ -46,9 +48,7 @@ const Navbar = () => {
                                 Home
                             </a>
                         </Link>
-
-                        <div className="dropdown dropdown-end">
-                            <label tabIndex="0" className={`${navActivePath('/fashion/men')} font-bold px-4 py-2  cursor-pointer`}>Fashion</label>
+                        <DropdownMenu name="Fashion">
                             <ul tabIndex="0" className="menu dropdown-content p-2 shadow bg-base-100 w-52 mt-4">
                                 <Link href="/fashion/men">
                                     <li className={`${dropdownActivePath('/fashion/men')}`}>
@@ -61,34 +61,40 @@ const Navbar = () => {
                                     </li>
                                 </Link>
                             </ul>
-                        </div>
-                        <a className="text-secondary font-bold ml-5">About</a>
+                        </DropdownMenu>
+                        <a className="text-secondary font-bold">About</a>
                         <a className="text-secondary font-bold ml-5">Contact</a>
                     </div>
                 </div>
 
+
                 <div className="ml-5">
                     {
                         isAuthenticate ?
-                            <div className="dropdown dropdown-end">
-                                <label tabIndex="0" className="cursor-pointer">
-                                    <div className="avatar placeholder  hover:scale-125 active:scale-90 transition-all duration-300">
-                                        <div className="bg-neutral-focus  border-2 border-slate-400 text-neutral-content rounded-full w-7  shadow-2xl">
-                                            <img src="https://i.ibb.co/jgDtzL8/empty-avatar.jpg" alt="" />
-                                        </div>
-                                    </div>
-                                </label>
-                                <ul tabIndex="0" className="menu dropdown-content px-2 shadow bg-base-100 w-36 mt-4">
-                                    <li onClick={handleLogOut} className={`${dropdownActivePath('/fashion/men')} bg-accent text-white font-bold rounded-md`}>
-                                        <a className="">Logout</a>
+                            <DropdownMenuAccount>
+                                <ul className="mr-52 absolute hidden z-10 text-gray-700 group-hover:block w-[150px] bg-slate-200 px-1 py-1 rounded-md">
+                                    <Link href="/fashion/men">
+                                        <li className={`${dropdownActivePath('/fashion/men')} py-2 px-2 cursor-pointer`}>
+                                            <a className="font-bold">My Account</a>
+                                        </li>
+                                    </Link>
+                                    <Link href="/order">
+                                        <li className={`${dropdownActivePath('/order')} py-2 px-2  cursor-pointer`}>
+                                            <a className="font-bold">Orders</a>
+                                        </li>
+                                    </Link>
+                                    <li onClick={handleLogOut} className={`py-2 px-2 cursor-pointer bg-accent text-white font-bold text-center mt-2 rounded-md`}>
+                                        <a>Logout</a>
                                     </li>
                                 </ul>
-                            </div>
+                            </DropdownMenuAccount>
                             :
                             // login icon
                             <MdAccountCircle onClick={() => router.push('/login')} className="text-3xl text-slate-500 cursor-pointer style_btn" />
                     }
                 </div>
+
+
 
                 {/* cart items */}
                 <CartItem />

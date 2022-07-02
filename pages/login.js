@@ -7,6 +7,7 @@ import axios from 'axios';
 import { useState } from 'react';
 import { useDispatch } from "react-redux"
 import { useRouter } from "next/router"
+import HeadInfo from '../components/HeadInfo';
 
 const Login = () => {
     // redux
@@ -53,7 +54,7 @@ const Login = () => {
 
     return (
         <div>
-
+            <HeadInfo title="Login - Sadi EShop" />
             <div className="h-screen flex justify-center items-center py-20">
                 <div className="flex w-full lg:w-7/12 justify-center items-center bg-white space-y-8">
                     <div className="w-full px-8 md:px-32 lg:px-24">
