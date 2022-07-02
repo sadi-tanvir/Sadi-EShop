@@ -3,7 +3,6 @@ import { EmailIcon, PasswordIcon, UploadIcon, UserIcon } from '../components/sha
 import Link from "next/link"
 import SocialLogin from "../components/SocialLogin"
 import axios from "axios"
-import generateToken from "../middleware/generateToken"
 import { toast } from 'react-toastify';
 
 const Register = () => {
@@ -58,11 +57,6 @@ const Register = () => {
             const res = await axios.post(`http://localhost:3000/api/user/register`, { name, email, password, img: picture })
             if (res.data.user) {
                 localStorage.setItem("userInfo", JSON.stringify(res.data.user))
-                // localStorage.setItem("accessToken", JSON.stringify(res.data.token))
-                // dispatch({ type: 'loginUser' })
-                // dispatch({ type: 'userInfo', payload: res.data.user })
-                // dispatch({ type: "accessToken", payload: res.data.token })
-                // setAuthToken(res.data.token)
             }
             if (res.data.message) {
                 toast.success(res.data.message)

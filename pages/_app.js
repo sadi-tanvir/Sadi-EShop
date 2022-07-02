@@ -2,7 +2,7 @@ import Navbar from '../components/Navbar/Navbar'
 import Footer from '../components/Footer'
 import '../styles/globals.css'
 import 'react-toastify/dist/ReactToastify.css';
-import { Provider } from "react-redux"
+import { Provider,useSelector } from "react-redux"
 import store from '../redux/store'
 import { ToastContainer } from 'react-toastify';
 
@@ -11,7 +11,6 @@ import { ToastContainer } from 'react-toastify';
 
 function MyApp({ Component, pageProps }) {
 
-    
 
   return (
     <>

@@ -41,9 +41,6 @@ const Login = () => {
                         accessToken: res.data.token
                     }
                 })
-                // dispatch({ type: 'userInfo', payload: res.data.user })
-                // dispatch({ type: "accessToken", payload: res.data.token })
-                // setAuthToken(res.data.token)
             }
 
             if (res.data.message) {

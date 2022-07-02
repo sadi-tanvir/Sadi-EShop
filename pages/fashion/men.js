@@ -11,11 +11,10 @@ import { useRouter } from 'next/router'
 const MenFashion = ({ products }) => {
     // redux
     const dispatch = useDispatch();
-    const { accessToken, userInfo } = useSelector(state => state.authReducer)
+    const { accessToken, userInfo, isAuthenticate } = useSelector(state => state.authReducer)
 
     // next router
     const router = useRouter()
-
 
 
     // reload data
@@ -33,10 +32,18 @@ const MenFashion = ({ products }) => {
             dispatch({ type: 'loginUser' })
         } else {
             dispatch({ type: 'logOutUser' })
-            localStorage.removeItem('userInfo')
+            // localStorage.removeItem('userInfo')
             router.push('/login')
         }
-    }, [accessToken, userInfo.email, router, dispatch])
+
+        if (!localStorage.getItem('userInfo') && !localStorage.getItem('accessToken')) {
+            dispatch({ type: 'logOutUser' })
+            if (!isAuthenticate) {
+                router.push('/login')
+            }
+        }
+    }, [accessToken, userInfo.email, router, isAuthenticate, dispatch])
+
     return (
         <>
             <div className="my-14 w-11/12 m-auto">
