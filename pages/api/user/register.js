@@ -11,6 +11,7 @@ const handler = async (req, res) => {
 
         const { name, email, password, img } = req.body;
 
+        // custom validator
         const validate = registerValidator({name, email, password})
         if(!validate.isValid) return res.status(400).json(validate.error)
 

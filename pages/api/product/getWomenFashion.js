@@ -27,7 +27,7 @@ const handler = async (req, res) => {
             }
         }
 
-        0
+        
         res.json({ tshirts });
 
     } catch (error) {

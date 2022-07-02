@@ -4,12 +4,23 @@ import HomeProducts from "../components/Products/HomeProducts";
 import { useDispatch } from "react-redux"
 import { useEffect } from "react";
 
-const Home = ({cart}) => {
+const Home = ({ cart }) => {
+  // redux
+  const dispatch = useDispatch();
 
 
-  console.log(`from home`,cart);
 
-
+  // reload data
+  useEffect(() => {
+    if (localStorage.getItem('userInfo') && localStorage.getItem('accessToken')) {
+      dispatch({
+        type: "loginUser", payload: {
+          userInfo: localStorage.getItem("userInfo"),
+          accessToken: localStorage.getItem("accessToken")
+        }
+      })
+    }
+  }, [])
 
   return (
     <>

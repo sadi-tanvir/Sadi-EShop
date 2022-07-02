@@ -53,7 +53,27 @@ const registerValidator = (user) => {
     }
 }
 
+const loginValidator = (user) => {
+    const error = {}
+
+    if (!user.email) {
+        error.email = "Pleaser Enter Your Email"
+    }else if(!isEmail(user.email)){
+        error.email = "Invalid Email."
+    } if (!user.password) {
+        error.password = "Pleaser Enter Your Password"
+    }
+
+
+    return {
+        error,
+        isValid: Object.keys(error).length === 0
+    }
+}
 
 
 
+
+
+export {loginValidator}
 export default registerValidator

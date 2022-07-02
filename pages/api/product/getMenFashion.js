@@ -1,12 +1,13 @@
 import Product from '../../../model/Product';
 import connectDB from "../../../middleware/mongoConnect"
-
+import jwt from "jsonwebtoken"
 
 
 const handler = async (req, res) => {
     try {
         if (req.method !== 'GET') return res.status(400).json({ message: 'Method not allowed' });
         const products = await Product.find({ category: "fashion/men" });
+
 
         let tshirts = {}
 
@@ -25,7 +26,7 @@ const handler = async (req, res) => {
             }
         }
 
-        0
+        
         res.json({ tshirts });
 
     } catch (error) {

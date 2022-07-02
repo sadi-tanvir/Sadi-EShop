@@ -4,8 +4,13 @@ import SocialLogin from '../components/SocialLogin';
 import ForgetPassword from '../components/ForgetPassword';
 import { toast } from "react-toastify"
 import axios from 'axios';
+import { useState } from 'react';
+import { useDispatch } from "react-redux"
 
 const Login = () => {
+    // redux
+    const dispatch = useDispatch()
+
     // state
     const [info, setInfo] = useState({
         email: '',
@@ -23,13 +28,19 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
-            const {email, password} = info;
-            const res  = await axios.post(`http://localhost:3000/api/user/login`, {email, password})
-
+            const { email, password } = info;
+            const res = await axios.post(`http://localhost:3000/api/user/login`, { email, password })
+            console.log(res.data);
             if (res.data.user) {
                 localStorage.setItem("userInfo", JSON.stringify(res.data.user))
-                // localStorage.setItem("accessToken", JSON.stringify(res.data.token))
-                // dispatch({ type: 'loginUser' })
+                localStorage.setItem("accessToken", JSON.stringify(res.data.token))
+                dispatch({
+                    type: 'loginUser',
+                    payload: {
+                        userInfo: res.data.user,
+                        accessToken: res.data.token
+                    }
+                })
                 // dispatch({ type: 'userInfo', payload: res.data.user })
                 // dispatch({ type: "accessToken", payload: res.data.token })
                 // setAuthToken(res.data.token)
@@ -40,8 +51,7 @@ const Login = () => {
             }
 
         } catch (error) {
-            toast.error(error.response.data.message);
-            console.log(error);
+            toast.error(Object.values(error.response.data)[0]);
         }
     }
 

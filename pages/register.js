@@ -3,7 +3,8 @@ import { EmailIcon, PasswordIcon, UploadIcon, UserIcon } from '../components/sha
 import Link from "next/link"
 import SocialLogin from "../components/SocialLogin"
 import axios from "axios"
-import { ToastContainer, toast } from 'react-toastify';
+import generateToken from "../middleware/generateToken"
+import { toast } from 'react-toastify';
 
 const Register = () => {
     const [picture, setPicture] = useState("")
@@ -69,7 +70,7 @@ const Register = () => {
 
         } catch (error) {
             console.log(error);
-            toast.error(error.response.data.message);
+            toast.error(Object.values(error.response.data)[0]);
         }
     }
 
