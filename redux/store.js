@@ -1,5 +1,6 @@
 import {configureStore} from "@reduxjs/toolkit"
 import productsReducer from "./reducers/productsReducer"
+import { createWrapper, HYDRATE } from 'next-redux-wrapper';
 import authReducer from "./reducers/authReducer"
 
 const store = configureStore({
@@ -9,4 +10,8 @@ const store = configureStore({
     }
 })
 
-export default store
+const makeStore = () => store;
+
+const wrapper = createWrapper(makeStore);
+
+export default wrapper

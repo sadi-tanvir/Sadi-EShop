@@ -64,20 +64,6 @@ const ProductInfo = ({ product, variant }) => {
         window.location = url
     }
 
-
-    // reload data
-    useEffect(() => {
-        if (localStorage.getItem('userInfo') && localStorage.getItem('accessToken')) {
-            dispatch({
-                type: "loginUser", payload: {
-                    userInfo: localStorage.getItem("userInfo"),
-                    accessToken: localStorage.getItem("accessToken")
-                }
-            })
-        }
-    }, [])
-
-
     return (
         <>
             <section className="text-gray-600 body-font overflow-hidden">

@@ -31,7 +31,6 @@ const Navbar = () => {
         router.push('/login')
     }
 
-
     return (
         <>
             <nav className="navbar bg-base-100 flex justify-center items-center">
@@ -47,22 +46,6 @@ const Navbar = () => {
                                 Home
                             </a>
                         </Link>
-
-                        <div className="dropdown dropdown-end">
-                            <label tabIndex="0" className={`${navActivePath('/food/vegetables' || '/food/fruits')} font-bold px-4 py-2  cursor-pointer`}>Food</label>
-                            <ul tabIndex="0" className="menu dropdown-content p-2 shadow bg-base-100 w-52 mt-4">
-                                <Link href="/food/vegetables">
-                                    <li className={`${dropdownActivePath('/food/vegetables')}`}>
-                                        <a className="">Vegetables</a>
-                                    </li>
-                                </Link>
-                                <Link href="/food/fruits">
-                                    <li className={`${dropdownActivePath('/food/fruits')}`}>
-                                        <a>Fruits</a>
-                                    </li>
-                                </Link>
-                            </ul>
-                        </div>
 
                         <div className="dropdown dropdown-end">
                             <label tabIndex="0" className={`${navActivePath('/fashion/men')} font-bold px-4 py-2  cursor-pointer`}>Fashion</label>
@@ -95,18 +78,16 @@ const Navbar = () => {
                                         </div>
                                     </div>
                                 </label>
-                                <ul tabIndex="0" className="menu dropdown-content p-2 shadow bg-base-100 w-36 mt-4">
-                                    <li onClick={handleLogOut} className={`${dropdownActivePath('/fashion/men')}`}>
+                                <ul tabIndex="0" className="menu dropdown-content px-2 shadow bg-base-100 w-36 mt-4">
+                                    <li onClick={handleLogOut} className={`${dropdownActivePath('/fashion/men')} bg-accent text-white font-bold rounded-md`}>
                                         <a className="">Logout</a>
                                     </li>
                                 </ul>
                             </div>
                             :
                             // login icon
-                            <MdAccountCircle onClick={() => router.push('/login')} className="text-3xl cursor-pointer style_btn" />
-
+                            <MdAccountCircle onClick={() => router.push('/login')} className="text-3xl text-slate-500 cursor-pointer style_btn" />
                     }
-
                 </div>
 
                 {/* cart items */}

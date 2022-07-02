@@ -4,8 +4,15 @@ import Link from "next/link"
 import SocialLogin from "../components/SocialLogin"
 import axios from "axios"
 import { toast } from 'react-toastify';
+import { useDispatch, useSelector } from "react-redux"
+import { useRouter } from "next/router"
+import HeadInfo from '../components/HeadInfo';
 
 const Register = () => {
+    // redux
+    const dispatch = useDispatch()
+
+    // state
     const [picture, setPicture] = useState("")
     const [loading, setLoading] = useState(false)
     const [info, setInfo] = useState({
@@ -13,6 +20,9 @@ const Register = () => {
         email: '',
         password: ''
     })
+
+    // next router
+    const router = useRouter()
 
     // upload picture
     const postPicture = (pic) => {
@@ -57,20 +67,24 @@ const Register = () => {
             const res = await axios.post(`http://localhost:3000/api/user/register`, { name, email, password, img: picture })
             if (res.data.user) {
                 localStorage.setItem("userInfo", JSON.stringify(res.data.user))
-            }
-            if (res.data.message) {
+                localStorage.setItem("accessToken", JSON.stringify(res.data.token))
+                dispatch({ type: 'userInfo', payload: JSON.parse(localStorage.getItem("userInfo")) })
+                dispatch({ type: 'accessToken', payload: JSON.parse(localStorage.getItem("accessToken")) })
+                dispatch({ type: 'loginUser' })
                 toast.success(res.data.message)
+                router.push('/')
             }
 
         } catch (error) {
-            console.log(error);
-            toast.error(Object.values(error.response.data)[0]);
+            // console.log(error);
+            toast.error(Object.values(error.response?.data)[0]);
         }
     }
 
 
     return (
         <>
+            <HeadInfo title="Register - Sadi EShop" />
             <div className="min-h-screen flex justify-center items-center py-20">
                 <div className="flex w-full lg:w-7/12 justify-center items-center bg-white space-y-8">
                     <div className="w-full px-8 md:px-32 lg:px-24">
@@ -80,17 +94,17 @@ const Register = () => {
 
                             <div className="flex items-center border-2 mb-8 py-2 px-3 rounded-2xl">
                                 <UserIcon />
-                                <input onChange={handleChange} id="name" className=" pl-2 w-full outline-none border-none" type="text" name="name" placeholder="Name" />
+                                <input onChange={handleChange} id="name" className=" pl-2 w-full outline-none border-none" type="text" name="name" placeholder="Name" value={info.name} />
                             </div>
 
                             <div className="flex items-center border-2 mb-8 py-2 px-3 rounded-2xl">
                                 <EmailIcon />
-                                <input onChange={handleChange} id="email" className=" pl-2 w-full outline-none border-none" type="email" name="email" placeholder="Email Address" />
+                                <input onChange={handleChange} id="email" className=" pl-2 w-full outline-none border-none" type="email" name="email" placeholder="Email Address" value={info.email} />
                             </div>
 
                             <div className="flex items-center border-2 mb-12 py-2 px-3 rounded-2xl ">
                                 <PasswordIcon />
-                                <input onChange={handleChange} className="pl-2 w-full outline-none border-none" type="password" name="password" id="password" placeholder="Password" />
+                                <input onChange={handleChange} className="pl-2 w-full outline-none border-none" type="password" name="password" id="password" placeholder="Password" value={info.password} />
                             </div>
 
                             <div className="flex items-center justify-center">

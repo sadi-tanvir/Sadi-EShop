@@ -2,7 +2,7 @@ import connectDB from "../../../middleware/mongoConnect"
 import User from '../../../model/User';
 import bcrypt from 'bcryptjs';
 import registerValidator from "../../../middleware/validator"
-
+import generateToken from "../../../middleware/generateToken"
 
 
 const handler = async (req, res) => {
@@ -34,7 +34,7 @@ const handler = async (req, res) => {
         res.status(201).json({
             message: "User has been Registered Successfully",
             user,
-            // token: generateToken(user.email)
+            token: generateToken(user.email)
         })
 
     } catch (error) {

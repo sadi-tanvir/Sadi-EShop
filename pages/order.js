@@ -1,10 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
-import { useDispatch } from "react-redux"
 
 const Order = () => {
     // redux
-    const dispatch = useDispatch();
     const { cart } = useSelector(state => state.productsReducer)
 
     // total cart's product price
@@ -12,19 +10,7 @@ const Order = () => {
         return cart[k].qty * cart[k].price
     })
     const totalPrice = sub.reduce((pre, curr) => pre + curr, 0)
-
-
-    // reload data
-    useEffect(() => {
-        if (localStorage.getItem('userInfo') && localStorage.getItem('accessToken')) {
-            dispatch({
-                type: "loginUser", payload: {
-                    userInfo: localStorage.getItem("userInfo"),
-                    accessToken: localStorage.getItem("accessToken")
-                }
-            })
-        }
-    }, [])
+    
     return (
         <>
             <section className="text-gray-600 body-font overflow-hidden">

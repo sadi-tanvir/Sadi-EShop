@@ -6,6 +6,7 @@ import { toast } from "react-toastify"
 import axios from 'axios';
 import { useState } from 'react';
 import { useDispatch } from "react-redux"
+import { useRouter } from "next/router"
 
 const Login = () => {
     // redux
@@ -16,6 +17,9 @@ const Login = () => {
         email: '',
         password: ''
     })
+
+    // next router
+    const router = useRouter()
 
     // handle input change
     const handleChange = (e) => {
@@ -30,21 +34,15 @@ const Login = () => {
         try {
             const { email, password } = info;
             const res = await axios.post(`http://localhost:3000/api/user/login`, { email, password })
-            console.log(res.data);
+
             if (res.data.user) {
                 localStorage.setItem("userInfo", JSON.stringify(res.data.user))
                 localStorage.setItem("accessToken", JSON.stringify(res.data.token))
-                dispatch({
-                    type: 'loginUser',
-                    payload: {
-                        userInfo: res.data.user,
-                        accessToken: res.data.token
-                    }
-                })
-            }
-
-            if (res.data.message) {
+                dispatch({ type: 'userInfo', payload: JSON.parse(localStorage.getItem("userInfo")) })
+                dispatch({ type: 'accessToken', payload: JSON.parse(localStorage.getItem("accessToken")) })
+                dispatch({ type: 'loginUser' })
                 toast.success(res.data.message)
+                router.push('/')
             }
 
         } catch (error) {
