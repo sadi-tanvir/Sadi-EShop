@@ -78,8 +78,8 @@ const Navbar = () => {
                                             <a className="font-bold">My Account</a>
                                         </li>
                                     </Link>
-                                    <Link href="/order">
-                                        <li className={`${dropdownActivePath('/order')} py-2 px-2  cursor-pointer`}>
+                                    <Link href="/orders">
+                                        <li className={`${dropdownActivePath('/orders')} py-2 px-2  cursor-pointer`}>
                                             <a className="font-bold">Orders</a>
                                         </li>
                                     </Link>

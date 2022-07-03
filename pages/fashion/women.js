@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { useRouter } from 'next/router'
 
 const WomenFashion = ({ products }) => {
-    
+
     return (
         <>
             <div className="my-14 w-11/12 m-auto">
@@ -35,7 +35,7 @@ const WomenFashion = ({ products }) => {
 // This gets called on every request
 export async function getServerSideProps() {
 
-    const products = await axios('http://localhost:3000/api/product/getWomenFashion')
+    const products = await axios(`${process.env.NEXT_PUBLIC_BASE_URL}/api/product/getWomenFashion`)
 
 
     // Pass data to the page via props

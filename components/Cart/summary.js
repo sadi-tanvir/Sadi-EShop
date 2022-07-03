@@ -13,11 +13,11 @@ const Summary = ({totalPrice}) => {
                         </div>
                         <div className="flex justify-between items-center w-full">
                             <p className="text-base dark:text-white leading-4 text-gray-800">Discount <span className="bg-gray-200 p-1 text-xs font-medium dark:bg-white dark:text-gray-800 leading-3 text-gray-800">STUDENT</span></p>
-                            <p className="text-base dark:text-gray-300 leading-4 text-gray-600">-$0.00 (50%)</p>
+                            <p className="text-base dark:text-gray-300 leading-4 text-gray-600">-$0.00 (00%)</p>
                         </div>
                         <div className="flex justify-between items-center w-full">
                             <p className="text-base dark:text-white leading-4 text-gray-800">Shipping</p>
-                            <p className="text-base dark:text-gray-300 leading-4 text-gray-600">$0.00</p>
+                            <p className="text-base dark:text-gray-300 leading-4 text-gray-600">$0.00 (free)</p>
                         </div>
                     </div>
                     <div className="flex justify-between items-center w-full">

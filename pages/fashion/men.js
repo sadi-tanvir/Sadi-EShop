@@ -3,7 +3,6 @@ import axios from "axios"
 
 
 const MenFashion = ({ products }) => {
-
     return (
         <>
             <div className="my-14 w-11/12 m-auto">
@@ -33,8 +32,7 @@ const MenFashion = ({ products }) => {
 // This gets called on every request
 export async function getServerSideProps() {
 
-    const products = await axios('http://localhost:3000/api/product/getMenFashion')
-
+    const products = await axios(`${process.env.NEXT_PUBLIC_BASE_URL}/api/product/getMenFashion`)
 
     // Pass data to the page via props
     return { props: { products: products.data.tshirts } }

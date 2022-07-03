@@ -21,6 +21,7 @@
     "react-dom": "^18.2.0",
     "react-icons": "^4.4.0",
     "react-redux": "^8.0.2",
+    "react-stripe-elements": "^6.1.2",
     "react-toastify": "^9.0.5",
     "react-top-loading-bar": "^2.1.0",
     "swiper": "^8.2.4"

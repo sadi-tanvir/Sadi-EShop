@@ -3,6 +3,7 @@ import CartIcon, { DeleteIcon, InfoIcon } from '../shared/Icon';
 import { useSelector, useDispatch } from "react-redux"
 import CartItem from './CartItem';
 import { useRouter } from 'next/router';
+import { toast } from "react-toastify"
 
 const Cart = () => {
     // redux
@@ -17,10 +18,14 @@ const Cart = () => {
     })
     const totalPrice = sub.reduce((pre, curr) => pre + curr, 0)
 
-    // re set cart data to redux store
-    useEffect(() => {
-        dispatch({ type: 'reloadCart', payload: JSON.parse(localStorage.getItem('cart')) })
-    }, [])
+
+    // check out order
+    const checkOutOrder = () => {
+        if (Object.keys(cart).length === 0) {
+            return toast.error("Your cart is empty")
+        }
+        router.push("/checkout")
+    }
 
     return (
         <>
@@ -48,7 +53,7 @@ const Cart = () => {
                                 <button onClick={() => dispatch({ type: 'clearCart' })} className="style_btn py-1 bg-accent px-4 rounded-md text-white font-bold flex justify-center items-center">
                                     Clear Cart <DeleteIcon iconClass="w-7 h-7 text-white" />
                                 </button>
-                                <button onClick={() => router.push('/checkout')} className="style_btn px-5 py-1 bg-primary rounded-md text-white font-bold flex justify-center items-center">
+                                <button onClick={checkOutOrder} className="style_btn px-5 py-1 bg-primary rounded-md text-white font-bold flex justify-center items-center">
                                     Checkout <CartIcon iconClass="w-7 h-7 text-white" />
                                 </button>
                             </div>

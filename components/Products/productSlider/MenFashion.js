@@ -9,7 +9,7 @@ const MenFashion = () => {
 
     useEffect(() => {
         const getData = async () => {
-            const res = await axios('http://localhost:3000/api/product/getMenFashion')
+            const res = await axios(`${process.env.NEXT_PUBLIC_BASE_URL}/api/product/getMenFashion`)
             setProducts(res.data.tshirts);
         }
         getData()

@@ -12,8 +12,8 @@ const handler = async (req, res) => {
         const { name, email, password, img } = req.body;
 
         // custom validator
-        const validate = registerValidator({name, email, password})
-        if(!validate.isValid) return res.status(400).json(validate.error)
+        const validate = registerValidator({ name, email, password })
+        if (!validate.isValid) return res.status(400).json(validate.error)
 
         // is user already exist
         const userExist = await User.findOne({ email })
@@ -33,7 +33,13 @@ const handler = async (req, res) => {
 
         res.status(201).json({
             message: "User has been Registered Successfully",
-            user,
+            user: {
+                id: user._id,
+                name: user.name,
+                email: user.email,
+                role: user.role,
+                img: user.img
+            },
             token: generateToken(user.email)
         })
 

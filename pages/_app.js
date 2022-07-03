@@ -21,6 +21,9 @@ function MyApp({ Component, pageProps }) {
   const router = useRouter()
 
   useEffect(() => {
+    router.events.on('routeChangeStart', () => {
+      setProgress(50)
+    })
     router.events.on('routeChangeComplete', () => {
       setProgress(100)
     })
@@ -37,6 +40,11 @@ function MyApp({ Component, pageProps }) {
     }
   }, [dispatch])
 
+  // re-load cart data to redux store
+  useEffect(() => {
+    dispatch({ type: 'reloadCart', payload: JSON.parse(localStorage.getItem('cart')) })
+  }, [])
+
 
   return (
     <>
@@ -50,7 +58,7 @@ function MyApp({ Component, pageProps }) {
       <Footer />
 
       <ToastContainer
-        position="top-right"
+        position="top-left"
         autoClose={5000}
         hideProgressBar
         newestOnTop={false}

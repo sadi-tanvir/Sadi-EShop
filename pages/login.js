@@ -4,14 +4,15 @@ import SocialLogin from '../components/SocialLogin';
 import ForgetPassword from '../components/ForgetPassword';
 import { toast } from "react-toastify"
 import axios from 'axios';
-import { useState } from 'react';
-import { useDispatch } from "react-redux"
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from "react-redux"
 import { useRouter } from "next/router"
 import HeadInfo from '../components/HeadInfo';
 
 const Login = () => {
     // redux
     const dispatch = useDispatch()
+    const { isAuthenticate } = useSelector(state => state.authReducer)
 
     // state
     const [info, setInfo] = useState({
@@ -34,7 +35,7 @@ const Login = () => {
         e.preventDefault()
         try {
             const { email, password } = info;
-            const res = await axios.post(`http://localhost:3000/api/user/login`, { email, password })
+            const res = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/api/user/login`, { email, password })
 
             if (res.data.user) {
                 localStorage.setItem("userInfo", JSON.stringify(res.data.user))
@@ -50,6 +51,15 @@ const Login = () => {
             toast.error(Object.values(error.response.data)[0]);
         }
     }
+
+    // redirect to home page
+    useEffect(() => {
+        if (localStorage.getItem('userInfo') && localStorage.getItem('accessToken')) {
+            if (isAuthenticate) {
+                router.push('/')
+            }
+        }
+    }, [isAuthenticate])
 
 
     return (

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { EmailIcon, PasswordIcon, UploadIcon, UserIcon } from '../components/shared/Icon';
 import Link from "next/link"
 import SocialLogin from "../components/SocialLogin"
@@ -11,6 +11,7 @@ import HeadInfo from '../components/HeadInfo';
 const Register = () => {
     // redux
     const dispatch = useDispatch()
+    const { isAuthenticate } = useSelector(state => state.authReducer)
 
     // state
     const [picture, setPicture] = useState("")
@@ -64,7 +65,7 @@ const Register = () => {
         e.preventDefault()
         try {
             const { name, email, password } = info;
-            const res = await axios.post(`http://localhost:3000/api/user/register`, { name, email, password, img: picture })
+            const res = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/api/user/register`, { name, email, password, img: picture })
             if (res.data.user) {
                 localStorage.setItem("userInfo", JSON.stringify(res.data.user))
                 localStorage.setItem("accessToken", JSON.stringify(res.data.token))
@@ -81,6 +82,14 @@ const Register = () => {
         }
     }
 
+    // redirect to home page
+    useEffect(() => {
+        if (localStorage.getItem('userInfo') && localStorage.getItem('accessToken')) {
+            if (isAuthenticate) {
+                router.push('/')
+            }
+        }
+    }, [isAuthenticate])
 
     return (
         <>
