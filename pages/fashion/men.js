@@ -1,10 +1,16 @@
 import ProductCard from "../../components/Products/ProductCard";
 import axios from "axios"
+import Breadcrumbs from "../../components/Breadcrumbs";
+import HeadInfo from "../../components/HeadInfo";
 
 
 const MenFashion = ({ products }) => {
     return (
         <>
+            {/* Breadcrumbs */}
+            <Breadcrumbs firstPath="/" firstName="Home" current="fashion/men" />
+            <HeadInfo title="Men's Fashion - Sadi EShop" />
+
             <div className="my-14 w-11/12 m-auto">
                 <div className="divider">
                     <h1 className="text-2xl font-bold text-secondary uppercase">

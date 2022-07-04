@@ -5,6 +5,8 @@ import CartIcon, { DownArrowIcon, FacebookIcon, HeartIcon, MessageIcon, StarHalf
 import { useDispatch } from "react-redux"
 import Product from "../../model/Product";
 import { ToastContainer, toast } from "react-toastify"
+import Breadcrumbs from '../../components/Breadcrumbs';
+import HeadInfo from '../../components/HeadInfo';
 const ProductInfo = ({ product, variant }) => {
     // redux
     const dispatch = useDispatch()
@@ -17,6 +19,8 @@ const ProductInfo = ({ product, variant }) => {
     // router
     const router = useRouter()
     const { productInfo } = router.query
+
+    console.log(product[0]?.category);
 
 
     // Add Item To the cart
@@ -65,8 +69,11 @@ const ProductInfo = ({ product, variant }) => {
 
     return (
         <>
-            <section className="text-gray-600 body-font overflow-hidden">
+            {/* Breadcrumbs  & header */}
+            <Breadcrumbs firstPath="/" firstName="Home" secondPath={`/${product[0]?.category}`} secondName={product[0]?.category} current="product details" />
+            <HeadInfo title="Product Details - Sadi EShop" />
 
+            <section className="text-gray-600 body-font overflow-hidden">
                 <div className="container px-5 py-24 mx-auto">
                     <div className="lg:w-4/5 mx-auto flex flex-wrap">
                         {/* product image */}

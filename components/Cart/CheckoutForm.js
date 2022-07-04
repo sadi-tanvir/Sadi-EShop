@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import axios from "axios"
 import { toast } from "react-toastify"
@@ -9,7 +9,9 @@ const CheckoutForm = () => {
     const { accessToken, userInfo } = useSelector(state => state.authReducer)
     const { cart } = useSelector(state => state.productsReducer)
 
+
     // state
+    const [tempering, setTempering] = useState(false)
     const [shipping, setShipping] = useState({
         name: userInfo?.name,
         email: userInfo?.email,
@@ -18,18 +20,44 @@ const CheckoutForm = () => {
         zipCode: '',
     })
 
+    
+    // next router
+    const router = useRouter()
+
+
+    // check cart tempering
+    useEffect(() => {
+        fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/order/checkCartTempering`, {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json',
+                authentication: accessToken
+            },
+            body: JSON.stringify({ cartProducts: Object.values(cart) })
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(`i am from checkout form`, data);
+                setTempering(data.tempering)
+                if (data.tempering && data.message) {
+                    toast.error(data.message)
+                }
+            })
+    }, [cart, accessToken])
+
     // check input validation
     const checkValidate = () => {
         const { name, email, phone, address, zipCode } = shipping
-        if (name && email && phone && address && zipCode) {
+        // check cart tempering
+
+        // check input validation
+        if (!tempering && name && email && phone && address && zipCode) {
             return false
         } else {
             return true
         }
     }
 
-    // next router
-    const router = useRouter()
 
     // total cart's product price
     const sub = Object.keys(cart).map(k => {

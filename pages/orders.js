@@ -4,6 +4,8 @@ import { useSelector } from "react-redux"
 import { useRouter } from "next/router"
 import { TbListDetails } from 'react-icons/tb';
 import { FaCcAmazonPay } from 'react-icons/fa';
+import Breadcrumbs from '../components/Breadcrumbs';
+import HeadInfo from '../components/HeadInfo';
 
 
 const Orders = () => {
@@ -30,54 +32,60 @@ const Orders = () => {
         getMyOrders();
     }, [userInfo, accessToken])
     return (
-        <div className="w-10/12 mx-auto my-20 min-h-[60vh] shadow-lg">
-            <h1 className="font-bold text-2xl uppercase my-5">My Orders</h1>
-            <div className="overflow-x-auto">
-                <table className="table w-full">
-                    {/* <!-- head --> */}
-                    <thead>
-                        <tr>
-                            <th>Order Id</th>
-                            <th>Order Item Qty</th>
-                            <th>Total Amount</th>
-                            <th>Payment Status</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            orders?.map(order => {
-                                return (
-                                    <>
-                                        <tr className="hover">
-                                            <td>{order._id}</td>
-                                            <td>{Object.keys(order.products).length} item</td>
-                                            <td>${order.amount}</td>
-                                            <td>
-                                                {
-                                                    order?.payment_status ?
-                                                        <img draggable={false} src="/assets/paid-icon.png" className="w-[50px]  " alt="paid" />
-                                                        :
-                                                        <img draggable={false} src="/assets/unpaid-icon.png" className="w-14  " alt="unpaid" />
-                                                }
-                                            </td>
-                                            <td className="flex">
-                                                {
-                                                    order?.payment_status ||
-                                                    <FaCcAmazonPay onClick={() => router.push(`payment/${order._id}`)} title="pay" className="mr-2 text-3xl text-accent cursor-pointer style_btn" />
-                                                }
-                                                <TbListDetails title="details" onClick={() => router.push(`order/${order._id}`)} className="text-3xl text-primary cursor-pointer style_btn" />
-                                            </td>
-                                        </tr>
-                                    </>
-                                )
-                            })
-                        }
+        <>
+            {/* Breadcrumbs & header */}
+            <Breadcrumbs firstPath="/" firstName="Home" current="orders" />
+            <HeadInfo title="Orders - Sadi EShop" />
 
-                    </tbody>
-                </table>
+            <div className="w-10/12 mx-auto my-20 min-h-[60vh] shadow-lg">
+                <h1 className="font-bold text-2xl uppercase my-5">My Orders</h1>
+                <div className="overflow-x-auto">
+                    <table className="table w-full">
+                        {/* <!-- head --> */}
+                        <thead>
+                            <tr>
+                                <th>Order Id</th>
+                                <th>Order Item Qty</th>
+                                <th>Total Amount</th>
+                                <th>Payment Status</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                orders?.map(order => {
+                                    return (
+                                        <>
+                                            <tr className="hover">
+                                                <td>{order._id}</td>
+                                                <td>{Object.keys(order.products).length} item</td>
+                                                <td>${order.amount}</td>
+                                                <td>
+                                                    {
+                                                        order?.payment_status ?
+                                                            <img draggable={false} src="/assets/paid-icon.png" className="w-[50px]  " alt="paid" />
+                                                            :
+                                                            <img draggable={false} src="/assets/unpaid-icon.png" className="w-14  " alt="unpaid" />
+                                                    }
+                                                </td>
+                                                <td className="flex">
+                                                    {
+                                                        order?.payment_status ||
+                                                        <FaCcAmazonPay onClick={() => router.push(`payment/${order._id}`)} title="pay" className="mr-2 text-3xl text-accent cursor-pointer style_btn" />
+                                                    }
+                                                    <TbListDetails title="details" onClick={() => router.push(`order/${order._id}`)} className="text-3xl text-primary cursor-pointer style_btn" />
+                                                </td>
+                                            </tr>
+                                        </>
+                                    )
+                                })
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </div>
+        </>
     );
 };
 

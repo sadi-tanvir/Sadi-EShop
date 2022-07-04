@@ -4,6 +4,9 @@ import CheckoutForm from '../components/Cart/CheckoutForm';
 import Summary from '../components/Cart/summary';
 import jwt from "jsonwebtoken"
 import { useRouter } from 'next/router'
+import Breadcrumbs from "../components/Breadcrumbs"
+import HeadInfo from '../components/HeadInfo';
+import axios from "axios"
 
 
 
@@ -15,6 +18,7 @@ const Checkout = () => {
 
     // next router
     const router = useRouter()
+
 
     // total cart's product price
     const sub = Object.keys(cart).map(k => {
@@ -40,13 +44,19 @@ const Checkout = () => {
         }
     }, [accessToken, userInfo.email, router, isAuthenticate, dispatch])
     return (
-        <div className="grid grid-cols-1">
-            {/* order summary */}
-            <Summary totalPrice={totalPrice} />
+        <>
+            {/* Breadcrumbs  & header */}
+            <Breadcrumbs firstPath="/" firstName="Home" secondPath="/fashion/men" secondName="fashion/men" current="checkout" />
+            <HeadInfo title="Checkout - Sadi EShop" />
 
-            {/* checkout form */}
-            <CheckoutForm />
-        </div>
+            <div className="grid grid-cols-1">
+                {/* order summary */}
+                <Summary totalPrice={totalPrice} />
+
+                {/* checkout form */}
+                <CheckoutForm />
+            </div>
+        </>
     );
 };
 

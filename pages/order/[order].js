@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import HeadInfo from '../../components/HeadInfo';
 import { useRouter } from "next/router"
 import axios from 'axios';
+import Breadcrumbs from '../../components/Breadcrumbs';
 
 const Order = () => {
     // state
@@ -24,7 +25,10 @@ const Order = () => {
 
     return (
         <>
-            <HeadInfo title="Order - Sadi EShop" />
+            {/* Breadcrumbs  & header */}
+            <Breadcrumbs firstPath="/" firstName="Home" secondPath="/orders" secondName="Orders" current="Order Details" />
+            <HeadInfo title="Order Details - Sadi EShop" />
+
             <section className="text-gray-600 body-font overflow-hidden">
                 <div className="container px-5 mt-10 mx-auto">
                     <h1 className="text-secondary text-xl title-font font-semibold ">Order ID: {product?._id}</h1>

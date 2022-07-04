@@ -7,7 +7,9 @@ const Home = () => {
 
   return (
     <>
+      {/* header info */}
       <HeadInfo title="Home - Sadi EShop" />
+
       <Banner />
       <HomeProducts />
     </>
