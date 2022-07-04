@@ -2,9 +2,12 @@ import React, { useEffect } from 'react';
 import axios from "axios"
 import { useSelector } from "react-redux"
 import { useRouter } from "next/router"
+import { TbListDetails } from 'react-icons/tb';
+import { FaCcAmazonPay } from 'react-icons/fa';
+
 
 const Orders = () => {
-    const { accessToken, userInfo, isAuthenticate } = useSelector(state => state.authReducer)
+    const { accessToken, userInfo } = useSelector(state => state.authReducer)
 
     // state
     const [orders, setOrders] = React.useState([])
@@ -15,13 +18,19 @@ const Orders = () => {
     // get my orders
     useEffect(() => {
         const getMyOrders = async () => {
-            const res = await axios(`${process.env.NEXT_PUBLIC_BASE_URL}/api/order/getMyOrders?email=${userInfo.email}`)
+            const res = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/order/getMyOrders?email=${userInfo.email}`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    authentication: accessToken
+                }
+
+            })
             setOrders(res.data.myOrders);
         }
         getMyOrders();
-    }, [userInfo])
+    }, [userInfo, accessToken])
     return (
-        <div className="w-10/12 mx-auto my-20 min-h-[60vh]">
+        <div className="w-10/12 mx-auto my-20 min-h-[60vh] shadow-lg">
             <h1 className="font-bold text-2xl uppercase my-5">My Orders</h1>
             <div className="overflow-x-auto">
                 <table className="table w-full">
@@ -37,7 +46,7 @@ const Orders = () => {
                     </thead>
                     <tbody>
                         {
-                            orders.map(order => {
+                            orders?.map(order => {
                                 return (
                                     <>
                                         <tr className="hover">
@@ -47,22 +56,17 @@ const Orders = () => {
                                             <td>
                                                 {
                                                     order?.payment_status ?
-                                                        <>
-                                                            <span className="bg-primary text-sm px-7 py-1 inline-block rounded-2xl font-semibold text-white">
-                                                                Paid
-                                                            </span>
-                                                        </>
+                                                        <img draggable={false} src="/assets/paid-icon.png" className="w-[50px]  " alt="paid" />
                                                         :
-                                                        <span className="px-5 text-sm py-1 rounded-2xl bg-red-400 font-semibold text-white">
-                                                            Unpaid
-                                                        </span>
+                                                        <img draggable={false} src="/assets/unpaid-icon.png" className="w-14  " alt="unpaid" />
                                                 }
                                             </td>
-                                            <td>
-                                                {/* <a href={`/order/${order._id}`} className="text-sm text-blue-500 hover:text-blue-700"> */}
-                                                <button onClick={() => router.push(`payment/${order._id}`)} className="style_btn bg-primary px-5 rounded-md text-white font-bold flex justify-center items-center">
-                                                    Pay Now
-                                                </button>
+                                            <td className="flex">
+                                                {
+                                                    order?.payment_status ||
+                                                    <FaCcAmazonPay onClick={() => router.push(`payment/${order._id}`)} title="pay" className="mr-2 text-3xl text-accent cursor-pointer style_btn" />
+                                                }
+                                                <TbListDetails title="details" onClick={() => router.push(`order/${order._id}`)} className="text-3xl text-primary cursor-pointer style_btn" />
                                             </td>
                                         </tr>
                                     </>

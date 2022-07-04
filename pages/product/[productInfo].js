@@ -60,7 +60,6 @@ const ProductInfo = ({ product, variant }) => {
     // redirect to selected size product
     const refreshVariant = (newColor, newSize) => {
         let url = `${process.env.NEXT_PUBLIC_BASE_URL}/product/${variant[newColor][newSize]['id']}`
-        console.log(url);
         window.location = url
     }
 
@@ -189,11 +188,3 @@ export async function getServerSideProps(context) {
 }
 
 export default ProductInfo;
-
-
-
-{/* {Object.keys(variant).includes('white') && <button onClick={() => getSize(variant['white'])} className="border-2 border-gray-300 ml-1 bg-white rounded-full w-6 h-6 focus:outline-none"></button>} */ }
-{/* {Object.keys(variant).includes('black') && <button onClick={() => getSize(variant['black'])} className="border-2 border-gray-300 ml-1 bg-gray-700 rounded-full w-6 h-6 focus:outline-none"></button>} */ }
-{/* {Object.keys(variant).includes('blue') && <button onClick={() => getSize(variant['blue'])} className="border-2 border-gray-300 ml-1 bg-blue-700 rounded-full w-6 h-6 focus:outline-none"></button>} */ }
-{/* {Object.keys(variant).includes('red') && <button onClick={() => getSize(variant['red'])} className="border-2 border-gray-300 ml-1 bg-red-700 rounded-full w-6 h-6 focus:outline-none"></button>} */ }
-{/* {Object.keys(variant).includes('orange') && <button onClick={() => getSize(variant['orange'])} className="border-2 border-gray-300 ml-1 bg-orange-700 rounded-full w-6 h-6 focus:outline-none"></button>} */ }

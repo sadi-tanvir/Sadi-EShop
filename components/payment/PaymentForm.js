@@ -6,6 +6,7 @@ import {
     useElements,
 } from '@stripe/react-stripe-js';
 import Swal from 'sweetalert2';
+import { useSelector } from "react-redux";
 
 
 
@@ -21,11 +22,15 @@ const PaymentForm = ({ product }) => {
 
     console.log(`this is client secret`, clientSecret);
 
+     // redux
+     const { accessToken } = useSelector(state => state.authReducer)
+
     useEffect(() => {
         fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/payment/createPaymentIntent?price=${product?.amount}`, {
             method: 'POST',
             headers: {
-                'content-type': 'application/json'
+                'content-type': 'application/json',
+                authentication: accessToken
             },
             // body: JSON.stringify({ price: product?.amount })
         })

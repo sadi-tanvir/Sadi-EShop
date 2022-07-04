@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useSelector } from "react-redux";
 import { loadStripe } from '@stripe/stripe-js';
 import { useRouter } from "next/router"
 import {
@@ -16,9 +17,11 @@ const stripePromise = loadStripe('pk_test_51L4MS4Cqaut6bPICBKVF9ezBxrYxlN6EbsJzT
 
 
 const Payment = () => {
+    // redux
+    const { accessToken } = useSelector(state => state.authReducer)
+
+    // state
     const [product, setProduct] = useState({})
-    // const { productId } = useParams()
-    // const { productName, productImage, totalAmount, payment_status, orderQuantity } = product
 
     // router
     const router = useRouter()
@@ -28,7 +31,12 @@ const Payment = () => {
     // get product by id
     useEffect(() => {
         const getProduct = async () => {
-            const res = await axios(`${process.env.NEXT_PUBLIC_BASE_URL}/api/order/getSingleOrder?id=${payment}`)
+            const res = await axios(`${process.env.NEXT_PUBLIC_BASE_URL}/api/order/getSingleOrder?id=${payment}`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    authentication: accessToken
+                }
+            })
             setProduct(res.data.order);
             console.log(res.data);
         }

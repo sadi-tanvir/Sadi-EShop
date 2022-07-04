@@ -1,12 +1,21 @@
 import connectDB from "../../../middleware/mongoConnect"
 import Stripe from 'stripe';
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+import jwt from "jsonwebtoken"
+import User from "../../../model/User"
 
 
 
 const handler = async (req, res) => {
     try {
         if (req.method !== 'POST') return res.status(400).json({ message: 'Method not allowed' });
+
+        // check authentication
+        const decoded = jwt.verify(req.headers.authentication, process.env.SECRET_KEY)
+        if (!decoded) return res.status(403).json({ message: 'Forbidden User.' })
+        const findUser = await User.findOne({ email: decoded.email })
+        if (!findUser) return res.status(401).json({ message: 'Unauthorized User.' })
+        
 
         const calculateOrderAmount = (price) => {
             // Replace this constant with a calculation of the order's amount
@@ -31,7 +40,6 @@ const handler = async (req, res) => {
         });
 
     } catch (error) {
-        console.log(error);
         res.json({ error });
     }
 }

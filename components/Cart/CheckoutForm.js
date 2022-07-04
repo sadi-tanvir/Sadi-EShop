@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import axios from "axios"
 import { toast } from "react-toastify"
+import { useRouter } from 'next/router';
 
 const CheckoutForm = () => {
     // redux
-    const { accessToken, userInfo, isAuthenticate } = useSelector(state => state.authReducer)
+    const { accessToken, userInfo } = useSelector(state => state.authReducer)
     const { cart } = useSelector(state => state.productsReducer)
 
     // state
@@ -16,6 +17,19 @@ const CheckoutForm = () => {
         address: '',
         zipCode: '',
     })
+
+    // check input validation
+    const checkValidate = () => {
+        const { name, email, phone, address, zipCode } = shipping
+        if (name && email && phone && address && zipCode) {
+            return false
+        } else {
+            return true
+        }
+    }
+
+    // next router
+    const router = useRouter()
 
     // total cart's product price
     const sub = Object.keys(cart).map(k => {
@@ -40,14 +54,22 @@ const CheckoutForm = () => {
                 phone: phone,
                 address: `${address}, ${zipCode}-bangladesh`,
                 amount: parseInt(totalPrice)
+            }, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    authentication: accessToken
+                }
             })
 
-            console.log(res.data);
-            if(res.data.message){
+            if (res.data.message) {
                 toast.success(res.data.message)
+                setTimeout(() => {
+                    router.push('/orders')
+                }, 2000)
             }
         } catch (error) {
             console.log(error);
+            toast.success(error.response.data.message)
         }
     }
 
@@ -67,7 +89,7 @@ const CheckoutForm = () => {
                             <input onChange={handleChange} type="number" name="phone" value={shipping.phone} className="border rounded h-10 w-full focus:outline-none focus:border-primary px-2 mt-2 text-sm" placeholder="Phone Number" />
                             <input onChange={handleChange} type="text" name="address" value={shipping.address} className="border rounded h-10 w-full focus:outline-none focus:border-primary px-2 mt-2 text-sm" placeholder="Address*" />
                             <input onChange={handleChange} type="text" name="zipCode" value={shipping.zipCode} className="border rounded h-10 w-full focus:outline-none focus:border-primary px-2 mt-2 text-sm" placeholder="Zipcode" />
-                            <button type="submit" className="bg-primary style_btn mt-5 h-12 w-full rounded font-medium text-xs text-white">
+                            <button disabled={checkValidate()} type="submit" className="disabled:cursor-not-allowed disabled:bg-gray-400 bg-primary style_btn mt-5 h-12 w-full rounded font-medium text-xs text-white">
                                 Continue to Shipping
                             </button>
                         </form>
