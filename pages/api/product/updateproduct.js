@@ -7,7 +7,6 @@ import connectDB from "../../../middleware/mongoConnect"
 
 const handler = async (req, res) => {
     try {
-        console.log(req.method)
         if (req.method !== 'PUT') return res.status(400).json({ message: 'Method not allowed' });
 
         // check authentication

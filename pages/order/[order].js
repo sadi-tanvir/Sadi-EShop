@@ -6,6 +6,9 @@ import axios from 'axios';
 import Breadcrumbs from '../../components/Breadcrumbs';
 
 const Order = () => {
+    // redux
+    const { accessToken } = useSelector(state => state.authReducer)
+
     // state
     const [product, setProduct] = useState({})
 
@@ -17,11 +20,17 @@ const Order = () => {
     // get product by id
     useEffect(() => {
         const getProduct = async () => {
-            const res = await axios(`${process.env.NEXT_PUBLIC_BASE_URL}/api/order/getSingleOrder?id=${order}`)
+            // const res = await axios(`${process.env.NEXT_PUBLIC_BASE_URL}/api/order/getSingleOrder?id=${order}`)
+            const res = await axios(`${process.env.NEXT_PUBLIC_BASE_URL}/api/order/getSingleOrder?id=${order}`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    authentication: accessToken
+                }
+            })
             setProduct(res.data.order);
         }
         getProduct()
-    }, [order])
+    }, [order, accessToken])
 
     return (
         <>

@@ -7,6 +7,7 @@ import jwt from "jsonwebtoken"
 const handler = async (req, res) => {
     try {
         if (req.method !== 'GET') return res.status(400).json({ message: 'Method not allowed' });
+        
         const decoded = jwt.verify(req.headers.authentication, process.env.SECRET_KEY)
         if (!decoded) return res.status(400).json({ message: 'Unauthorized User.' })
 

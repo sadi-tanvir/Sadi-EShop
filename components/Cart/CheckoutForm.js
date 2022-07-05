@@ -20,10 +20,8 @@ const CheckoutForm = () => {
         zipCode: '',
     })
 
-    
     // next router
     const router = useRouter()
-
 
     // check cart tempering
     useEffect(() => {

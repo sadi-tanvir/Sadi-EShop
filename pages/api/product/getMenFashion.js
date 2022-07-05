@@ -6,8 +6,8 @@ import jwt from "jsonwebtoken"
 const handler = async (req, res) => {
     try {
         if (req.method !== 'GET') return res.status(400).json({ message: 'Method not allowed' });
-        const products = await Product.find({ category: "fashion/men" });
 
+        const products = await Product.find({ category: "fashion/men" });
 
         let tshirts = {}
 

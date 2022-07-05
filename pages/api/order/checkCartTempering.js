@@ -18,7 +18,7 @@ const handler = async (req, res) => {
         for (let i = 0; i < req.body.cartProducts.length; i++) {
             const products = await Product.findOne({ _id: req.body.cartProducts[i].productId, price: req.body.cartProducts[i].price });
             if (!products) {
-                return res.status(400).json({ tempering: true, message: 'Product Price has been tempered' });
+                return res.status(400).json({ tempering: true, message: 'the price of some items in your cart has changed, please! try again' });
             }
         }
 

@@ -155,10 +155,10 @@ const ProductInfo = ({ product, variant }) => {
 
                                 {/* buy & cart add button */}
                                 <div className="flex justify-start items-center mt-10">
-                                    <button onClick={buyNow} className="flex text-white bg-secondary border-0 py-2 px-6 focus:outline-none hover:bg-primary style_btn rounded">
+                                    <button disabled={currentProduct.availableQty < 1} onClick={buyNow} className="disabled:cursor-not-allowed flex text-white bg-secondary border-0 py-2 px-6 focus:outline-none hover:bg-primary style_btn rounded">
                                         Buy Now
                                     </button>
-                                    <button onClick={addToCart} className="flex ml-10 text-white bg-primary border-0 py-2 px-6 focus:outline-none hover:bg-primary style_btn rounded">
+                                    <button disabled={currentProduct.availableQty < 1} onClick={addToCart} className="disabled:cursor-not-allowed flex ml-10 text-white bg-primary border-0 py-2 px-6 focus:outline-none hover:bg-primary style_btn rounded">
                                         Add To Cart
                                         <CartIcon iconClass="h-7 w-7" />
                                     </button>
