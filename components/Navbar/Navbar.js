@@ -73,8 +73,8 @@ const Navbar = () => {
                         isAuthenticate ?
                             <DropdownMenuAccount>
                                 <ul className="mr-52 absolute hidden z-10 text-gray-700 group-hover:block w-[150px] bg-slate-200 px-1 py-1 rounded-md">
-                                    <Link href="/fashion/men">
-                                        <li className={`${dropdownActivePath('/fashion/men')} py-2 px-2 cursor-pointer`}>
+                                    <Link href="/myaccount">
+                                        <li className={`${dropdownActivePath('/myaccount')} py-2 px-2 cursor-pointer`}>
                                             <a className="font-bold">My Account</a>
                                         </li>
                                     </Link>

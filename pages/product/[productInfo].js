@@ -20,7 +20,14 @@ const ProductInfo = ({ product, variant }) => {
     const router = useRouter()
     const { productInfo } = router.query
 
-    console.log(product[0]?.category);
+    // color's object
+    const colors = {
+        white: 'bg-white',
+        black: 'bg-gray-700',
+        blue: 'bg-blue-700',
+        red: 'bg-red-700',
+        orange: 'bg-orange-700'
+    }
 
 
     // Add Item To the cart
@@ -47,24 +54,12 @@ const ProductInfo = ({ product, variant }) => {
         })
         setCurrentProduct(findCurrentProduct);
         setCurrentColor(currentProduct.color)
-    }, [])
-
-
-
-
-    // color's object
-    const colors = {
-        white: 'bg-white',
-        black: 'bg-gray-700',
-        blue: 'bg-blue-700',
-        red: 'bg-red-700',
-        orange: 'bg-orange-700'
-    }
+    }, [productInfo])
 
     // redirect to selected size product
     const refreshVariant = (newColor, newSize) => {
-        let url = `${process.env.NEXT_PUBLIC_BASE_URL}/product/${variant[newColor][newSize]['id']}`
-        window.location = url
+        let url = `${process.env.NEXT_PUBLIC_BASE_URL}/product/${variant[newColor][newSize]?.id}`
+        router.push(url)
     }
 
     return (
@@ -75,14 +70,18 @@ const ProductInfo = ({ product, variant }) => {
 
             <section className="text-gray-600 body-font overflow-hidden">
                 <div className="container px-5 py-24 mx-auto">
-                    <div className="lg:w-4/5 mx-auto flex flex-wrap">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-x-10 content-center gap-y-10">
                         {/* product image */}
-                        <img
-                            alt="ecommerce"
-                            className="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded hover:scale-150 transition ease-in-out duration-300"
-                            src={currentProduct['img']}
-                        />
-                        <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
+                        <div className="mx-auto order-2 md:order-1">
+                            <img
+                                alt="eCommerce"
+                                className="shadow-2xl rounded-2xl object-cover object-center hover:scale-150 transition ease-in-out duration-300"
+                                src={currentProduct['img']}
+                            />
+                        </div>
+
+                        {/* product information */}
+                        <div className="col-span-2 order-1 md:order-2">
                             <h2 className="text-sm title-font text-gray-500 tracking-widest">PRODUCT NAME</h2>
                             <h1 className="text-gray-900 text-3xl title-font font-medium mb-1">{currentProduct?.name}</h1>
 
@@ -112,6 +111,11 @@ const ProductInfo = ({ product, variant }) => {
                             </div>
 
                             <p className="leading-relaxed">{currentProduct?.description}</p>
+                            {
+                                currentProduct["availableQty"] > 0 ?
+                                    <span className="text-lg text-primary font-bold mt-5 inline-block">{currentProduct["availableQty"]}pcs Available</span> :
+                                    <span className="text-lg text-accent font-bold mt-5 inline-block">Out Of Stock</span>
+                            }
 
                             {/* color & size area */}
                             {
@@ -142,7 +146,6 @@ const ProductInfo = ({ product, variant }) => {
                                     </div>
                                 </div>
                             }
-
                             <div className="flex flex-col">
                                 <div className="flex justify-start items-center">
                                     {/* price */}
@@ -155,10 +158,10 @@ const ProductInfo = ({ product, variant }) => {
 
                                 {/* buy & cart add button */}
                                 <div className="flex justify-start items-center mt-10">
-                                    <button disabled={currentProduct.availableQty < 1} onClick={buyNow} className="disabled:cursor-not-allowed flex text-white bg-secondary border-0 py-2 px-6 focus:outline-none hover:bg-primary style_btn rounded">
+                                    <button disabled={currentProduct.availableQty < 1} onClick={buyNow} className="disabled:cursor-not-allowed disabled:bg-gray-400 flex text-white bg-secondary border-0 py-2 px-6 focus:outline-none hover:bg-primary style_btn rounded">
                                         Buy Now
                                     </button>
-                                    <button disabled={currentProduct.availableQty < 1} onClick={addToCart} className="disabled:cursor-not-allowed flex ml-10 text-white bg-primary border-0 py-2 px-6 focus:outline-none hover:bg-primary style_btn rounded">
+                                    <button disabled={currentProduct.availableQty < 1} onClick={addToCart} className="disabled:cursor-not-allowed disabled:bg-emerald-200 flex ml-10 text-white bg-primary border-0 py-2 px-6 focus:outline-none hover:bg-primary style_btn rounded">
                                         Add To Cart
                                         <CartIcon iconClass="h-7 w-7" />
                                     </button>

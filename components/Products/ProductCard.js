@@ -32,7 +32,7 @@ const ProductCard = ({ colors, product }) => {
                         <button onClick={() => router.push(`/product/${product["_id"]}`)} className="style_btn bg-slate-600 px-3 rounded-md text-white font-bold flex justify-center items-center">
                             Details <InfoIcon iconClass="w-8 h-8 text-white" />
                         </button>
-                        <button disabled={product?.availableQty < 1} onClick={addToCart} className="disabled:cursor-not-allowed style_btn bg-primary px-5 rounded-md text-white font-bold flex justify-center items-center">
+                        <button disabled={product?.availableQty < 1} onClick={addToCart} className="disabled:cursor-not-allowed disabled:bg-emerald-200 style_btn bg-primary px-5 rounded-md text-white font-bold flex justify-center items-center">
                             Cart <CartIcon iconClass="w-8 h-8 text-white" />
                         </button>
                     </div>

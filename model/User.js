@@ -12,6 +12,12 @@ const userSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
+    phone: {
+        type: String,
+    },
+    address: {
+        type: String,
+    },
     password: {
         type: String,
         required: true
@@ -19,6 +25,11 @@ const userSchema = new mongoose.Schema({
     img: {
         type: String,
         default: "https://i.ibb.co/jgDtzL8/empty-avatar.jpg"
+    },
+    role: {
+        type: String,
+        default: "user",
+        enum: ["user", "admin"]
     }
 }, { timestamps: true })
 
