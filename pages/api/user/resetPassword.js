@@ -28,7 +28,7 @@ const handler = async (req, res) => {
         const updateUser = await User.findOneAndUpdate({ email: decoded.email }, { password: hash })
         if (!updateUser) return res.status(401).json({ message: 'Failed to update password.' })
 
-        res.status(200).json({ message: 'Password updated successfully.' })
+        res.status(200).json({ success: true, message: 'Password updated successfully.' })
 
     } catch (error) {
         res.status(500).json(error)

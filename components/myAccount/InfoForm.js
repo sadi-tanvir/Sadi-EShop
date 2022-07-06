@@ -105,16 +105,12 @@ const InfoForm = () => {
 
             // console.log(res.data.response.status);
 
-            if (res.data.message) {
-                if(res.status == 200){
-                    toast.success(res.data?.message)
-                    return
-                }
-                toast.error(res.data?.message)
+            if (res.data.message && res.data.success) {
+                return toast.success(res.data?.message)
             }
         } catch (error) {
             console.log(error);
-            toast.success(error.response.data.message)
+            toast.error(error.response.data.message)
         }
     }
 
@@ -124,7 +120,7 @@ const InfoForm = () => {
             <div className="max-w-md mx-auto bg-white rounded-lg md:max-w-xl">
                 <div className="">
                     <div className="w-full p-4 px-5 pb-5">
-                        <h1 className="font-bold text-secondary">Shipping Address</h1>
+                        <h1 className="font-bold text-secondary">Update Information</h1>
                         <form onSubmit={handleSubmit}>
                             <div className="grid md:grid-cols-2 md:gap-2">
                                 <input onChange={handleChange} type="text" name="name" value={user.name} className="border rounded h-10 w-full focus:outline-none focus:border-primary px-2 mt-2 text-sm" placeholder="Name" />

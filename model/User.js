@@ -30,6 +30,9 @@ const userSchema = new mongoose.Schema({
         type: String,
         default: "user",
         enum: ["user", "admin"]
+    },
+    isPasswordChange: {
+        type: String,
     }
 }, { timestamps: true })
 

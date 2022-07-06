@@ -1,5 +1,9 @@
+import { useSelector } from 'react-redux';
+const DropdownMenuAccount = ({ children }) => {
 
-const DropdownMenuAccount = ({children}) => {
+    // redux
+    const { userInfo } = useSelector(state => state.authReducer)
+
     return (
         <>
             <div className="group inline-block relative w-12">
@@ -8,7 +12,10 @@ const DropdownMenuAccount = ({children}) => {
                 >
                     <div className="avatar placeholder  hover:scale-125 active:scale-90 transition-all duration-300">
                         <div className="bg-neutral-focus  border-2 border-slate-400 text-neutral-content rounded-full w-7  shadow-2xl">
-                            <img src="https://i.ibb.co/jgDtzL8/empty-avatar.jpg" alt="" />
+                            <img
+                                src={userInfo?.img || "https://i.ibb.co/jgDtzL8/empty-avatar.jpg"}
+                                alt=""
+                            />
                         </div>
                     </div>
                     <svg
