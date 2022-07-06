@@ -29,6 +29,8 @@ const handler = async (req, res) => {
                     id: user._id,
                     name: user.name,
                     email: user.email,
+                    phone: user.phone,
+                    address: user.address,
                     role: user.role,
                     img: user.img
                 },

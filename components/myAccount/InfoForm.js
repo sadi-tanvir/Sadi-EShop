@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector,useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import axios from "axios"
 import { toast } from "react-toastify"
 import { useRouter } from 'next/router';
@@ -88,6 +88,36 @@ const InfoForm = () => {
         }
     }
 
+    // handle form submit
+    const handlePasswordChange = async (e) => {
+        e.preventDefault()
+        try {
+            const { oldPassword, newPassword } = user;
+            const res = await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/api/user/resetPassword`, {
+                oldPassword,
+                newPassword
+            }, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    authentication: accessToken
+                }
+            })
+
+            // console.log(res.data.response.status);
+
+            if (res.data.message) {
+                if(res.status == 200){
+                    toast.success(res.data?.message)
+                    return
+                }
+                toast.error(res.data?.message)
+            }
+        } catch (error) {
+            console.log(error);
+            toast.success(error.response.data.message)
+        }
+    }
+
     return (
         <>
             {/* shipping information */}
@@ -120,8 +150,8 @@ const InfoForm = () => {
 
                     <div className="w-full p-4 px-5 pb-5">
                         <h1 className="font-bold text-secondary">Update Password</h1>
-                        <form onSubmit={handleSubmit}>
-                            <input onChange={handleChange} type="number" name="oldPassword" value={user.oldPassword} className="border rounded h-10 w-full focus:outline-none focus:border-primary px-2 mt-2 text-sm" placeholder="Phone Number" />
+                        <form onSubmit={handlePasswordChange}>
+                            <input onChange={handleChange} type="number" name="oldPassword" value={user.oldPassword} className="border rounded h-10 w-full focus:outline-none focus:border-primary px-2 mt-2 text-sm" placeholder="Old Password" />
                             <input onChange={handleChange} type="text" name="newPassword" value={user.newPassword} className="border rounded h-10 w-full focus:outline-none focus:border-primary px-2 mt-2 text-sm" placeholder="New Password" />
                             <button disabled={loading ? true : false} type="submit" className="disabled:cursor-not-allowed disabled:bg-gray-400 bg-primary style_btn mt-5 h-12 w-full rounded font-medium text-xs text-white">
                                 Update Password
