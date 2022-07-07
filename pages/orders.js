@@ -37,7 +37,7 @@ const Orders = () => {
             <Breadcrumbs firstPath="/" firstName="Home" current="orders" />
             <HeadInfo title="Orders - Sadi EShop" />
 
-            <div className="w-10/12 mx-auto my-20 min-h-[60vh] shadow-lg">
+            <div className="w-full md:w-10/12 mx-auto px-5 md:px-0 my-20 min-h-[60vh] shadow-lg">
                 <h1 className="font-bold text-2xl uppercase my-5">My Orders</h1>
                 <div className="overflow-x-auto">
                     <table className="table w-full">

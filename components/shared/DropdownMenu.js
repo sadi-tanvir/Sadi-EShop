@@ -4,7 +4,7 @@ const DropdownMenu = ({ name, children }) => {
         <>
             <div className="group inline-block relative">
                 <button
-                    className=" text-gray-700 font-semibold py-2 px-4 rounded inline-flex items-center"
+                    className=" text-gray-700 font-semibold py-2 px-1 mr-5 md:mr-0 ml-5 md:px-4 rounded inline-flex items-center"
                 >
                     <span className="font-bold">{name}</span>
                     <svg

@@ -8,7 +8,7 @@ const DropdownMenuAccount = ({ children }) => {
         <>
             <div className="group inline-block relative w-12">
                 <button
-                    className=" text-gray-700 font-semibold py-2 px-4 rounded inline-flex items-center"
+                    className=" text-gray-700 font-semibold py-2 px- rounded inline-flex items-center"
                 >
                     <div className="avatar placeholder  hover:scale-125 active:scale-90 transition-all duration-300">
                         <div className="bg-neutral-focus  border-2 border-slate-400 text-neutral-content rounded-full w-7  shadow-2xl">

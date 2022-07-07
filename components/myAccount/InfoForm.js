@@ -117,7 +117,7 @@ const InfoForm = () => {
     return (
         <>
             {/* shipping information */}
-            <div className="max-w-md mx-auto bg-white rounded-lg md:max-w-xl">
+            <div className="w-11/12 md:w-8/12 mx-auto bg-white rounded-lg mb-20">
                 <div className="">
                     <div className="w-full p-4 px-5 pb-5">
                         <h1 className="font-bold text-secondary">Update Information</h1>
@@ -144,7 +144,7 @@ const InfoForm = () => {
                         </form>
                     </div>
 
-                    <div className="w-full p-4 px-5 pb-5">
+                    <div className="w-full p-4 px-5 pb-5 mt-20">
                         <h1 className="font-bold text-secondary">Update Password</h1>
                         <form onSubmit={handlePasswordChange}>
                             <input onChange={handleChange} type="number" name="oldPassword" value={user.oldPassword} className="border rounded h-10 w-full focus:outline-none focus:border-primary px-2 mt-2 text-sm" placeholder="Old Password" />

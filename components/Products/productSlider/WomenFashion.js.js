@@ -1,6 +1,7 @@
 import ProductSlider from "../ProductSlider";
 import { useEffect, useState } from 'react';
 import axios from "axios"
+import ProductCard from "../ProductCard";
 
 const WomenFashion = () => {
     // state
@@ -23,7 +24,19 @@ const WomenFashion = () => {
                     </h1>
                 </div>
 
-                <ProductSlider products={products}></ProductSlider>
+                {/* <ProductSlider products={products}></ProductSlider> */}
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-3 px-5">
+                    {
+                        Object.keys(products).splice(0,4).map((elem, index) => {
+                            products[elem]
+                            return <ProductCard
+                                key={index}
+                                product={products[elem]}
+                                colors={products[elem].color}
+                            />
+                        })
+                    }
+                </div>
             </div>
         </>
     );

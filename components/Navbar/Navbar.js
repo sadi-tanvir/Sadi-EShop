@@ -44,7 +44,7 @@ const Navbar = () => {
                     </div>
                     <div className="flex-none">
                         <Link href="/">
-                            <a className={`${navActivePath('/')} font-bold  px-4 py-2`}>
+                            <a className={`${navActivePath('/')} font-bold px-1 md:px-4 py-2`}>
                                 Home
                             </a>
                         </Link>
@@ -62,8 +62,8 @@ const Navbar = () => {
                                 </Link>
                             </ul>
                         </DropdownMenu>
-                        <a className="text-secondary font-bold">About</a>
-                        <a className="text-secondary font-bold ml-5">Contact</a>
+                        {/* <a className="text-secondary font-bold">About</a> */}
+                        {/* <a className="text-secondary font-bold ml-5">Contact</a> */}
                     </div>
                 </div>
 
