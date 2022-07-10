@@ -15,9 +15,9 @@ const Login = () => {
     const { isAuthenticate } = useSelector(state => state.authReducer)
 
     // state
-    const [info, setInfo] = useState({
-        email: '',
-        password: ''
+    const [password, setPassword] = useState({
+        newPassword: '',
+        confirmPassword: ''
     })
 
     // next router
@@ -26,7 +26,7 @@ const Login = () => {
     // handle input change
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setInfo({ ...info, [name]: value })
+        setPassword({ ...password, [name]: value })
     }
 
 
@@ -34,17 +34,12 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
-            const { email, password } = info;
-            const res = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/api/user/login`, { email, password })
+            const { newPassword, confirmPassword } = password;
+            const res = await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/api/user/resetPassword`, { email: router.query.email, newPassword, confirmPassword })
 
-            if (res.data.user) {
-                localStorage.setItem("userInfo", JSON.stringify(res.data.user))
-                localStorage.setItem("accessToken", JSON.stringify(res.data.token))
-                dispatch({ type: 'userInfo', payload: JSON.parse(localStorage.getItem("userInfo")) })
-                dispatch({ type: 'accessToken', payload: JSON.parse(localStorage.getItem("accessToken")) })
-                dispatch({ type: 'loginUser' })
+            if (res.data.message) {
                 toast.success(res.data.message)
-                router.push('/')
+                router.push('/login')
             }
 
         } catch (error) {
@@ -76,8 +71,8 @@ const Login = () => {
                                     onChange={handleChange}
                                     className="pl-2 w-full outline-none border-none"
                                     type="password"
-                                    name="password"
-                                    id="password"
+                                    name="newPassword"
+                                    id="newPassword"
                                     placeholder="Password"
                                 />
                             </div>
@@ -87,8 +82,8 @@ const Login = () => {
                                     onChange={handleChange}
                                     className="pl-2 w-full outline-none border-none"
                                     type="password"
-                                    name="password"
-                                    id="password"
+                                    name="confirmPassword"
+                                    id="confirmPassword"
                                     placeholder="Confirm Password"
                                 />
                             </div>
