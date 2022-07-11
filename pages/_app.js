@@ -1,6 +1,7 @@
 import Navbar from '../components/Navbar/Navbar'
 import Footer from '../components/Footer'
 import '../styles/globals.css'
+import "@fortawesome/fontawesome-free/css/all.min.css";
 import 'react-toastify/dist/ReactToastify.css';
 import { useDispatch } from "react-redux"
 import { ToastContainer } from 'react-toastify';

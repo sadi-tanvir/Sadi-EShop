@@ -42,10 +42,6 @@ export default function MyAccount() {
                                 </div>
                             </div>
                             <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
-                                <h6 className="text-secondary text-xl mt-3 mb-6 font-bold uppercase">
-                                    User Information
-                                </h6>
-
                                 {/* user info form */}
                                 <UserInfoForm />
 

@@ -89,6 +89,9 @@ const UserInfoForm = () => {
     return (
         <>
             <div>
+                <h6 className="text-secondary text-xl mt-3 mb-6 font-bold uppercase">
+                    User Information
+                </h6>
                 <form onSubmit={handleSubmit}>
                     <div className="flex flex-wrap">
                         <div className="w-full lg:w-6/12 px-4">
