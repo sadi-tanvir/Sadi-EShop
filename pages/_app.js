@@ -1,4 +1,3 @@
-import Navbar from '../components/Navbar/Navbar'
 import Footer from '../components/Footer'
 import '../styles/globals.css'
 import "@fortawesome/fontawesome-free/css/all.min.css";
@@ -9,6 +8,7 @@ import wrapper from '../redux/store'
 import { useEffect, useState } from 'react';
 import LoadingBar from 'react-top-loading-bar'
 import { useRouter } from "next/router"
+import Navbar from '../components/Navbar/Navbar';
 
 
 // routeChangeComplete(url, { shallow })

@@ -31,7 +31,7 @@ const Cart = () => {
         <>
             <div className="dropdown dropdown-end">
                 <label tabIndex="0">
-                    <div className="indicator ml-5">
+                    <div className="indicator mr-5 md:mr-0">
                         <span className="indicator-item badge badge-secondary text-white font-bold">{Object.keys(cart).length}</span>
                         <CartIcon iconClass="w-8 h-8 text-primary" />
                     </div>
@@ -66,13 +66,3 @@ const Cart = () => {
 };
 
 export default Cart;
-
-
-{/* <select className="select select-bordered ml-2">
-                                        <option disabled selected>1</option>
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                        <option>5</option>
-                                    </select> */}
