@@ -10,10 +10,6 @@ const handler = async (req, res) => {
 
         const { email, newPassword, confirmPassword } = req.body;
 
-        console.log(email)
-        console.log(newPassword)
-        console.log(confirmPassword)
-
         // find user
         const findUser = await User.findOne({ email })
         if (!findUser) return res.status(400).json({ message: 'No user account was created with this email' })
