@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react';
 import LoadingBar from 'react-top-loading-bar'
 import { useRouter } from "next/router"
 import Navbar from '../components/Navbar/Navbar';
+import Sidebar from '../components/Navbar/Sidebar/Sidebar';
 
 
 // routeChangeComplete(url, { shallow })

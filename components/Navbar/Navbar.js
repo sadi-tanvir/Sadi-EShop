@@ -1,13 +1,8 @@
-import { useEffect, useState } from "react";
 import Link from "next/link"
 import { useDispatch, useSelector } from "react-redux"
 import { useRouter } from "next/router"
 import CartItem from "../Cart/Cart";
 import { MdAccountCircle } from 'react-icons/md';
-import jwt from "jsonwebtoken"
-import DropdownMenuAccount from "../shared/DropdownMenuAccount";
-import DropdownMenu from "../shared/DropdownMenu";
-import Head from "next/head";
 import { DownArrowIcon } from "../shared/Icon";
 
 const Navbar = () => {
@@ -66,6 +61,14 @@ const Navbar = () => {
                                         </a>
                                     </li>
                                 </Link>
+                                <Link href="/admin">
+                                    <li className={`${router.pathname == '/admin' ? 'bg-primary' : 'bg-gray-100'} px-4 py-1 rounded-sm mr-6 md:my-3`}>
+                                        <a href="#" className={`${router.pathname == '/admin' ? 'text-white' : 'text-primary'} font-semibold hover:border-primary flex pl-1 align-middle no-underline`}>
+                                            {/* <i className={`${router.pathname == '/' ? 'text-primary' : ''} fas fa-home fa-fw mr-3`}></i> */}
+                                            <span className="pb-1 md:pb-0 text-sm">Dashboard</span>
+                                        </a>
+                                    </li>
+                                </Link>
 
                                 <li className="relative text-sm">
                                     <button onClick={() => dispatch({ type: 'fashionDropDown' })} id="userButton" className="flex items-center focus:outline-none mr-3 bg-gray-100 px-3 py-1">
@@ -95,32 +98,38 @@ const Navbar = () => {
                             <div className="flex relative inline-block float-right">
 
                                 {/* user info dropdown start */}
-                                <div className="relative text-sm">
-                                    <button onClick={() => dispatch({ type: 'userDropDown' })} id="userButton" className="flex items-center focus:outline-none mr-3">
-                                        <img className="w-8 h-8 rounded-full mr-4" src="https://i.ibb.co/jgDtzL8/empty-avatar.jpg" alt="Avatar of User" />
-                                        <span className="hidden md:inline-block font-semibold -ml-2">
-                                            Hi, {userInfo?.name?.split(" ")[0]}
-                                        </span>
-                                        <DownArrowIcon />
-                                    </button>
-                                    <div id="userMenu" className={`${userDropDown ? "" : "invisible"} bg-white w-40 rounded shadow-md mt-2 absolute mt-12 top-0 right-0 min-w-full overflow-auto z-30`}>
-                                        <ul className="list-reset px-2 py-2">
-                                            <Link href="/myaccount">
-                                                <li className={`${dropdownActivePath('/myaccount')} py-2 px-2 cursor-pointer`}>
-                                                    <a className="font-bold">My Account</a>
-                                                </li>
-                                            </Link>
-                                            <Link href="/orders">
-                                                <li className={`${dropdownActivePath('/orders')} py-2 px-2  cursor-pointer`}>
-                                                    <a className="font-bold">Orders</a>
-                                                </li>
-                                            </Link>
-                                            <li onClick={handleLogOut} className={`py-2 px-2 cursor-pointer bg-accent text-white font-bold text-center mt-2 rounded-md`}>
-                                                <a>Logout</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div> {/* user info dropdown end */}
+                                {
+                                    isAuthenticate ?
+                                        <div className="relative text-sm">
+                                            <button onClick={() => dispatch({ type: 'userDropDown' })} id="userButton" className="flex items-center focus:outline-none mr-3">
+                                                <img className="w-8 h-8 rounded-full mr-4" src="https://i.ibb.co/jgDtzL8/empty-avatar.jpg" alt="Avatar of User" />
+                                                <span className="hidden md:inline-block font-semibold -ml-2">
+                                                    Hi, {userInfo?.name?.split(" ")[0]}
+                                                </span>
+                                                <DownArrowIcon />
+                                            </button>
+                                            <div div id="userMenu" className={`${userDropDown ? "" : "invisible"} bg-white w-40 rounded shadow-md mt-2 absolute mt-12 top-0 right-0 min-w-full overflow-auto z-30`}>
+                                                <ul className="list-reset px-2 py-2">
+                                                    <Link href="/myaccount">
+                                                        <li className={`${dropdownActivePath('/myaccount')} py-2 px-2 cursor-pointer`}>
+                                                            <a className="font-bold">My Account</a>
+                                                        </li>
+                                                    </Link>
+                                                    <Link href="/orders">
+                                                        <li className={`${dropdownActivePath('/orders')} py-2 px-2  cursor-pointer`}>
+                                                            <a className="font-bold">Orders</a>
+                                                        </li>
+                                                    </Link>
+                                                    <li onClick={handleLogOut} className={`py-2 px-2 cursor-pointer bg-accent text-white font-bold text-center mt-2 rounded-md`}>
+                                                        <a>Logout</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        :
+                                        // login icon
+                                        <MdAccountCircle onClick={() => router.push('/login')} className="text-3xl text-slate-500 cursor-pointer style_btn mx-2" />
+                                } {/* user info dropdown end */}
 
 
                                 {/* cart items */}
