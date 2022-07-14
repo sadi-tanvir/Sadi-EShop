@@ -34,7 +34,7 @@ const handler = async (req, res) => {
                     role: user.role,
                     img: user.img
                 },
-                token: generateToken(user.email)
+                token: generateToken(user.email, user.role)
             })
         })
 

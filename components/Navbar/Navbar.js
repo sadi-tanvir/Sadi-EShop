@@ -8,7 +8,7 @@ import { DownArrowIcon } from "../shared/Icon";
 const Navbar = () => {
     // redux
     const dispatch = useDispatch();
-    const { accessToken, userInfo, isAuthenticate } = useSelector(state => state.authReducer)
+    const { isAdmin, accessToken, userInfo, isAuthenticate } = useSelector(state => state.authReducer)
     const { menuDropDown, userDropDown, fashionDropDown } = useSelector(state => state.globalReducer)
 
     // router
@@ -61,15 +61,17 @@ const Navbar = () => {
                                         </a>
                                     </li>
                                 </Link>
-                                <Link href="/admin">
-                                    <li className={`${router.pathname == '/admin' ? 'bg-primary' : 'bg-gray-100'} px-4 py-1 rounded-sm mr-6 md:my-3`}>
-                                        <a href="#" className={`${router.pathname == '/admin' ? 'text-white' : 'text-primary'} font-semibold hover:border-primary flex pl-1 align-middle no-underline`}>
-                                            {/* <i className={`${router.pathname == '/' ? 'text-primary' : ''} fas fa-home fa-fw mr-3`}></i> */}
-                                            <span className="pb-1 md:pb-0 text-sm">Dashboard</span>
-                                        </a>
-                                    </li>
-                                </Link>
-
+                                {
+                                    userInfo.role === 'admin' &&
+                                    <Link href="/admin">
+                                        <li className={`${router.pathname == '/admin' ? 'bg-primary' : 'bg-gray-100'} px-4 py-1 rounded-sm mr-6 md:my-3`}>
+                                            <a href="#" className={`${router.pathname == '/admin' ? 'text-white' : 'text-primary'} font-semibold hover:border-primary flex pl-1 align-middle no-underline`}>
+                                                {/* <i className={`${router.pathname == '/' ? 'text-primary' : ''} fas fa-home fa-fw mr-3`}></i> */}
+                                                <span className="pb-1 md:pb-0 text-sm">Dashboard</span>
+                                            </a>
+                                        </li>
+                                    </Link>
+                                }
                                 <li className="relative text-sm">
                                     <button onClick={() => dispatch({ type: 'fashionDropDown' })} id="userButton" className="flex items-center focus:outline-none mr-3 bg-gray-100 px-3 py-1">
                                         <span className="pb-1 md:pb-0 text-sm font-semibold">Fashion</span>
@@ -159,6 +161,14 @@ const Navbar = () => {
                                     <a className="font-bold">Home</a>
                                 </li>
                             </Link>
+                            {
+                                userInfo.role === 'admin' &&
+                                <Link href="/admin">
+                                    <li className={`${dropdownActivePath('/admin')} py-2 px-2 cursor-pointer`}>
+                                        <a className="font-bold">Dashboard</a>
+                                    </li>
+                                </Link>
+                            }
                             <Link href="/fashion/men">
                                 <li className={`${dropdownActivePath('/fashion/men')} py-2 px-2  cursor-pointer`}>
                                     <a className="font-bold">Men Fashion</a>

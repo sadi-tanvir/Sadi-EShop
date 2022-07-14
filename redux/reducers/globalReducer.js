@@ -24,7 +24,11 @@ const globalReducer = createReducer(initialState, {
         state.userDropDown = false
         state.menuDropDown = false
     },
-
+    closeDropDown: (state, action) => {
+        state.fashionDropDown = false
+        state.userDropDown = false
+        state.menuDropDown = false
+    }
 })
 
 export default globalReducer

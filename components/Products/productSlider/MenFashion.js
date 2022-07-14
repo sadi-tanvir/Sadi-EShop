@@ -28,7 +28,7 @@ const MenFashion = () => {
 
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-3 px-5">
                     {
-                        Object.keys(products).map((elem, index) => {
+                        Object.keys(products).splice(0,4).map((elem, index) => {
                             products[elem]
                             return <ProductCard
                                 key={index}

@@ -1,11 +1,16 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import DashboardIcon, { DeliverablesIcon, InventoryIcon, InvoicesIcon, OrdersIcon, ProductIcon, ProductsIcon, SettingsIcon } from '../../shared/DashboardIcon';
 import { useRouter } from "next/router"
 import SmallSideBar from './SmallSideBar';
 import LargeSideBar from './LargeSideBar';
+import jwt from "jsonwebtoken"
+import { useSelector, useDispatch } from 'react-redux';
 
 
 const SidebarLayout = ({ children }) => {
+    // redux
+    const dispatch = useDispatch();
+    const { accessToken, userInfo, isAuthenticate } = useSelector(state => state.authReducer)
 
     const [sideBar, setSideBar] = useState(false)
 
@@ -38,6 +43,27 @@ const SidebarLayout = ({ children }) => {
             icon: <OrdersIcon iconClass={`${router.pathname == '/admin/orders' ? 'text-primary' : 'text-white'}`} />,
         },
     ]
+
+    // check authentication
+    useEffect(() => {
+        const decoded = jwt.decode(accessToken, { complete: true })
+        if (decoded?.payload.email === userInfo.email) {
+            dispatch({ type: 'loginUser' })
+            if (decoded?.payload.role !== 'admin') {
+                router.push('/')
+            }
+        } else {
+            dispatch({ type: 'logOutUser' })
+            router.push('/login')
+        }
+
+        if (!localStorage.getItem('userInfo') || !localStorage.getItem('accessToken')) {
+            dispatch({ type: 'logOutUser' })
+            if (!isAuthenticate) {
+                router.push('/login')
+            }
+        }
+    }, [accessToken, userInfo.email, router, isAuthenticate, dispatch])
 
     return (
         <>

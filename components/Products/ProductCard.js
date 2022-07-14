@@ -29,7 +29,7 @@ const ProductCard = ({ colors, product }) => {
                     <h2 className="text-xl font-bold text-secondary">{product["name"].slice(0, 16)}...</h2>
                     <p className="text-primary font-semibold text-lg mt-2">${product["price"]}</p>
                     <div className="card-actions justify-end grid grid-cols-2 mt-4">
-                        <button onClick={() => router.push(`/product/${product["_id"]}`)} className="style_btn bg-slate-600 px-3 rounded-md text-white font-bold flex justify-center items-center">
+                        <button onClick={() => router.push(`/product/${product["_id"]}`)} className="style_btn bg-secondary px-3 rounded-md text-white font-bold flex justify-center items-center">
                             Details <InfoIcon iconClass="w-8 h-8 text-white" />
                         </button>
                         <button disabled={product?.availableQty < 1} onClick={addToCart} className="disabled:cursor-not-allowed disabled:bg-emerald-200 style_btn bg-primary px-5 rounded-md text-white font-bold flex justify-center items-center">
@@ -52,6 +52,7 @@ const ProductCard = ({ colors, product }) => {
                     {colors.includes('blue') && <button className="border-2 border-gray-300 ml-1 bg-blue-500 rounded-full w-5 h-5 focus:outline-none"></button>}
                     {colors.includes('green') && <button className="border-2 border-gray-300 ml-1 bg-green-500 rounded-full w-5 h-5 focus:outline-none"></button>}
                     {colors.includes('orange') && <button className="border-2 border-gray-300 ml-1 bg-orange-500 rounded-full w-5 h-5 focus:outline-none"></button>}
+                    {colors.includes('gray') && <button className="border-2 border-gray-300 ml-1 bg-gray-400 rounded-full w-5 h-5 focus:outline-none"></button>}
                     {colors.includes('black') && <button className="border-2 border-gray-300 ml-1 bg-slate-800 rounded-full w-5 h-5 focus:outline-none"></button>}
                 </div>
             </div>

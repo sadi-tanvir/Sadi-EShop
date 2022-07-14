@@ -5,6 +5,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import axios from "axios"
 import { toast } from "react-toastify"
 import { useRouter } from 'next/router';
+import Breadcrumbs from '../../components/Breadcrumbs';
+import HeadInfo from '../../components/HeadInfo';
 
 const AddProduct = () => {
     // redux
@@ -65,7 +67,7 @@ const AddProduct = () => {
         e.preventDefault()
         try {
             const { name, price, category, size, color, availableQty, description } = product;
-            const res = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/api/product/addproduct`, {
+            const res = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/api/admin/products/addproduct`, {
                 name,
                 price,
                 category,
@@ -86,12 +88,16 @@ const AddProduct = () => {
             }
         } catch (error) {
             console.log(error);
-            toast.success(error.response.data.message)
+            toast.error(error.response.data.message)
         }
     }
 
     return (
         <>
+            {/* Breadcrumbs & header */}
+            <Breadcrumbs firstPath="/" firstName="Home" secondPath="/admin" secondName="Dashboard" current="Add Product" />
+            <HeadInfo title="Add Product - Sadi EShop" />
+
             <SidebarLayout>
                 <div>
                     <h2 className="text-secondary font-bold text-2xl mb-10 md:ml-32">Add Product</h2>

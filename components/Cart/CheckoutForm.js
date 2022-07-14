@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import axios from "axios"
 import { toast } from "react-toastify"
 import { useRouter } from 'next/router';
 
 const CheckoutForm = () => {
     // redux
+    const dispatch = useDispatch()
     const { accessToken, userInfo } = useSelector(state => state.authReducer)
     const { cart } = useSelector(state => state.productsReducer)
 
@@ -90,6 +91,7 @@ const CheckoutForm = () => {
             if (res.data.message) {
                 toast.success(res.data.message)
                 setTimeout(() => {
+                    dispatch({ type: 'clearCart' })
                     router.push('/orders')
                 }, 2000)
             }

@@ -36,7 +36,7 @@ const Orders = () => {
             <Breadcrumbs firstPath="/" firstName="Home" current="orders" />
             <HeadInfo title="Orders - Sadi EShop" />
 
-            <div className={`px-5 md:px-20 flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded`}>
+            <div className={`px-5 min-h-screen md:px-20 flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded`}>
                 <div className="rounded-t mb-0 px-4 py-3 border-0">
                     <div className="flex flex-wrap items-center">
                         <div className="w-full px-4 max-w-full flex-grow flex-1">
@@ -75,29 +75,33 @@ const Orders = () => {
                                             <>
                                                 <tr>
                                                     <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left flex items-center">
-                                                        <span className={`ml-3 font-bold`}>
+                                                        <span className={`ml-3 inline-block text-secondary font-bold text-md`}>
                                                             {order._id}
                                                         </span>
                                                     </th>
                                                     <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                                        {Object.keys(order.products).length} pcs
+                                                        <span className="badge badge-primary text-white font-bold">
+                                                            {Object.keys(order.products).length} pcs
+                                                        </span>
                                                     </td>
                                                     <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                                        ${order.amount} USD
+                                                        <span className="badge badge-accent text-white font-bold">
+                                                            ${order.amount} USD
+                                                        </span>
                                                     </td>
                                                     <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                                                         {
                                                             order?.payment_status ?
                                                                 <>
                                                                     <i className="fas fa-circle text-primary mr-2"></i>
-                                                                    <span>
+                                                                    <span className='text-secondary font-bold'>
                                                                         Paid
                                                                     </span>
                                                                 </>
                                                                 :
                                                                 <>
                                                                     <i className="fas fa-circle text-accent mr-2"></i>
-                                                                    <span>
+                                                                    <span className='text-secondary font-bold'>
                                                                         Pending
                                                                     </span>
                                                                 </>
