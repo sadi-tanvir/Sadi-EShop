@@ -6,6 +6,7 @@ import TableDropdown from "../../components/admin/orders/TableDropdown"
 import axios from "axios"
 import { toast } from "react-toastify"
 import { useDispatch, useSelector } from 'react-redux';
+import Pagination from '../../components/admin/Pagination';
 
 
 const Orders = () => {
@@ -16,6 +17,9 @@ const Orders = () => {
     // state
     const [orders, setOrders] = useState([])
     const [isChanged, setIsChanged] = useState(false)
+    const [count, setCount] = useState(0)
+    const [size, setSize] = useState(5)
+    const [page, setPage] = useState(0)
 
     // handle Confirm Payment
     const handleConfirmPayment = async (orderId) => {
@@ -81,10 +85,26 @@ const Orders = () => {
         }
     }
 
+    // get count products
+    useEffect(() => {
+        const countProducts = async () => {
+            const res = await axios(`${process.env.NEXT_PUBLIC_BASE_URL}/api/admin/orders/ordersCount`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    authentication: accessToken
+                }
+            })
+            const count = res.data.ordersCount
+            const dividedCount = Math.ceil(count / size)
+            setCount(dividedCount)
+        }
+        countProducts()
+    }, [accessToken, size])
+
     // get all orders
     useEffect(() => {
         const getOrders = async () => {
-            const res = await axios(`${process.env.NEXT_PUBLIC_BASE_URL}/api/admin/orders/getOrders`, {
+            const res = await axios(`${process.env.NEXT_PUBLIC_BASE_URL}/api/admin/orders/getOrders?page=${page}&size=${size}`, {
                 headers: {
                     'Content-Type': 'application/json',
                     authentication: accessToken
@@ -93,7 +113,7 @@ const Orders = () => {
             setOrders(res.data.orders)
         }
         getOrders()
-    }, [isChanged, accessToken])
+    }, [isChanged, accessToken, size, page])
 
 
     return (
@@ -108,9 +128,17 @@ const Orders = () => {
                         <div className="flex flex-wrap items-center">
                             <div className="w-full px-4 max-w-full flex-grow flex-1">
                                 <h3 className={`font-bold text-2xl text-secondary`} >
-                                    My Orders
+                                    Customer&rsquo;s Order
                                 </h3>
                             </div>
+
+                            {/* pagination */}
+                            <Pagination
+                                count={count}
+                                page={page}
+                                setPage={setPage}
+                                setSize={setSize}
+                            />
                         </div>
                     </div>
                     <div className="">

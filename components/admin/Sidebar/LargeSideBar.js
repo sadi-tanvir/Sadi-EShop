@@ -10,7 +10,7 @@ const LargeSideBar = ({ menuItemText }) => {
     const router = useRouter()
     return (
         <>
-            <div style={{ minHeight: "716px" }} className="w-64 absolute sm:relative bg-gray-800 shadow md:h-full flex-col justify-between hidden sm:flex">
+            <div style={{ minHeight: "716px" }} className="w-64 absolute sm:relative bg-gray-800 shadow md:min-h-screen flex-col justify-between hidden sm:flex">
                 <div className="px-8">
                     <div className="h-16 w-full flex items-center">
                         <img src="https://tuk-cdn.s3.amazonaws.com/can-uploader/light_with_icons_at_bottom-svg1.svg" alt="Logo" />

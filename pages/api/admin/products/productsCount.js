@@ -7,7 +7,7 @@ import jwt from "jsonwebtoken"
 
 const handler = async (req, res) => {
     try {
-        if (req.method !== 'POST') return res.status(400).json({ message: 'Method not allowed' });
+        if (req.method !== 'GET') return res.status(400).json({ message: 'Method not allowed' });
 
         // check authentication
         const decoded = jwt.verify(req.headers.authentication, process.env.SECRET_KEY)
@@ -15,12 +15,11 @@ const handler = async (req, res) => {
         const findUser = await User.findOne({ email: decoded.email, role: 'admin' })
         if (!findUser) return res.status(401).json({ message: 'Unauthorized User.' })
 
-        const product = await Product.create(req.body);
-        if (!product) return res.status(400).json({ message: 'Failed to create product' });
+        const productsCount = await Product.estimatedDocumentCount()
+        if (!productsCount) return res.status(400).json({ message: 'Failed to estimate document' });
 
         res.json({
-            message: 'Product created successfully',
-            product 
+            productsCount
         });
 
     } catch (error) {
