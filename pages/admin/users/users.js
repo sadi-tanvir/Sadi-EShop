@@ -21,56 +21,12 @@ const Users = () => {
     const [size, setSize] = useState(5)
     const [page, setPage] = useState(0)
 
-    console.log(users)
 
-    // handle Confirm Payment
-    const handleConfirmPayment = async (orderId) => {
-        try {
-            const res = await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/api/admin/orders/confirmPayment`, {
-                _id: orderId,
-            }, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    authentication: accessToken
-                }
-            })
-            // console.log(`from table drop....`, res.data)
-            if (res.data.message) {
-                toast.success(res.data?.message)
-                setIsChanged(!isChanged)
-            }
-        } catch (error) {
-            console.log(error);
-            toast.error(error.response?.data.message)
-        }
-    }
-
-    // handle Confirm Delivery
-    const handleConfirmDelivery = async (orderId) => {
-        try {
-            const res = await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/api/admin/orders/confirmDelivery`, {
-                _id: orderId,
-            }, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    authentication: accessToken
-                }
-            })
-
-            if (res.data.message) {
-                toast.success(res.data?.message)
-                setIsChanged(!isChanged)
-            }
-        } catch (error) {
-            console.log(error);
-            toast.error(error.response?.data.message)
-        }
-    }
 
     // handle Delete Order
-    const handleDeleteOrder = async (orderId) => {
+    const handleDeleteUser = async (userId) => {
         try {
-            const res = await axios.delete(`${process.env.NEXT_PUBLIC_BASE_URL}/api/admin/orders/deleteOrder?id=${orderId}`, {
+            const res = await axios.delete(`${process.env.NEXT_PUBLIC_BASE_URL}/api/admin/users/deleteUser?id=${userId}`, {
                 headers: {
                     'Content-Type': 'application/json',
                     authentication: accessToken
@@ -217,6 +173,7 @@ const Users = () => {
                                                         <td className="border-t-0 px-6 align-top border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-right">
                                                             <TableDropdown
                                                                 user={user}
+                                                                handleDeleteUser={handleDeleteUser}
                                                             />
                                                         </td>
                                                     </tr>

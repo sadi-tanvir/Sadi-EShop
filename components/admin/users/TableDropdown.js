@@ -6,7 +6,7 @@ import axios from "axios"
 import { useSelector, useDispatch } from 'react-redux';
 import { toast } from "react-toastify"
 
-const TableDropdown = ({ user, handleDeleteUser, changeToDeactive }) => {
+const TableDropdown = ({ user, handleDeleteUser }) => {
     // redux
     const dispatch = useDispatch()
     const { accessToken, userInfo } = useSelector(state => state.authReducer)
