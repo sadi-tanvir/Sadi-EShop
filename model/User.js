@@ -31,6 +31,10 @@ const userSchema = new mongoose.Schema({
         default: "user",
         enum: ["user", "admin"]
     },
+    isActive: {
+        type: Boolean,
+        default: false
+    },
     isPasswordChange: {
         type: String,
     }

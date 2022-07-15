@@ -1,25 +1,27 @@
 import React, { useEffect, useState } from 'react';
-import SidebarLayout from '../../components/admin/Sidebar/SidebarLayout';
-import Breadcrumbs from '../../components/Breadcrumbs';
-import HeadInfo from '../../components/HeadInfo';
-import TableDropdown from "../../components/admin/orders/TableDropdown"
+import SidebarLayout from '../../../components/admin/Sidebar/SidebarLayout';
+import Breadcrumbs from '../../../components/Breadcrumbs';
+import HeadInfo from '../../../components/HeadInfo';
+import TableDropdown from "../../../components/admin/users/TableDropdown";
 import axios from "axios"
 import { toast } from "react-toastify"
 import { useDispatch, useSelector } from 'react-redux';
-import Pagination from '../../components/admin/Pagination';
+import Pagination from '../../../components/admin/Pagination';
 
 
-const Orders = () => {
+const Users = () => {
     // redux
     const dispatch = useDispatch()
     const { accessToken, userInfo } = useSelector(state => state.authReducer)
 
     // state
-    const [orders, setOrders] = useState([])
+    const [users, setUsers] = useState([])
     const [isChanged, setIsChanged] = useState(false)
     const [count, setCount] = useState(0)
     const [size, setSize] = useState(5)
     const [page, setPage] = useState(0)
+
+    console.log(users)
 
     // handle Confirm Payment
     const handleConfirmPayment = async (orderId) => {
@@ -85,42 +87,42 @@ const Orders = () => {
         }
     }
 
-    // get count products
+    // get count users
     useEffect(() => {
-        const countProducts = async () => {
-            const res = await axios(`${process.env.NEXT_PUBLIC_BASE_URL}/api/admin/orders/ordersCount`, {
+        const countUsers = async () => {
+            const res = await axios(`${process.env.NEXT_PUBLIC_BASE_URL}/api/admin/users/usersCount`, {
                 headers: {
                     'Content-Type': 'application/json',
                     authentication: accessToken
                 }
             })
-            const count = res.data.ordersCount
+            const count = res.data.usersCount
             const dividedCount = Math.ceil(count / size)
             setCount(dividedCount)
         }
-        countProducts()
+        countUsers()
     }, [accessToken, size])
 
-    // get all orders
+    // get all Users
     useEffect(() => {
-        const getOrders = async () => {
-            const res = await axios(`${process.env.NEXT_PUBLIC_BASE_URL}/api/admin/orders/getOrders?page=${page}&size=${size}`, {
+        const getUsers = async () => {
+            const res = await axios(`${process.env.NEXT_PUBLIC_BASE_URL}/api/admin/users/getUsers?page=${page}&size=${size}`, {
                 headers: {
                     'Content-Type': 'application/json',
                     authentication: accessToken
                 }
             })
-            setOrders(res.data.orders)
+            setUsers(res.data.users)
         }
-        getOrders()
+        getUsers()
     }, [isChanged, accessToken, size, page])
 
 
     return (
         <>
             {/* Breadcrumbs & header */}
-            <Breadcrumbs firstPath="/" firstName="Home" secondPath="/admin" secondName="Dashboard" current="Orders" />
-            <HeadInfo title="All Orders - Sadi EShop" />
+            <Breadcrumbs firstPath="/" firstName="Home" secondPath="/admin" secondName="Dashboard" current="Users Management" />
+            <HeadInfo title="Users Management - Sadi EShop" />
 
             <SidebarLayout>
                 <div className={`px-5 flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded`}>
@@ -148,19 +150,16 @@ const Orders = () => {
                                 <thead>
                                     <tr className="">
                                         <th className={"px-6 align-middle border border-solid py-3 font-bold text-md uppercase border-l-0 border-r-0 whitespace-nowrap text-left bg-blueGray-50 text-secondary border-blueGray-100"}>
-                                            Order Id
+                                            Name & Email
                                         </th>
                                         <th className={"px-6 align-middle border border-solid py-3 font-bold text-md uppercase border-l-0 border-r-0 whitespace-nowrap text-left bg-blueGray-50 text-secondary border-blueGray-100"}>
-                                            Qty
+                                            Phone
                                         </th>
                                         <th className={"px-6 align-middle border border-solid py-3 font-bold text-md uppercase border-l-0 border-r-0 whitespace-nowrap text-left bg-blueGray-50 text-secondary border-blueGray-100"}>
-                                            Amount
+                                            Role
                                         </th>
                                         <th className={"px-6 align-middle border border-solid py-3 font-bold text-md uppercase border-l-0 border-r-0 whitespace-nowrap text-left bg-blueGray-50 text-secondary border-blueGray-100"}>
-                                            Payment
-                                        </th>
-                                        <th className={"px-6 align-middle border border-solid py-3 font-bold text-md uppercase border-l-0 border-r-0 whitespace-nowrap text-left bg-blueGray-50 text-secondary border-blueGray-100"}>
-                                            shipping
+                                            account Status
                                         </th>
                                         <th className={"px-6 align-middle border border-solid py-3 font-bold text-md uppercase border-l-0 border-r-0 whitespace-nowrap text-left bg-blueGray-50 text-secondary border-blueGray-100"}>
                                         </th>
@@ -168,73 +167,56 @@ const Orders = () => {
                                 </thead>
                                 <tbody>
                                     {
-                                        orders?.map(order => {
+                                        users?.map(user => {
                                             return (
                                                 <>
                                                     <tr>
                                                         <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left flex items-center">
+                                                            <div className="avatar">
+                                                                <div className="w-8 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                                                                    <img src={user?.img || "https://i.ibb.co/jgDtzL8/empty-avatar.jpg"} />
+                                                                </div>
+                                                            </div>
                                                             <span className={`ml-3 inline-block text-secondary font-bold text-md`}>
-                                                                <span className="block mb-2">
-                                                                    {order.userEmail.slice(0, 20)}
+                                                                <span title={user?.name} className="block mb-2">
+                                                                    {user?.name.length > 20 ? `${user?.name.slice(0, 20)}...` : user?.name}
                                                                 </span>
-                                                                <span className="block">
-                                                                    {order._id}
+                                                                <span title={user?.email} className="block">
+                                                                    {user?.email.length > 20 ? `${user?.email.slice(0, 20)}...` : user?.email}
                                                                 </span>
                                                             </span>
                                                         </th>
                                                         <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                                            <span className="badge badge-primary text-white font-bold  shadow-md">
-                                                                {Object.keys(order.products).length} pcs
+                                                            <span className="badge badge-primary text-white font-bold shadow-md">
+                                                                {user?.phone}
                                                             </span>
                                                         </td>
                                                         <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                                            <span className="badge badge-accent text-white font-bold  shadow-md">
-                                                                ${order.amount} USD
+                                                            <span className="badge badge-accent text-white font-bold shadow-md">
+                                                                {user?.role}
                                                             </span>
                                                         </td>
                                                         <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                                                             {
-                                                                order?.payment_status ?
+                                                                user?.isActive ?
                                                                     <>
                                                                         <i className="fas fa-circle text-primary mr-2"></i>
                                                                         <span className='text-secondary font-bold'>
-                                                                            Paid
+                                                                            active
                                                                         </span>
                                                                     </>
                                                                     :
                                                                     <>
                                                                         <i className="fas fa-circle text-accent mr-2"></i>
                                                                         <span className='text-secondary font-bold'>
-                                                                            Pending
+                                                                            deactivated
                                                                         </span>
                                                                     </>
                                                             }
                                                         </td>
-                                                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                                            {
-                                                                order?.shipping ?
-                                                                    <>
-                                                                        <i className="fas fa-circle text-primary mr-2"></i>
-                                                                        <span className='text-primary font-bold'>
-                                                                            delivered
-                                                                        </span>
-                                                                    </>
-                                                                    :
-                                                                    <>
-                                                                        <i className="fas fa-circle text-accent mr-2"></i>
-                                                                        <span className='text-accent font-bold'>
-                                                                            pending
-                                                                        </span>
-                                                                    </>
-                                                            }
-                                                        </td>
-
                                                         <td className="border-t-0 px-6 align-top border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-right">
                                                             <TableDropdown
-                                                                handleConfirmPayment={handleConfirmPayment}
-                                                                handleConfirmDelivery={handleConfirmDelivery}
-                                                                handleDeleteOrder={handleDeleteOrder}
-                                                                order={order}
+                                                                user={user}
                                                             />
                                                         </td>
                                                     </tr>
@@ -254,4 +236,4 @@ const Orders = () => {
 };
 
 
-export default Orders;
+export default Users;

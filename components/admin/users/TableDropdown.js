@@ -6,7 +6,7 @@ import axios from "axios"
 import { useSelector, useDispatch } from 'react-redux';
 import { toast } from "react-toastify"
 
-const TableDropdown = ({ product, handleDeleteProduct }) => {
+const TableDropdown = ({ user, handleDeleteUser, changeToDeactive }) => {
     // redux
     const dispatch = useDispatch()
     const { accessToken, userInfo } = useSelector(state => state.authReducer)
@@ -44,13 +44,10 @@ const TableDropdown = ({ product, handleDeleteProduct }) => {
                     <i className="fas fa-ellipsis-v text-primary font-bold inline-block text-lg"></i>
                 </a>
                 <div ref={popoverDropdownRef} className={`${dropdownPopoverShow ? "block " : "hidden "} bg-white text-base float-left py-2 list-none text-left rounded shadow-lg min-w-48`}>
-                    <a onClick={() => router.push(`/product/${product?._id}`)} className={"text-sm cursor-pointer py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"}>
-                        Details
-                    </a>
-                    <a onClick={() => router.push(`/admin/products/${product?._id}`)} className={"text-sm cursor-pointer py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"}>
+                    <a onClick={() => router.push(`/admin/users/${user?._id}`)} className={"text-sm cursor-pointer py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"}>
                         Edit
                     </a>
-                    <a onClick={() => handleDeleteProduct(product?._id)} className={"text-sm cursor-pointer py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"}>
+                    <a onClick={() => handleDeleteUser(user?._id)} className={"text-sm cursor-pointer py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"}>
                         Delete
                     </a>
                 </div>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import DashboardIcon, { DeliverablesIcon, InventoryIcon, InvoicesIcon, OrdersIcon, ProductIcon, ProductsIcon, SettingsIcon } from '../../shared/DashboardIcon';
+import DashboardIcon, { DeliverablesIcon, InventoryIcon, InvoicesIcon, OrdersIcon, ProductIcon, ProductsIcon, SettingsIcon, UsersIcon } from '../../shared/DashboardIcon';
 import { useRouter } from "next/router"
 import SmallSideBar from './SmallSideBar';
 import LargeSideBar from './LargeSideBar';
@@ -25,23 +25,28 @@ const SidebarLayout = ({ children }) => {
         {
             pathname: '/admin',
             pageName: 'Dashboard',
-            icon: <DashboardIcon iconClass={`${router.pathname == '/admin' ? 'text-primary' : 'text-white'}`} />,
+            icon: <DashboardIcon iconClass={`${router.pathname == '/admin' ? 'text-white' : 'text-secondary'}`} />,
         },
         {
-            pathname: '/admin/addProduct',
-            pageName: 'Add Product',
-            icon: <ProductIcon iconClass={`${router.pathname == '/admin/addProduct' ? 'text-primary' : 'text-white'}`} />,
-        },
-        {
-            pathname: '/admin/products',
-            pageName: 'Products',
-            icon: <InventoryIcon iconClass={`${router.pathname == '/admin/products' ? 'text-primary' : 'text-white'}`} />,
+            pathname: '/admin/users/users',
+            pageName: 'Users',
+            icon: <UsersIcon iconClass={`${router.pathname == '/admin/users' ? 'text-white' : 'text-secondary'}`} />,
         },
         {
             pathname: '/admin/orders',
             pageName: 'Orders',
-            icon: <OrdersIcon iconClass={`${router.pathname == '/admin/orders' ? 'text-primary' : 'text-white'}`} />,
+            icon: <OrdersIcon iconClass={`${router.pathname == '/admin/orders' ? 'text-white' : 'text-secondary'}`} />,
         },
+        {
+            pathname: '/admin/products/products',
+            pageName: 'Products',
+            icon: <InventoryIcon iconClass={`${router.pathname == '/admin/product/products' ? 'text-white' : 'text-secondary'}`} />,
+        },
+        {
+            pathname: '/admin/addProduct',
+            pageName: 'Add Product',
+            icon: <ProductIcon iconClass={`${router.pathname == '/admin/addProduct' ? 'text-white' : 'text-secondary'}`} />,
+        }
     ]
 
     // check authentication

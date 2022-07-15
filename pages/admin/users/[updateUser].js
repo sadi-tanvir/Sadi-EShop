@@ -1,44 +1,29 @@
 import React, { useEffect, useState } from 'react';
-import SidebarLayout from '../../components/admin/Sidebar/SidebarLayout';
-import { UploadIcon } from '../../components/shared/Icon';
+import SidebarLayout from '../../../components/admin/Sidebar/SidebarLayout';
+import { UploadIcon } from '../../../components/shared/Icon';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from "axios"
 import { toast } from "react-toastify"
 import { useRouter } from 'next/router';
-import Breadcrumbs from '../../components/Breadcrumbs';
-import HeadInfo from '../../components/HeadInfo';
+import Breadcrumbs from '../../../components/Breadcrumbs';
+import HeadInfo from '../../../components/HeadInfo';
 
-const EditProduct = () => {
+
+
+const EditUser = () => {
     // redux
     const dispatch = useDispatch()
     const { accessToken, userInfo } = useSelector(state => state.authReducer)
-    const { name, price, category, size, color, availableQty, description, img } = useSelector(state => state.productUpdateReducer)
+    const userState = useSelector(state => state.userUpdateReducer)
 
     // state
     const [picture, setPicture] = useState("")
     const [loading, setLoading] = useState(false)
-    const [product, setProduct] = useState({
-        name: name,
-        price: price,
-        category: category,
-        size: size,
-        color: color,
-        availableQty: availableQty,
-        description: description,
-        img: img
-    })
-
-    console.log(`i am picture`, picture)
 
     // next/router
     const router = useRouter()
-    const { editProduct } = router.query
+    const { updateUser } = router.query
 
-    // color's object
-    const colors = { white: 'bg-white', black: 'bg-gray-700', blue: 'bg-blue-700', red: 'bg-red-700', orange: 'bg-orange-700', gray: 'bg-gray-400' }
-
-    // sizes object
-    const sizes = { S: 'S', M: 'M', L: 'L', XL: 'XL', XXL: 'XXL' }
 
     // upload picture
     const postPicture = (pic) => {
@@ -68,26 +53,25 @@ const EditProduct = () => {
         }
     }
 
-    // handle input change
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setProduct({ ...product, [name]: value })
-    }
+    // // handle input change
+    // const handleChange = (e) => {
+    //     const { name, value } = e.target;
+    //     setProduct({ ...product, [name]: value })
+    // }
 
 
-    // handle Update Product
-    const handleUpdateProduct = async (e) => {
+    // handle Update user information
+    const handleUpdateUser = async (e) => {
         e.preventDefault()
         try {
-            const { name, price, category, size, color, availableQty, description, img } = product;
-            const res = await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/api/admin/products/editProduct?id=${editProduct}`, {
+            const { name, email, phone, role, isActive, address, img } = userState;
+            const res = await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/api/admin/users/updateUser?id=${updateUser}`, {
                 name,
-                price,
-                category,
-                size,
-                color,
-                availableQty,
-                description,
+                email,
+                phone,
+                role,
+                isActive:JSON.parse(isActive),
+                address,
                 img: picture || img,
             }, {
                 headers: {
@@ -105,46 +89,46 @@ const EditProduct = () => {
         }
     }
 
-    // get product information
+
+
+    // get user information
     useEffect(() => {
-        const getProduct = async () => {
-            const res = await axios(`${process.env.NEXT_PUBLIC_BASE_URL}/api/admin/products/getSingleProduct?id=${editProduct}`, {
+        const getUser = async () => {
+            const res = await axios(`${process.env.NEXT_PUBLIC_BASE_URL}/api/admin/users/getSingleUser?id=${updateUser}`, {
                 headers: {
                     'Content-Type': 'application/json',
                     authentication: accessToken
                 }
             })
-            console.log(`res`, res.data)
             dispatch({
-                type: 'updateProduct', payload: {
-                    name: res.data?.product?.name,
-                    price: res.data?.product?.price,
-                    category: res.data?.product?.category,
-                    size: res.data?.product?.size,
-                    color: res.data?.product?.color,
-                    availableQty: res.data?.product?.availableQty,
-                    description: res.data?.product?.description,
-                    img: res.data?.product?.img
+                type: 'updateUser', payload: {
+                    name: res.data?.user?.name,
+                    email: res.data?.user?.email,
+                    phone: res.data?.user?.phone,
+                    role: res.data?.user?.role,
+                    isActive: JSON.parse(JSON.stringify(res.data?.user?.isActive || "")),
+                    address: res.data?.user?.address,
+                    img: res.data?.user?.img
                 }
             })
         }
-        getProduct()
-    }, [accessToken, editProduct, product.name, dispatch])
+        getUser()
+    }, [accessToken, updateUser, dispatch])
 
     return (
         <>
             {/* Breadcrumbs & header */}
-            <Breadcrumbs firstPath="/" firstName="Home" secondPath="/admin/products" secondName="Products" current="Update Product" />
-            <HeadInfo title="Add Product - Sadi EShop" />
+            <Breadcrumbs firstPath="/" firstName="Home" secondPath="/admin/users/users" secondName="users" current="Update User" />
+            <HeadInfo title="Update User - Sadi EShop" />
 
             <SidebarLayout>
                 <div>
-                    <h2 className="text-secondary font-bold text-2xl mb-10 md:ml-32">Edit Product</h2>
+                    <h2 className="text-secondary font-bold text-2xl mb-10 md:ml-32">Update User</h2>
                     <div className="md:mx-32  shadow-xl">
 
                         <div className="mt-5 md:mt-0 md:col-span-2">
                             <div className="shadow sm:rounded-md sm:overflow-hidden">
-                                <form onSubmit={handleUpdateProduct}>
+                                <form onSubmit={handleUpdateUser}>
                                     <div className="px-4 py-5 bg-white space-y-6 sm:p-6">
                                         <div className="flex flex-wrap">
                                             <div className="w-full lg:w-6/12 px-4">
@@ -153,21 +137,21 @@ const EditProduct = () => {
                                                         type="text"
                                                         name="name"
                                                         className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                                                        placeholder='product name'
-                                                        onChange={handleChange}
-                                                        value={product.name}
+                                                        placeholder='name'
+                                                        onChange={(e) => dispatch({ type: 'updateUser', payload: { ...userState, name: e.target.value } })}
+                                                        value={userState.name}
                                                     />
                                                 </div>
                                             </div>
                                             <div className="w-full lg:w-6/12 px-4">
                                                 <div className="relative w-full mb-3">
                                                     <input
-                                                        type="number"
-                                                        name="price"
+                                                        type="email"
+                                                        name="email"
                                                         className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                                                        placeholder='price'
-                                                        onChange={handleChange}
-                                                        value={product.price}
+                                                        placeholder='email'
+                                                        onChange={(e) => dispatch({ type: 'updateUser', payload: { ...userState, email: e.target.value } })}
+                                                        value={userState.email}
                                                     />
                                                 </div>
                                             </div>
@@ -175,70 +159,54 @@ const EditProduct = () => {
                                                 <div className="relative w-full mb-3">
                                                     <input
                                                         type="text"
-                                                        name="category"
+                                                        name="phone"
                                                         className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                                                        placeholder='category'
-                                                        onChange={handleChange}
-                                                        value={product.category}
+                                                        placeholder='phone'
+                                                        onChange={(e) => dispatch({ type: 'updateUser', payload: { ...userState, phone: e.target.value } })}
+                                                        value={userState.phone}
                                                     />
                                                 </div>
                                             </div>
                                             <div className="w-full lg:w-6/12 px-4">
                                                 <div className="relative w-full mb-3">
                                                     <input
-                                                        type="number"
-                                                        name="availableQty"
+                                                        type="text"
+                                                        name="address"
                                                         className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                                                        placeholder='available Quantity'
-                                                        onChange={handleChange}
-                                                        value={product.availableQty}
+                                                        placeholder='address'
+                                                        onChange={(e) => dispatch({ type: 'updateUser', payload: { ...userState, address: e.target.value } })}
+                                                        value={userState.address}
                                                     />
                                                 </div>
                                             </div>
                                             <div className="w-full lg:w-6/12 px-4">
                                                 <div className="relative w-full mb-3">
-                                                    <select onChange={(e) => setProduct({ ...product, size: e.target.value })} className="select select-bordered w-full max-w-xs">
-                                                        <option disabled selected>Select Size</option>
-                                                        {
-                                                            Object.keys(sizes).map((size) => {
-                                                                return <option value={size} key={size}>{size}</option>
-                                                            })
-                                                        }
+                                                    <select onChange={(e) => dispatch({ type: 'updateUser', payload: { ...userState, role: e.target.value } })} className="select select-bordered w-full max-w-xs">
+                                                        <option disabled selected>User Type</option>
+                                                        <option value="user">user</option>
+                                                        <option value="admin">admin</option>
                                                     </select>
                                                 </div>
                                             </div>
                                             <div className="w-full lg:w-6/12 px-4">
                                                 <div className="relative w-full mb-3">
-                                                    <select onChange={(e) => setProduct({ ...product, color: e.target.value })} className="select select-bordered w-full max-w-xs">
-                                                        <option disabled selected>Select Color</option>
-                                                        {
-                                                            Object.keys(colors).map((color) => {
-                                                                return <option value={color} key={color}>{color}</option>
-                                                            })
-                                                        }
+                                                    <select onChange={(e) => dispatch({ type: 'updateUser', payload: { ...userState, isActive: e.target.value } })} className="select select-bordered w-full max-w-xs">
+                                                        <option disabled selected>Account Status</option>
+                                                        <option value={true}>active</option>
+                                                        <option value={false}>deactivated</option>
                                                     </select>
                                                 </div>
                                             </div>
-
                                         </div>
                                         <div className="w-full px-4 mb-3">
                                             <input
                                                 type="text"
                                                 name="img"
                                                 className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                                                placeholder='Image URL'
-                                                onChange={handleChange}
-                                                value={product.img}
+                                                placeholder='image'
+                                                onChange={(e) => dispatch({ type: 'updateUser', payload: { ...userState, img: e.target.value } })}
+                                                value={userState.img}
                                             />
-                                        </div>
-                                        <div className="w-full px-4 mb-3">
-                                            <textarea
-                                                name="description"
-                                                className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                                                placeholder='description'
-                                                onChange={handleChange}
-                                                value={product.description}
-                                            ></textarea>
                                         </div>
 
 
@@ -266,4 +234,4 @@ const EditProduct = () => {
     );
 };
 
-export default EditProduct;
+export default EditUser;

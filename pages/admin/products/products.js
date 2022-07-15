@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import SidebarLayout from '../../components/admin/Sidebar/SidebarLayout';
-import Breadcrumbs from '../../components/Breadcrumbs';
-import HeadInfo from '../../components/HeadInfo';
-import TableDropdown from "../../components/admin/products/TableDropdown"
+import SidebarLayout from '../../../components/admin/Sidebar/SidebarLayout';
+import Breadcrumbs from '../../../components/Breadcrumbs';
+import HeadInfo from '../../../components/HeadInfo';
+import TableDropdown from "../../../components/admin/products/TableDropdown"
 import { toast } from "react-toastify"
 import { useDispatch, useSelector } from 'react-redux';
 import axios from "axios"
-import Pagination from '../../components/admin/Pagination';
+import Pagination from '../../../components/admin/Pagination';
 
 const Products = () => {
     // redux
@@ -136,22 +136,22 @@ const Products = () => {
                                                             </span>
                                                         </th>
                                                         <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                                            <span className="badge badge-primary text-white font-bold">
+                                                            <span className="badge badge-primary text-white font-bold shadow-md">
                                                                 {product.category}
                                                             </span>
                                                         </td>
                                                         <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                                            <span className="badge badge-accent text-white font-bold">
+                                                            <span className="badge badge-accent text-white font-bold shadow-md">
                                                                 ${product.price} USD
                                                             </span>
                                                         </td>
                                                         <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                                            <span className="badge badge-primary text-white font-bold">
+                                                            <span className="badge badge-primary text-white font-bold shadow-md">
                                                                 {product.availableQty} PCS
                                                             </span>
                                                         </td>
                                                         <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                                            <span className="badge badge-accent text-white font-bold">
+                                                            <span className="badge badge-accent text-white font-bold shadow-md">
                                                                 {product.color} / {product.size}
                                                             </span>
                                                         </td>
