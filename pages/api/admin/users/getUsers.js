@@ -17,12 +17,20 @@ const handler = async (req, res) => {
         if (!findUser) return res.status(401).json({ message: 'Unauthorized User.' })
 
         // get users
-        const users = await User.find().skip(page * size).limit(size)
-        if (!users) return res.status(400).json({ message: 'Failed to find users' });
+        if (page && size) {
+            const users = await User.find().skip(page * size).limit(size)
+            if (!users) return res.status(400).json({ message: 'Failed to find users' });
+            res.json({
+                users
+            });
+        } else {
+            const users = await User.find()
+            if (!users) return res.status(400).json({ message: 'Failed to find users' });
+            res.json({
+                users
+            });
+        }
 
-        res.json({
-            users
-        });
 
     } catch (error) {
         console.log(error);

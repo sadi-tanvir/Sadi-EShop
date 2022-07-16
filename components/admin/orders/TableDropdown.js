@@ -59,7 +59,7 @@ const TableDropdown = ({ order, handleConfirmPayment, handleConfirmDelivery,hand
                         </a>
                     }
 
-                    <a onClick={() => handleDeleteOrder(order?._id)} className={"text-sm cursor-pointer py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"}>
+                    <a onClick={() => handleDeleteOrder(order?._id)} className={"text-sm cursor-pointer py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-accent"}>
                         Delete
                     </a>
                     

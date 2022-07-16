@@ -10,7 +10,7 @@ const Pagination = ({ count, page, setPage, setSize }) => {
                             return <button
                                 onClick={() => setPage(num)}
                                 key={num}
-                                className={`${num === page && "btn-active"} btn`}>{num + 1}
+                                className={`${num === page && "btn-active"} btn btn-sm`}>{num + 1}
                             </button>
                         })
                     }

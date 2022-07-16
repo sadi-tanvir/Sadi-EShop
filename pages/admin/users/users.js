@@ -7,7 +7,7 @@ import axios from "axios"
 import { toast } from "react-toastify"
 import { useDispatch, useSelector } from 'react-redux';
 import Pagination from '../../../components/admin/Pagination';
-
+import Swal from 'sweetalert2';
 
 const Users = () => {
     // redux
@@ -26,17 +26,24 @@ const Users = () => {
     // handle Delete Order
     const handleDeleteUser = async (userId) => {
         try {
-            const res = await axios.delete(`${process.env.NEXT_PUBLIC_BASE_URL}/api/admin/users/deleteUser?id=${userId}`, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    authentication: accessToken
+            Swal.fire({ title: 'Are you sure?', icon: 'warning', showCancelButton: true, confirmButtonColor: '#3085d6', cancelButtonColor: '#d33', confirmButtonText: 'Yes, cancel it!' }).then((result) => {
+                if (result.isConfirmed) {
+                    const deleteData = async () => {
+                        const res = await axios.delete(`${process.env.NEXT_PUBLIC_BASE_URL}/api/admin/users/deleteUser?id=${userId}`, {
+                            headers: {
+                                'Content-Type': 'application/json',
+                                authentication: accessToken
+                            }
+                        })
+
+                        if (res.data.message) {
+                            toast.success(res.data?.message)
+                            setIsChanged(!isChanged)
+                        }
+                    }
+                    deleteData()
                 }
             })
-
-            if (res.data.message) {
-                toast.success(res.data?.message)
-                setIsChanged(!isChanged)
-            }
         } catch (error) {
             console.log(error);
             toast.error(error.response?.data.message)

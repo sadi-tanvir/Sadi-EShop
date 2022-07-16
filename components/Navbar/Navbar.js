@@ -48,7 +48,7 @@ const Navbar = () => {
                         <div className={` w-full flex-grow lg:flex lg:items-center lg:w-auto hidden lg:block mt-2 lg:mt-0 bg-white z-20`} id="nav-content">
                             <ul className="list-reset lg:flex flex-1 items-center px-4 md:px-0">
                                 <Link href="/">
-                                    <li className={`${router.pathname == '/' ? 'bg-primary shadow-md' : 'bg-gray-200 shadow'} px-4 py-1 rounded-sm mr-3 md:my-3`}>
+                                    <li className={`${router.pathname == '/' ? 'bg-primary shadow-md' : 'bg-gray-200 shadow'} px-4 py-1 rounded-md mr-3 md:my-3`}>
                                         <a href="#" className={`${router.pathname == '/' ? 'text-white' : 'text-secondary'} font-semibold hover:border-primary flex pl-1 align-middle no-underline`}>
                                             <HomeIcon iconClass={`${router.pathname == '/' ? 'text-white' : 'text-secondary'}`} />
                                             <span className="pb-1 md:pb-0 text-sm ml-2 font-bold">Home</span>
@@ -58,7 +58,7 @@ const Navbar = () => {
                                 {
                                     userInfo.role === 'admin' &&
                                     <Link href="/admin">
-                                        <li className={`${router.pathname == '/admin' ? 'bg-primary shadow-md' : 'bg-gray-200 shadow'} px-4 py-1 rounded-sm mr-3 md:my-3`}>
+                                        <li className={`${router.pathname == '/admin' ? 'bg-primary shadow-md' : 'bg-gray-200 shadow'} px-4 py-1 rounded-md mr-3 md:my-3`}>
                                             <a href="#" className={`${router.pathname == '/admin' ? 'text-white' : 'text-secondary'} font-semibold hover:border-primary flex pl-1 align-middle no-underline`}>
                                                 <DashboardIcon iconClass={`${router.pathname == '/admin' ? 'text-white' : 'text-secondary'}`} />
                                                 <span className="pb-1 md:pb-0 text-sm ml-2">Dashboard</span>
@@ -67,7 +67,7 @@ const Navbar = () => {
                                     </Link>
                                 }
                                 <li className="relative text-sm">
-                                    <button onClick={() => dispatch({ type: 'fashionDropDown' })} id="userButton" className="flex items-center focus:outline-none mr-3 bg-gray-100 shadow px-3 py-1">
+                                    <button onClick={() => dispatch({ type: 'fashionDropDown' })} id="userButton" className="flex items-center focus:outline-none mr-3 bg-gray-100 shadow px-3 py-1 rounded-md">
                                         <InventoryIcon iconClass={`${router.pathname == '/fashion/men' ? 'text-white' : 'text-secondary'}`} />
                                         <span className="ml-2 pb-1 md:pb-0 text-sm font-semibold text-secondary">Fashion</span>
                                         <DownArrowIcon iconClass="text-secondary" />

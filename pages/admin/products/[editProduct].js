@@ -12,21 +12,12 @@ const EditProduct = () => {
     // redux
     const dispatch = useDispatch()
     const { accessToken, userInfo } = useSelector(state => state.authReducer)
-    const { name, price, category, size, color, availableQty, description, img } = useSelector(state => state.productUpdateReducer)
+    const productState = useSelector(state => state.productUpdateReducer)
 
     // state
     const [picture, setPicture] = useState("")
     const [loading, setLoading] = useState(false)
-    const [product, setProduct] = useState({
-        name: name,
-        price: price,
-        category: category,
-        size: size,
-        color: color,
-        availableQty: availableQty,
-        description: description,
-        img: img
-    })
+    
 
     // next/router
     const router = useRouter()
@@ -77,7 +68,7 @@ const EditProduct = () => {
     const handleUpdateProduct = async (e) => {
         e.preventDefault()
         try {
-            const { name, price, category, size, color, availableQty, description, img } = product;
+            const { name, price, category, size, color, availableQty, description, img } = productState;
             const res = await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/api/admin/products/editProduct?id=${editProduct}`, {
                 name,
                 price,
@@ -126,7 +117,7 @@ const EditProduct = () => {
             })
         }
         getProduct()
-    }, [accessToken, editProduct, product.name, dispatch])
+    }, [accessToken, editProduct, dispatch])
 
     return (
         <>
@@ -151,8 +142,8 @@ const EditProduct = () => {
                                                         name="name"
                                                         className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                                         placeholder='product name'
-                                                        onChange={handleChange}
-                                                        value={product.name}
+                                                        onChange={(e) => dispatch({ type: 'updateProduct', payload: { ...productState, name: e.target.value } })}
+                                                        value={productState.name}
                                                     />
                                                 </div>
                                             </div>
@@ -163,8 +154,8 @@ const EditProduct = () => {
                                                         name="price"
                                                         className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                                         placeholder='price'
-                                                        onChange={handleChange}
-                                                        value={product.price}
+                                                        onChange={(e) => dispatch({ type: 'updateProduct', payload: { ...productState, price: e.target.value } })}
+                                                        value={productState.price}
                                                     />
                                                 </div>
                                             </div>
@@ -175,8 +166,8 @@ const EditProduct = () => {
                                                         name="category"
                                                         className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                                         placeholder='category'
-                                                        onChange={handleChange}
-                                                        value={product.category}
+                                                        onChange={(e) => dispatch({ type: 'updateProduct', payload: { ...productState, category: e.target.value } })}
+                                                        value={productState.category}
                                                     />
                                                 </div>
                                             </div>
@@ -187,14 +178,14 @@ const EditProduct = () => {
                                                         name="availableQty"
                                                         className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                                         placeholder='available Quantity'
-                                                        onChange={handleChange}
-                                                        value={product.availableQty}
+                                                        onChange={(e) => dispatch({ type: 'updateProduct', payload: { ...productState, availableQty: e.target.value } })}
+                                                        value={productState.availableQty}
                                                     />
                                                 </div>
                                             </div>
                                             <div className="w-full lg:w-6/12 px-4">
                                                 <div className="relative w-full mb-3">
-                                                    <select onChange={(e) => setProduct({ ...product, size: e.target.value })} className="select select-bordered w-full max-w-xs">
+                                                    <select onChange={(e) => dispatch({ type: 'updateProduct', payload: { ...productState, size: e.target.value } })} className="select select-bordered w-full max-w-xs">
                                                         <option disabled selected>Select Size</option>
                                                         {
                                                             Object.keys(sizes).map((size) => {
@@ -206,7 +197,7 @@ const EditProduct = () => {
                                             </div>
                                             <div className="w-full lg:w-6/12 px-4">
                                                 <div className="relative w-full mb-3">
-                                                    <select onChange={(e) => setProduct({ ...product, color: e.target.value })} className="select select-bordered w-full max-w-xs">
+                                                    <select onChange={(e) => dispatch({ type: 'updateProduct', payload: { ...productState, color: e.target.value } })} className="select select-bordered w-full max-w-xs">
                                                         <option disabled selected>Select Color</option>
                                                         {
                                                             Object.keys(colors).map((color) => {
@@ -224,8 +215,8 @@ const EditProduct = () => {
                                                 name="img"
                                                 className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                                 placeholder='Image URL'
-                                                onChange={handleChange}
-                                                value={product.img}
+                                                onChange={(e) => dispatch({ type: 'updateProduct', payload: { ...productState, img: e.target.value } })}
+                                                value={productState.img}
                                             />
                                         </div>
                                         <div className="w-full px-4 mb-3">
@@ -233,8 +224,8 @@ const EditProduct = () => {
                                                 name="description"
                                                 className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                                 placeholder='description'
-                                                onChange={handleChange}
-                                                value={product.description}
+                                                onChange={(e) => dispatch({ type: 'updateProduct', payload: { ...productState, description: e.target.value } })}
+                                                value={productState.description}
                                             ></textarea>
                                         </div>
 

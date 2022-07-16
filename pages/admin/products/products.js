@@ -7,6 +7,7 @@ import { toast } from "react-toastify"
 import { useDispatch, useSelector } from 'react-redux';
 import axios from "axios"
 import Pagination from '../../../components/admin/Pagination';
+import Swal from 'sweetalert2';
 
 const Products = () => {
     // redux
@@ -25,17 +26,24 @@ const Products = () => {
     // handle Delete Product
     const handleDeleteProduct = async (orderId) => {
         try {
-            const res = await axios.delete(`${process.env.NEXT_PUBLIC_BASE_URL}/api/admin/products/deleteProduct?id=${orderId}`, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    authentication: accessToken
+            Swal.fire({ title: 'Are you sure?', icon: 'warning', showCancelButton: true, confirmButtonColor: '#3085d6', cancelButtonColor: '#d33', confirmButtonText: 'Yes, cancel it!' }).then((result) => {
+                if (result.isConfirmed) {
+                    const deleteData = async () => {
+                        const res = await axios.delete(`${process.env.NEXT_PUBLIC_BASE_URL}/api/admin/products/deleteProduct?id=${orderId}`, {
+                            headers: {
+                                'Content-Type': 'application/json',
+                                authentication: accessToken
+                            }
+                        })
+
+                        if (res.data.message) {
+                            toast.success(res.data?.message)
+                            setIsChanged(!isChanged)
+                        }
+                    }
+                    deleteData()
                 }
             })
-
-            if (res.data.message) {
-                toast.success(res.data?.message)
-                setIsChanged(!isChanged)
-            }
         } catch (error) {
             console.log(error);
             toast.error(error.response?.data.message)
@@ -151,13 +159,13 @@ const Products = () => {
                                                             </span>
                                                         </td>
                                                         <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                                            <span className="badge badge-accent text-white font-bold shadow-md">
+                                                            <span className="badge badge-accent text-white font-bold shadow-md lowercase">
                                                                 {product.color} / {product.size}
                                                             </span>
                                                         </td>
 
                                                         <td className="border-t-0 px-6 align-top border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-right">
-                                                            <TableDropdown 
+                                                            <TableDropdown
                                                                 product={product}
                                                                 handleDeleteProduct={handleDeleteProduct}
                                                             />

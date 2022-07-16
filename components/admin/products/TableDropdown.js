@@ -50,7 +50,7 @@ const TableDropdown = ({ product, handleDeleteProduct }) => {
                     <a onClick={() => router.push(`/admin/products/${product?._id}`)} className={"text-sm cursor-pointer py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"}>
                         Edit
                     </a>
-                    <a onClick={() => handleDeleteProduct(product?._id)} className={"text-sm cursor-pointer py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"}>
+                    <a onClick={() => handleDeleteProduct(product?._id)} className={"text-sm cursor-pointer py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-accent"}>
                         Delete
                     </a>
                 </div>
