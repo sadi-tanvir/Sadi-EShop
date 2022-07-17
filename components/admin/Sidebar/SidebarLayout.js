@@ -22,11 +22,11 @@ const SidebarLayout = ({ children }) => {
     const router = useRouter()
 
     const menuItemText = [
-        {
-            pathname: '/admin',
-            pageName: 'Dashboard',
-            icon: <DashboardIcon iconClass={`${router.pathname == '/admin' ? 'text-white' : 'text-secondary'}`} />,
-        },
+        // {
+        //     pathname: '/admin',
+        //     pageName: 'Dashboard',
+        //     icon: <DashboardIcon iconClass={`${router.pathname == '/admin' ? 'text-white' : 'text-secondary'}`} />,
+        // },
         {
             pathname: '/admin/users/users',
             pageName: 'Users',

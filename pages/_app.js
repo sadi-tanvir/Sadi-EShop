@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react';
 import LoadingBar from 'react-top-loading-bar'
 import { useRouter } from "next/router"
 import Navbar from '../components/Navbar/Navbar';
+import Layout from '../components/Layout';
 
 
 // routeChangeComplete(url, { shallow })
@@ -55,8 +56,10 @@ function MyApp({ Component, pageProps }) {
         onLoaderFinished={() => setProgress(0)}
       />
       <Navbar />
-      <Component {...pageProps} />
-      <Footer />
+      <Layout>
+        <Component {...pageProps} />
+        <Footer />
+      </Layout>
 
       <ToastContainer
         position="top-left"

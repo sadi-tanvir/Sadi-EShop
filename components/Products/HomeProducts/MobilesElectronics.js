@@ -1,17 +1,16 @@
 import { useEffect, useState } from 'react';
 import axios from "axios"
-import ProductSlider from "../ProductSlider";
 import ProductCard from '../ProductCard';
 
 
-const MenFashion = () => {
+const MobilesElectronics = () => {
     // state
     const [products, setProducts] = useState({});
 
     useEffect(() => {
         const getData = async () => {
-            const res = await axios(`${process.env.NEXT_PUBLIC_BASE_URL}/api/product/getMenFashion`)
-            setProducts(res.data.tshirts);
+            const res = await axios(`${process.env.NEXT_PUBLIC_BASE_URL}/api/product/getElectronicsMobile`)
+            setProducts(res.data.mobiles);
         }
         getData()
     }, [])
@@ -21,10 +20,9 @@ const MenFashion = () => {
             <div className="my-10">
                 <div className="divider">
                     <h1 className="text-2xl font-bold text-secondary uppercase">
-                        Men&rsquo;s Fashion
+                        Mobiles
                     </h1>
                 </div>
-                {/* <ProductSlider products={products}></ProductSlider> */}
 
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-3 px-5">
                     {
@@ -44,4 +42,4 @@ const MenFashion = () => {
 };
 
 
-export default MenFashion
+export default MobilesElectronics

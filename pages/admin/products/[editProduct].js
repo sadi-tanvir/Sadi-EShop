@@ -57,12 +57,6 @@ const EditProduct = () => {
         }
     }
 
-    // handle input change
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setProduct({ ...product, [name]: value })
-    }
-
 
     // handle Update Product
     const handleUpdateProduct = async (e) => {

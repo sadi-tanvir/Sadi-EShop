@@ -92,7 +92,7 @@ const Products = () => {
                         <div className="flex flex-wrap items-center mb-3">
                             <div className="mb-4 md:mb-0 w-full px-4 max-w-full flex-grow flex-1">
                                 <h3 className={`font-bold text-2xl text-secondary`} >
-                                    Customer&rsquo;s Order
+                                    Products Management
                                 </h3>
                             </div>
 
@@ -138,8 +138,8 @@ const Products = () => {
                                                     <tr>
                                                         <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left flex items-center">
                                                             <span className={`ml-3 inline-block text-secondary font-bold text-md`}>
-                                                                <span className="block mb-2">
-                                                                    {product.name.slice(0, 20)}
+                                                                <span title={product.name} className="block mb-2">
+                                                                    {product.name.length >= 18 ? `${product.name.slice(0, 18)}...` : product.name}
                                                                 </span>
                                                             </span>
                                                         </th>

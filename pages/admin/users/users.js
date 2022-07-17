@@ -93,7 +93,7 @@ const Users = () => {
                         <div className="flex flex-wrap items-center">
                             <div className="w-full px-4 max-w-full flex-grow flex-1 mb-5 md:mb-0">
                                 <h3 className={`font-bold text-2xl text-secondary`} >
-                                    Customer&rsquo;s Order
+                                    User&rsquo;s Information
                                 </h3>
                             </div>
 

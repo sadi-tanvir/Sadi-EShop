@@ -14,7 +14,7 @@ const MenFashion = ({ products }) => {
             <div className="my-14 w-11/12 m-auto">
                 <div className="divider">
                     <h1 className="text-2xl font-bold text-secondary uppercase">
-                        Mens Fashion
+                        Men&rsquo;s Fashion
                     </h1>
                 </div>
 
@@ -41,7 +41,7 @@ export async function getServerSideProps() {
     const products = await axios(`${process.env.NEXT_PUBLIC_BASE_URL}/api/product/getMenFashion`)
 
     // Pass data to the page via props
-    return { props: { products: products.data.tshirts } }
+    return { props: { products: products.data.fashion } }
 }
 
 

@@ -90,9 +90,10 @@ const Login = () => {
                                     </span>
                                 </Link>
                             </div>
-                            <div className="divider">OR</div>
+
+                            {/* <div className="divider">OR</div> */}
                             {/* social login */}
-                            <SocialLogin />
+                            {/* <SocialLogin /> */}
                         </form>
                     </div>
                 </div>

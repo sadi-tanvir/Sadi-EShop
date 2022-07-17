@@ -9,25 +9,25 @@ const handler = async (req, res) => {
 
         const products = await Product.find({ category: "fashion/men" });
 
-        let tshirts = {}
+        let fashion = {}
 
         for (let product of products) {
-            if (product.name in tshirts) {
-                if (!tshirts[product.name].size.includes(product.size) && product.availableQty > 0) {
-                    tshirts[product.name].size.push(product.size)
+            if (product.name in fashion) {
+                if (!fashion[product.name].size.includes(product.size) && product.availableQty > 0) {
+                    fashion[product.name].size.push(product.size)
                 }
-                if (!tshirts[product.name].color.includes(product.color) && product.availableQty > 0) {
-                    tshirts[product.name].color.push(product.color)
+                if (!fashion[product.name].color.includes(product.color) && product.availableQty > 0) {
+                    fashion[product.name].color.push(product.color)
                 }
             } else {
-                tshirts[product.name] = JSON.parse(JSON.stringify(product))
-                tshirts[product.name].size = [product.size]
-                tshirts[product.name].color = [product.color]
+                fashion[product.name] = JSON.parse(JSON.stringify(product))
+                fashion[product.name].size = [product.size]
+                fashion[product.name].color = [product.color]
             }
         }
 
         
-        res.json({ tshirts });
+        res.json({ fashion });
 
     } catch (error) {
         console.log(error);

@@ -1,16 +1,16 @@
-import ProductSlider from "../ProductSlider";
 import { useEffect, useState } from 'react';
 import axios from "axios"
-import ProductCard from "../ProductCard";
+import ProductCard from '../ProductCard';
 
-const WomenFashion = () => {
+
+const MonitorsElectronics = () => {
     // state
     const [products, setProducts] = useState({});
 
     useEffect(() => {
         const getData = async () => {
-            const res = await axios(`${process.env.NEXT_PUBLIC_BASE_URL}/api/product/getWomenFashion`)
-            setProducts(res.data.tshirts);
+            const res = await axios(`${process.env.NEXT_PUBLIC_BASE_URL}/api/product/getElectronicsMonitor`)
+            setProducts(res.data.monitors);
         }
         getData()
     }, [])
@@ -20,11 +20,10 @@ const WomenFashion = () => {
             <div className="my-10">
                 <div className="divider">
                     <h1 className="text-2xl font-bold text-secondary uppercase">
-                        Women&rsquo;s Fashion
+                        Monitors
                     </h1>
                 </div>
 
-                {/* <ProductSlider products={products}></ProductSlider> */}
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-3 px-5">
                     {
                         Object.keys(products).splice(0,4).map((elem, index) => {
@@ -42,4 +41,5 @@ const WomenFashion = () => {
     );
 };
 
-export default WomenFashion
+
+export default MonitorsElectronics

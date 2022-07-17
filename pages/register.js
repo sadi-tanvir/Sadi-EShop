@@ -94,10 +94,10 @@ const Register = () => {
     return (
         <>
             <HeadInfo title="Register - Sadi EShop" />
-            <div className="min-h-screen flex justify-center items-center py-20">
+            <div onClick={() => dispatch({ type: 'closeDropDown' })} className="min-h-screen flex justify-center items-center py-20">
                 <div className="flex w-full lg:w-7/12 justify-center items-center bg-white space-y-8">
                     <div className="w-full px-8 md:px-32 lg:px-24">
-                        <form onSubmit={handleSubmit} className="bg-white rounded-md shadow-2xl px-8 py-10   rounded-xl">
+                        <form onSubmit={handleSubmit} className="bg-white shadow-2xl px-8 py-10 rounded-xl">
                             <h1 className="font-bold text-2xl mb-1 text-center text-primary">Please Register!</h1>
                             <p className="text-sm font-normal text-gray-600 mb-8  text-center">Welcome to come here</p>
 
@@ -133,10 +133,11 @@ const Register = () => {
                                     </span>
                                 </Link>
                             </div>
-                            <div className="divider">OR</div>
+                            
+                            {/* <div className="divider">OR</div> */}
 
                             {/* social login */}
-                            <SocialLogin />
+                            {/* <SocialLogin /> */}
                         </form>
                     </div>
                 </div>

@@ -24,6 +24,30 @@ const ProductsIcon = ({ iconClass }) => {
     )
 }
 
+const ElectronicsIcon = ({ iconClass }) => {
+    return (
+        <>
+            <svg xmlns="http://www.w3.org/2000/svg" className={`${iconClass} icon-tabler icon-tabler-puzzle`} width="18" height="18" fill="currentColor" viewBox="0 0 384 512" stroke="currentColor"><path d="M240.5 224H352C365.3 224 377.3 232.3 381.1 244.7C386.6 257.2 383.1 271.3 373.1 280.1L117.1 504.1C105.8 513.9 89.27 514.7 77.19 505.9C65.1 497.1 60.7 481.1 66.59 467.4L143.5 288H31.1C18.67 288 6.733 279.7 2.044 267.3C-2.645 254.8 .8944 240.7 10.93 231.9L266.9 7.918C278.2-1.92 294.7-2.669 306.8 6.114C318.9 14.9 323.3 30.87 317.4 44.61L240.5 224z"/></svg>
+        </>
+    )
+}
+
+const MobileIcon = ({ iconClass }) => {
+    return (
+        <>
+            <svg xmlns="http://www.w3.org/2000/svg" className={`${iconClass} icon-tabler icon-tabler-puzzle`} width="18" height="18" fill="currentColor" viewBox="0 0 384 512"><path d="M304 0h-224c-35.35 0-64 28.65-64 64v384c0 35.35 28.65 64 64 64h224c35.35 0 64-28.65 64-64V64C368 28.65 339.3 0 304 0zM192 480c-17.75 0-32-14.25-32-32s14.25-32 32-32s32 14.25 32 32S209.8 480 192 480zM304 64v320h-224V64H304z"/></svg>
+        </>
+    )
+}
+
+const MonitorIcon = ({ iconClass }) => {
+    return (
+        <>
+            <svg xmlns="http://www.w3.org/2000/svg" className={`${iconClass} icon-tabler icon-tabler-puzzle`} width="18" height="18" fill="currentColor" viewBox="0 0 576 512"><path d="M528 0h-480C21.5 0 0 21.5 0 48v320C0 394.5 21.5 416 48 416h192L224 464H152C138.8 464 128 474.8 128 488S138.8 512 152 512h272c13.25 0 24-10.75 24-24s-10.75-24-24-24H352L336 416h192c26.5 0 48-21.5 48-48v-320C576 21.5 554.5 0 528 0zM512 288H64V64h448V288z"/></svg>
+        </>
+    )
+}
+
 const DeliverablesIcon = ({ iconClass }) => {
     return (
         <>
@@ -108,4 +132,4 @@ const UsersIcon = ({ iconClass }) => {
 
 
 export default DashboardIcon;
-export { ProductsIcon, DeliverablesIcon, InvoicesIcon, InventoryIcon, SettingsIcon, ProductIcon, OrdersIcon, HomeIcon, UsersIcon };
+export { ProductsIcon, ElectronicsIcon,MobileIcon,MonitorIcon, DeliverablesIcon, InvoicesIcon, InventoryIcon, SettingsIcon, ProductIcon, OrdersIcon, HomeIcon, UsersIcon };

@@ -1,6 +1,8 @@
 import React from 'react';
-import MenFashion from "./productSlider/MenFashion"
-import WomenFashion from './productSlider/WomenFashion.js';
+import MenFashion from "./HomeProducts/MenFashion"
+import MobilesElectronics from './HomeProducts/MobilesElectronics';
+import MonitorsElectronics from './HomeProducts/MonitorsElectronics';
+import WomenFashion from './HomeProducts/WomenFashion.js';
 
 
 const HomeProducts = () => {
@@ -8,6 +10,8 @@ const HomeProducts = () => {
         <>
             <MenFashion />
             <WomenFashion />
+            <MobilesElectronics />
+            <MonitorsElectronics />
         </>
     );
 };

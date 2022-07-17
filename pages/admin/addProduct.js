@@ -23,11 +23,12 @@ const AddProduct = () => {
         size: "",
         color: "",
         availableQty: "",
-        description: ""
+        description: "",
+        imgUrl: ""
     })
 
     // color's object
-    const colors = { white: 'bg-white', black: 'bg-gray-700', blue: 'bg-blue-700', red: 'bg-red-700', orange: 'bg-orange-700', gray: 'bg-gray-400' }
+    const colors = { white: 'bg-white', black: 'bg-gray-700', blue: 'bg-blue-700', red: 'bg-red-700', green: 'bg-green-700', orange: 'bg-orange-700', gray: 'bg-gray-400' }
 
     // sizes object
     const sizes = { S: 'S', M: 'M', L: 'L', XL: 'XL', XXL: 'XXL' }
@@ -71,7 +72,7 @@ const AddProduct = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
-            const { name, price, category, size, color, availableQty, description } = product;
+            const { name, price, category, size, color, availableQty, description, imgUrl } = product;
             const res = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/api/admin/products/addproduct`, {
                 name,
                 price,
@@ -80,7 +81,7 @@ const AddProduct = () => {
                 color,
                 availableQty,
                 description,
-                img: picture || "https://i.ibb.co/g7dG1WK/images.png",
+                img: picture || imgUrl || "https://i.ibb.co/g7dG1WK/images.png",
             }, {
                 headers: {
                     'Content-Type': 'application/json',
@@ -161,16 +162,24 @@ const AddProduct = () => {
                                                     />
                                                 </div>
                                             </div>
-                                            <div className="w-full lg:w-6/12 px-4">
-                                                <div className="relative w-full mb-3">
-                                                    <select onChange={(e) => setProduct({ ...product, size: e.target.value })} className="select select-bordered w-full max-w-xs">
-                                                        <option disabled selected>Select Size</option>
+                                            <div className="form-control w-full lg:w-6/12 px-4">
+                                                <div className="relative input-group w-full mb-3">
+                                                    <select onChange={(e) => setProduct({ ...product, size: e.target.value })} className="select select-bordered w-5/12 max-w-xs">
+                                                        <option disabled selected>Size</option>
                                                         {
                                                             Object.keys(sizes).map((size) => {
                                                                 return <option value={size} key={size}>{size}</option>
                                                             })
                                                         }
                                                     </select>
+                                                    <input
+                                                        type="text"
+                                                        name="size"
+                                                        className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                                        placeholder='select or write'
+                                                        onChange={handleChange}
+                                                        value={product.size}
+                                                    />
                                                 </div>
                                             </div>
                                             <div className="w-full lg:w-6/12 px-4">
@@ -195,6 +204,16 @@ const AddProduct = () => {
                                                 onChange={handleChange}
                                                 value={product.description}
                                             ></textarea>
+                                        </div>
+                                        <div className="w-full px-4 mb-3">
+                                            <input
+                                                type="text"
+                                                name="imgUrl"
+                                                className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                                placeholder='Give Image Url Or Click Below to new upload'
+                                                onChange={handleChange}
+                                                value={product.imgUrl}
+                                            />
                                         </div>
 
 

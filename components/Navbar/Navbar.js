@@ -4,22 +4,19 @@ import { useRouter } from "next/router"
 import CartItem from "../Cart/Cart";
 import { MdAccountCircle } from 'react-icons/md';
 import { DownArrowIcon } from "../shared/Icon";
-import { fashionDropItem, smallSizeMenu } from "./fashionDropItem"
+import { fashionDropItem, smallSizeMenu,electronicsDropItem } from "./dropItem"
 import SmallSizeMenu from "./SmallSizeMenu";
-import DashboardIcon, { HomeIcon, InventoryIcon } from "../shared/DashboardIcon";
+import DashboardIcon, { ElectronicsIcon, HomeIcon, InventoryIcon } from "../shared/DashboardIcon";
 
 const Navbar = () => {
     // redux
     const dispatch = useDispatch();
     const { userInfo, isAuthenticate } = useSelector(state => state.authReducer)
-    const { userDropDown, fashionDropDown } = useSelector(state => state.globalReducer)
+    const { userDropDown, fashionDropDown,electronicsDropDown } = useSelector(state => state.globalReducer)
 
     // router
     const router = useRouter()
 
-    const dropdownActivePath = (path) => {
-        return router.pathname == path ? 'bg-primary rounded-md text-white font-bold' : ''
-    }
 
     // handle logout user
     const handleLogOut = () => {
@@ -57,10 +54,10 @@ const Navbar = () => {
                                 </Link>
                                 {
                                     userInfo.role === 'admin' &&
-                                    <Link href="/admin">
-                                        <li className={`${router.pathname == '/admin' ? 'bg-primary shadow-md' : 'bg-gray-200 shadow'} px-4 py-1 rounded-md mr-3 md:my-3`}>
-                                            <a href="#" className={`${router.pathname == '/admin' ? 'text-white' : 'text-secondary'} font-semibold hover:border-primary flex pl-1 align-middle no-underline`}>
-                                                <DashboardIcon iconClass={`${router.pathname == '/admin' ? 'text-white' : 'text-secondary'}`} />
+                                    <Link href="/admin/users/users">
+                                        <li className={`${router.pathname == '/admin/users/users' ? 'bg-primary shadow-md' : 'bg-gray-200 shadow'} px-4 py-1 rounded-md mr-3 md:my-3`}>
+                                            <a href="#" className={`${router.pathname == '/admin/users/users' ? 'text-white' : 'text-secondary'} font-semibold hover:border-primary flex pl-1 align-middle no-underline`}>
+                                                <DashboardIcon iconClass={`${router.pathname == '/admin/users/users' ? 'text-white' : 'text-secondary'}`} />
                                                 <span className="pb-1 md:pb-0 text-sm ml-2">Dashboard</span>
                                             </a>
                                         </li>
@@ -75,6 +72,29 @@ const Navbar = () => {
                                     <div id="userMenu" className={`${fashionDropDown ? "" : "invisible"}  z-50 bg-white w-40 rounded shadow-md mt-2 absolute mt-12 top-0 right-0 min-w-full overflow-auto`}>
                                         <ul className="list-reset px-2 pt-2 rounded-xl">
                                             {fashionDropItem?.map((item, index) => {
+                                                return (
+                                                    <>
+                                                        <Link href={item.path}>
+                                                            <li className={`${router.pathname == item.path ? 'bg-primary rounded-md text-white font-bold shadow-md' : 'shadow text-secondary'} rounded my-2 py-2 px-2 cursor-pointer`}>
+                                                                <a className="font-bold">{item.name}</a>
+                                                            </li>
+                                                        </Link>
+                                                    </>
+                                                )
+                                            })}
+                                        </ul>
+                                    </div>
+                                </li>
+
+                                <li className="relative text-sm">
+                                    <button onClick={() => dispatch({ type: 'electronicsDropDown' })} id="userButton" className="flex items-center focus:outline-none mr-3 bg-gray-100 shadow px-3 py-1 rounded-md">
+                                        <ElectronicsIcon iconClass={`${router.pathname == '/fashion/men' ? 'text-white' : 'text-secondary'}`} />
+                                        <span className="ml-2 pb-1 md:pb-0 text-sm font-semibold text-secondary">Electronics</span>
+                                        <DownArrowIcon iconClass="text-secondary" />
+                                    </button>
+                                    <div id="userMenu" className={`${electronicsDropDown ? "" : "invisible"}  z-50 bg-white w-40 rounded shadow-md mt-2 absolute mt-12 top-0 right-0 min-w-full overflow-auto`}>
+                                        <ul className="list-reset px-2 pt-2 rounded-xl">
+                                            {electronicsDropItem?.map((item, index) => {
                                                 return (
                                                     <>
                                                         <Link href={item.path}>

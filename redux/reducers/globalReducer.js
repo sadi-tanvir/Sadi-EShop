@@ -5,6 +5,7 @@ const initialState = {
     menuDropDown: false,
     userDropDown: false,
     fashionDropDown: false,
+    electronicsDropDown: false,
 }
 
 
@@ -13,14 +14,23 @@ const globalReducer = createReducer(initialState, {
         state.menuDropDown = !state.menuDropDown
         state.userDropDown = false
         state.fashionDropDown = false
+        state.electronicsDropDown = false
     },
     userDropDown: (state, action) => {
         state.userDropDown = !state.userDropDown
         state.menuDropDown = false
         state.fashionDropDown = false
+        state.electronicsDropDown = false
     },
     fashionDropDown: (state, action) => {
         state.fashionDropDown = !state.fashionDropDown
+        state.userDropDown = false
+        state.menuDropDown = false
+        state.electronicsDropDown = false
+    },
+    electronicsDropDown: (state, action) => {
+        state.electronicsDropDown = !state.electronicsDropDown
+        state.fashionDropDown = false
         state.userDropDown = false
         state.menuDropDown = false
     },
@@ -28,6 +38,7 @@ const globalReducer = createReducer(initialState, {
         state.fashionDropDown = false
         state.userDropDown = false
         state.menuDropDown = false
+        state.electronicsDropDown = false
     }
 })
 

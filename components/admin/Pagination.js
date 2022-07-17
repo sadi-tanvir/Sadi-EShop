@@ -6,13 +6,22 @@ const Pagination = ({ count, page, setPage, setSize }) => {
             <div className="flex">
                 <div className="btn-group block mx-auto">
                     {
-                        [...Array(count).keys()].map(num => {
-                            return <button
-                                onClick={() => setPage(num)}
-                                key={num}
-                                className={`${num === page && "btn-active"} btn btn-sm`}>{num + 1}
-                            </button>
-                        })
+                        [...Array(count)?.keys()].length > 5 ?
+                            [...Array(count)?.keys()]?.splice(0, 5)?.map(num => {
+                                return <button
+                                    onClick={() => setPage(num)}
+                                    key={num}
+                                    className={`${num === page && "btn-active"} btn btn-sm`}>{num + 1}
+                                </button>
+                            })
+
+                            : [...Array(count)?.keys()].map(num => {
+                                return <button
+                                    onClick={() => setPage(num)}
+                                    key={num}
+                                    className={`${num === page && "btn-active"} btn btn-sm`}>{num + 1}
+                                </button>
+                            })
                     }
                 </div>
                 <select onChange={(e) => setSize(e.target.value)} style={{ width: '60px' }} className="form-select ml-5 border-2 border-primary rounded-lg" aria-label="Default select example">

@@ -40,7 +40,12 @@ const Cart = () => {
                     <div className="h-[80vh] overflow-auto">
                         <div className="flex flex-col justify-center items-start mb-32">
                             {
-                                Object.keys(cart).map(productKey => <CartItem key={productKey} productKey={productKey} />)
+                                Object.keys(cart).length !== 0 ?
+                                    Object.keys(cart).map(productKey => <CartItem key={productKey} productKey={productKey} />)
+                                    :
+                                    <div className="flex justify-between items-center px-10 pb-2  pt-3">
+                                        <h1 className="text-xl font-bold text-secondary">Cart is empty, please! add some product to checkout</h1>
+                                    </div>
                             }
                         </div>
 
@@ -50,10 +55,10 @@ const Cart = () => {
                                 <h1 className="text-xl font-bold text-primary">${parseFloat(totalPrice).toFixed(2)}</h1>
                             </div>
                             <div className="card-actions justify-end grid grid-cols-2 px-3 pb-4">
-                                <button onClick={() => dispatch({ type: 'clearCart' })} className="style_btn py-1 bg-accent px-4 rounded-md text-white font-bold flex justify-center items-center">
+                                <button disabled={Object.keys(cart).length === 0} onClick={() => dispatch({ type: 'clearCart' })} className="disabled:cursor-not-allowed disabled:bg-red-300 style_btn py-1 bg-accent px-4 rounded-md text-white font-bold flex justify-center items-center">
                                     Clear Cart <DeleteIcon iconClass="w-7 h-7 text-white" />
                                 </button>
-                                <button onClick={checkOutOrder} className="style_btn px-5 py-1 bg-primary rounded-md text-white font-bold flex justify-center items-center">
+                                <button disabled={Object.keys(cart).length === 0} onClick={checkOutOrder} className="disabled:cursor-not-allowed disabled:bg-gray-400 style_btn px-5 py-1 bg-primary rounded-md text-white font-bold flex justify-center items-center">
                                     Checkout <CartIcon iconClass="w-7 h-7 text-white" />
                                 </button>
                             </div>

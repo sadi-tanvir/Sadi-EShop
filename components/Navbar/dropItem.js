@@ -1,11 +1,22 @@
 export const fashionDropItem = [
     {
-        name: "Men Fashion",
+        name: "Men's Fashion",
         path: "/fashion/men",
     },
     {
-        name: "Women Fashion",
+        name: "Women's Fashion",
         path: "/fashion/women",
+    },
+]
+
+export const electronicsDropItem = [
+    {
+        name: "Mobiles",
+        path: "/electronics/mobiles",
+    },
+    {
+        name: "Monitors",
+        path: "/electronics/monitors",
     },
 ]
 
