@@ -14,7 +14,7 @@ const handler = async (req, res) => {
         findUser.isPasswordChange = 'token matched'
         await findUser.save()
 
-        res.send(`<a style="background-color: #34d399; padding: 10px 20px; color: #fff; text-decoration: none ; display:inline-block; margin-top: 200px; margin-left: 450px; cursor: pointer" href="http://localhost:3000/forgot?email=${findUser.email}">Click Here to Reset Password</a>`)
+        res.send(`<a style="background-color: #34d399; padding: 10px 20px; color: #fff; text-decoration: none ; display:inline-block; margin-top: 200px; margin-left: 450px; cursor: pointer" href="${process.env.NEXT_PUBLIC_PORT}/forgot?email=${findUser.email}">Click Here to Reset Password</a>`)
 
     } catch (error) {
         res.status(500).json(error)
