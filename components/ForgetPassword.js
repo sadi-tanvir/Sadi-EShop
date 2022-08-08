@@ -10,7 +10,7 @@ const ForgetPassword = () => {
     // handle form submit
     const handleSendEmail = async () => {
         try {
-            const res = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/api/user/forgotPassword`, { email })
+            const res = await axios.post(`${process.env.NEXT_PUBLIC_PORT}/api/user/forgotPassword`, { email })
 
             console.log(res.data);
             if (res.data.message) {

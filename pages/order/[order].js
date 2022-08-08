@@ -20,8 +20,8 @@ const Order = () => {
     // get product by id
     useEffect(() => {
         const getProduct = async () => {
-            // const res = await axios(`${process.env.NEXT_PUBLIC_BASE_URL}/api/order/getSingleOrder?id=${order}`)
-            const res = await axios(`${process.env.NEXT_PUBLIC_BASE_URL}/api/order/getSingleOrder?id=${order}`, {
+            // const res = await axios(`${process.env.NEXT_PUBLIC_PORT}/api/order/getSingleOrder?id=${order}`)
+            const res = await axios(`${process.env.NEXT_PUBLIC_PORT}/api/order/getSingleOrder?id=${order}`, {
                 headers: {
                     'Content-Type': 'application/json',
                     authentication: accessToken
@@ -57,7 +57,7 @@ const Order = () => {
                                         <img draggable={false} src="/assets/unpaid-icon.png" className="w-14  " alt="unpaid" />
                                 }
                             </div>
-                            <small className="mb-4 inline-block">your order has been  placed successfully</small>
+                            <small className="mb-4 inline-block">Order has been  placed successfully</small>
                             <div className="flex mb-4">
                                 <a className="flex-grow text-secondary border-b-2 border-gray-300 py-2 text-lg px-1">Product Name</a>
                                 <a className="flex-grow border-b-2 border-gray-300 py-2 text-lg px-9"></a>

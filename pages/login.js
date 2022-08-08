@@ -35,7 +35,7 @@ const Login = () => {
         e.preventDefault()
         try {
             const { email, password } = info;
-            const res = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/api/user/login`, { email, password })
+            const res = await axios.post(`${process.env.NEXT_PUBLIC_PORT}/api/user/login`, { email, password })
 
             if (res.data.user) {
                 localStorage.setItem("userInfo", JSON.stringify(res.data.user))

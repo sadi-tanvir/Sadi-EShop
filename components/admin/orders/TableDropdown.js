@@ -6,7 +6,7 @@ import axios from "axios"
 import { useSelector, useDispatch } from 'react-redux';
 import { toast } from "react-toastify"
 
-const TableDropdown = ({ order, handleConfirmPayment, handleConfirmDelivery,handleDeleteOrder }) => {
+const TableDropdown = ({ order, handleConfirmPayment, handleConfirmDelivery, handleDeleteOrder }) => {
     // redux
     const dispatch = useDispatch()
     const { accessToken, userInfo } = useSelector(state => state.authReducer)
@@ -62,8 +62,8 @@ const TableDropdown = ({ order, handleConfirmPayment, handleConfirmDelivery,hand
                     <a onClick={() => handleDeleteOrder(order?._id)} className={"text-sm cursor-pointer py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-accent"}>
                         Delete
                     </a>
-                    
-                    <a onClick={() => router.push(`/ order / ${order?._id}`)} className={"text-sm cursor-pointer py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"}>
+
+                    <a onClick={() => router.push(`/order/${order?._id}`)} className={"text-sm cursor-pointer py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"}>
                         Details
                     </a>
                 </div>

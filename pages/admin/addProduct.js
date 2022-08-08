@@ -73,7 +73,7 @@ const AddProduct = () => {
         e.preventDefault()
         try {
             const { name, price, category, size, color, availableQty, description, imgUrl } = product;
-            const res = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/api/admin/products/addproduct`, {
+            const res = await axios.post(`${process.env.NEXT_PUBLIC_PORT}/api/admin/products/addproduct`, {
                 name,
                 price,
                 category,

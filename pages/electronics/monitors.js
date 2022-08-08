@@ -38,7 +38,7 @@ const MenFashion = ({ products }) => {
 // This gets called on every request
 export async function getServerSideProps() {
 
-    const products = await axios(`${process.env.NEXT_PUBLIC_BASE_URL}/api/product/getElectronicsMonitor`)
+    const products = await axios(`${process.env.NEXT_PUBLIC_PORT}/api/product/getElectronicsMonitor`)
 
     // Pass data to the page via props
     return { props: { products: products.data.monitors } }

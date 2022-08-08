@@ -9,7 +9,7 @@ const MonitorsElectronics = () => {
 
     useEffect(() => {
         const getData = async () => {
-            const res = await axios(`${process.env.NEXT_PUBLIC_BASE_URL}/api/product/getElectronicsMonitor`)
+            const res = await axios(`${process.env.NEXT_PUBLIC_PORT}/api/product/getElectronicsMonitor`)
             setProducts(res.data.monitors);
         }
         getData()

@@ -37,7 +37,7 @@ const DashboardCard = () => {
     // get all orders
     useEffect(() => {
         const getOrders = async () => {
-            const res = await axios(`${process.env.NEXT_PUBLIC_BASE_URL}/api/admin/orders/getOrders`, {
+            const res = await axios(`${process.env.NEXT_PUBLIC_PORT}/api/admin/orders/getOrders`, {
                 headers: {
                     'Content-Type': 'application/json',
                     authentication: accessToken
@@ -51,7 +51,7 @@ const DashboardCard = () => {
     // get all Users
     useEffect(() => {
         const getUsers = async () => {
-            const res = await axios(`${process.env.NEXT_PUBLIC_BASE_URL}/api/admin/users/getUsers`, {
+            const res = await axios(`${process.env.NEXT_PUBLIC_PORT}/api/admin/users/getUsers`, {
                 headers: {
                     'Content-Type': 'application/json',
                     authentication: accessToken

@@ -60,7 +60,7 @@ const ProductInfo = ({ product, variant }) => {
 
     // redirect to selected size product
     const refreshVariant = (newColor, newSize) => {
-        let url = `${process.env.NEXT_PUBLIC_BASE_URL}/product/${variant[newColor][newSize]?.id}`
+        let url = `${process.env.NEXT_PUBLIC_PORT}/product/${variant[newColor][newSize]?.id}`
         router.push(url)
     }
 

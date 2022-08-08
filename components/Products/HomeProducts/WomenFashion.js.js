@@ -8,7 +8,7 @@ const WomenFashion = () => {
 
     useEffect(() => {
         const getData = async () => {
-            const res = await axios(`${process.env.NEXT_PUBLIC_BASE_URL}/api/product/getWomenFashion`)
+            const res = await axios(`${process.env.NEXT_PUBLIC_PORT}/api/product/getWomenFashion`)
             setProducts(res.data.fashion);
         }
         getData()

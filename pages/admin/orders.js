@@ -25,7 +25,7 @@ const Orders = () => {
     // handle Confirm Payment
     const handleConfirmPayment = async (orderId) => {
         try {
-            const res = await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/api/admin/orders/confirmPayment`, {
+            const res = await axios.put(`${process.env.NEXT_PUBLIC_PORT}/api/admin/orders/confirmPayment`, {
                 _id: orderId,
             }, {
                 headers: {
@@ -47,7 +47,7 @@ const Orders = () => {
     // handle Confirm Delivery
     const handleConfirmDelivery = async (orderId) => {
         try {
-            const res = await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/api/admin/orders/confirmDelivery`, {
+            const res = await axios.put(`${process.env.NEXT_PUBLIC_PORT}/api/admin/orders/confirmDelivery`, {
                 _id: orderId,
             }, {
                 headers: {
@@ -73,7 +73,7 @@ const Orders = () => {
             Swal.fire({ title: 'Are you sure?', icon: 'warning', showCancelButton: true, confirmButtonColor: '#3085d6', cancelButtonColor: '#d33', confirmButtonText: 'Yes, cancel it!' }).then((result) => {
                 if (result.isConfirmed) {
                     const deleteData = async () => {
-                        const res = await axios.delete(`${process.env.NEXT_PUBLIC_BASE_URL}/api/admin/orders/deleteOrder?id=${orderId}`, {
+                        const res = await axios.delete(`${process.env.NEXT_PUBLIC_PORT}/api/admin/orders/deleteOrder?id=${orderId}`, {
                             headers: {
                                 'Content-Type': 'application/json',
                                 authentication: accessToken
@@ -97,7 +97,7 @@ const Orders = () => {
     // get count products
     useEffect(() => {
         const countProducts = async () => {
-            const res = await axios(`${process.env.NEXT_PUBLIC_BASE_URL}/api/admin/orders/ordersCount`, {
+            const res = await axios(`${process.env.NEXT_PUBLIC_PORT}/api/admin/orders/ordersCount`, {
                 headers: {
                     'Content-Type': 'application/json',
                     authentication: accessToken
@@ -113,7 +113,7 @@ const Orders = () => {
     // get all orders
     useEffect(() => {
         const getOrders = async () => {
-            const res = await axios(`${process.env.NEXT_PUBLIC_BASE_URL}/api/admin/orders/getOrders?page=${page}&size=${size}`, {
+            const res = await axios(`${process.env.NEXT_PUBLIC_PORT}/api/admin/orders/getOrders?page=${page}&size=${size}`, {
                 headers: {
                     'Content-Type': 'application/json',
                     authentication: accessToken

@@ -41,7 +41,7 @@ const WomenFashion = ({ products }) => {
 // This gets called on every request
 export async function getServerSideProps() {
 
-    const products = await axios(`${process.env.NEXT_PUBLIC_BASE_URL}/api/product/getWomenFashion`)
+    const products = await axios(`${process.env.NEXT_PUBLIC_PORT}/api/product/getWomenFashion`)
 
 
     // Pass data to the page via props

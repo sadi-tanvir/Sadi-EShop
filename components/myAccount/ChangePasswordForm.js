@@ -25,7 +25,7 @@ const ChangePasswordForm = () => {
         e.preventDefault()
         try {
             const { oldPassword, newPassword } = user;
-            const res = await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/api/user/changePassword`, {
+            const res = await axios.put(`${process.env.NEXT_PUBLIC_PORT}/api/user/changePassword`, {
                 oldPassword,
                 newPassword
             }, {

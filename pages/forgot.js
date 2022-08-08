@@ -35,7 +35,7 @@ const Login = () => {
         e.preventDefault()
         try {
             const { newPassword, confirmPassword } = password;
-            const res = await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/api/user/resetPassword`, { email: router.query.email, newPassword, confirmPassword })
+            const res = await axios.put(`${process.env.NEXT_PUBLIC_PORT}/api/user/resetPassword`, { email: router.query.email, newPassword, confirmPassword })
 
             if (res.data.message) {
                 toast.success(res.data.message)

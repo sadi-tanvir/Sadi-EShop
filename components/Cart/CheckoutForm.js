@@ -26,7 +26,7 @@ const CheckoutForm = () => {
 
     // check cart tempering
     useEffect(() => {
-        fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/order/checkCartTempering`, {
+        fetch(`${process.env.NEXT_PUBLIC_PORT}/api/order/checkCartTempering`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
@@ -75,7 +75,7 @@ const CheckoutForm = () => {
         e.preventDefault()
         try {
             const { email, phone, address, zipCode } = shipping;
-            const res = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/api/order/createOrder`, {
+            const res = await axios.post(`${process.env.NEXT_PUBLIC_PORT}/api/order/createOrder`, {
                 userEmail: email,
                 products: cart,
                 phone: phone,

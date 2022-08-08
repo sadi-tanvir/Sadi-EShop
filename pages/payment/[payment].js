@@ -33,7 +33,7 @@ const Payment = () => {
     // get product by id
     useEffect(() => {
         const getProduct = async () => {
-            const res = await axios(`${process.env.NEXT_PUBLIC_BASE_URL}/api/order/getSingleOrder?id=${payment}`, {
+            const res = await axios(`${process.env.NEXT_PUBLIC_PORT}/api/order/getSingleOrder?id=${payment}`, {
                 headers: {
                     'Content-Type': 'application/json',
                     authentication: accessToken

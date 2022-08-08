@@ -29,7 +29,7 @@ const Cart = () => {
 
     return (
         <>
-            <div className="dropdown dropdown-end">
+            <div className="dropdown dropdown-end ml-2">
                 <label tabIndex="0">
                     <div className="indicator mr-5 md:mr-0">
                         <span className="indicator-item badge badge-secondary text-white font-bold">{Object.keys(cart).length}</span>
@@ -44,7 +44,7 @@ const Cart = () => {
                                     Object.keys(cart).map(productKey => <CartItem key={productKey} productKey={productKey} />)
                                     :
                                     <div className="flex justify-between items-center px-10 pb-2  pt-3">
-                                        <h1 className="text-xl font-bold text-secondary">Cart is empty, please! add some product to checkout</h1>
+                                        <h1 className="text-xl font-bold text-secondary">Cart is Empty, Please! add some products to checkout</h1>
                                     </div>
                             }
                         </div>

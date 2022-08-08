@@ -63,7 +63,7 @@ const EditProduct = () => {
         e.preventDefault()
         try {
             const { name, price, category, size, color, availableQty, description, img } = productState;
-            const res = await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/api/admin/products/editProduct?id=${editProduct}`, {
+            const res = await axios.put(`${process.env.NEXT_PUBLIC_PORT}/api/admin/products/editProduct?id=${editProduct}`, {
                 name,
                 price,
                 category,
@@ -91,7 +91,7 @@ const EditProduct = () => {
     // get product information
     useEffect(() => {
         const getProduct = async () => {
-            const res = await axios(`${process.env.NEXT_PUBLIC_BASE_URL}/api/admin/products/getSingleProduct?id=${editProduct}`, {
+            const res = await axios(`${process.env.NEXT_PUBLIC_PORT}/api/admin/products/getSingleProduct?id=${editProduct}`, {
                 headers: {
                     'Content-Type': 'application/json',
                     authentication: accessToken
@@ -236,7 +236,7 @@ const EditProduct = () => {
                                         </div>
                                     </div>
                                     <div className="px-4 py-3 bg-gray-50 text-right sm:px-6 pb-10">
-                                        <button disabled={loading ? true : false} type="submit" className="disabled:cursor-not-allowed inline-flex w-full md:w-4/12 justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-primary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">Add Product</button>
+                                        <button disabled={loading ? true : false} type="submit" className="disabled:cursor-not-allowed inline-flex w-full md:w-4/12 justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-primary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">Update Product</button>
                                     </div>
                                 </form>
                             </div>

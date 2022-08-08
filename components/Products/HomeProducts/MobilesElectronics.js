@@ -9,7 +9,7 @@ const MobilesElectronics = () => {
 
     useEffect(() => {
         const getData = async () => {
-            const res = await axios(`${process.env.NEXT_PUBLIC_BASE_URL}/api/product/getElectronicsMobile`)
+            const res = await axios(`${process.env.NEXT_PUBLIC_PORT}/api/product/getElectronicsMobile`)
             setProducts(res.data.mobiles);
         }
         getData()

@@ -62,7 +62,7 @@ const UserInfoForm = () => {
         e.preventDefault()
         try {
             const { name, email, phone, address } = user;
-            const res = await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/api/user/updateUser`, {
+            const res = await axios.put(`${process.env.NEXT_PUBLIC_PORT}/api/user/updateUser`, {
                 name,
                 email,
                 phone,

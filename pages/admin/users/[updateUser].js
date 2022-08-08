@@ -59,12 +59,12 @@ const EditUser = () => {
         e.preventDefault()
         try {
             const { name, email, phone, role, isActive, address, img } = userState;
-            const res = await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/api/admin/users/updateUser?id=${updateUser}`, {
+            const res = await axios.put(`${process.env.NEXT_PUBLIC_PORT}/api/admin/users/updateUser?id=${updateUser}`, {
                 name,
                 email,
                 phone,
                 role,
-                isActive:JSON.parse(isActive),
+                isActive:JSON.parse(isActive || false),
                 address,
                 img: picture || img,
             }, {
@@ -79,7 +79,7 @@ const EditUser = () => {
             }
         } catch (error) {
             console.log(error);
-            toast.error(error.response.data.message)
+            toast.error(error.response?.data.message)
         }
     }
 
@@ -88,7 +88,7 @@ const EditUser = () => {
     // get user information
     useEffect(() => {
         const getUser = async () => {
-            const res = await axios(`${process.env.NEXT_PUBLIC_BASE_URL}/api/admin/users/getSingleUser?id=${updateUser}`, {
+            const res = await axios(`${process.env.NEXT_PUBLIC_PORT}/api/admin/users/getSingleUser?id=${updateUser}`, {
                 headers: {
                     'Content-Type': 'application/json',
                     authentication: accessToken
@@ -216,7 +216,7 @@ const EditUser = () => {
                                         </div>
                                     </div>
                                     <div className="px-4 py-3 bg-gray-50 text-right sm:px-6 pb-10">
-                                        <button disabled={loading ? true : false} type="submit" className="disabled:cursor-not-allowed inline-flex w-full md:w-4/12 justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-primary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">Add Product</button>
+                                        <button disabled={loading ? true : false} type="submit" className="disabled:cursor-not-allowed inline-flex w-full md:w-4/12 justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-primary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">Update Information</button>
                                     </div>
                                 </form>
                             </div>

@@ -26,7 +26,7 @@ const PaymentForm = ({ product }) => {
      const { accessToken } = useSelector(state => state.authReducer)
 
     useEffect(() => {
-        fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/payment/createPaymentIntent?price=${product?.amount}`, {
+        fetch(`${process.env.NEXT_PUBLIC_PORT}/api/payment/createPaymentIntent?price=${product?.amount}`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
@@ -91,7 +91,7 @@ const PaymentForm = ({ product }) => {
                 message: "Congrats! your payment has been completed.",
                 trx: paymentIntent?.id
             })
-            fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/order/updatePaymentStatus`, {
+            fetch(`${process.env.NEXT_PUBLIC_PORT}/api/order/updatePaymentStatus`, {
                 method: 'PATCH',
                 headers: {
                     'content-type': 'application/json'

@@ -29,7 +29,7 @@ const Products = () => {
             Swal.fire({ title: 'Are you sure?', icon: 'warning', showCancelButton: true, confirmButtonColor: '#3085d6', cancelButtonColor: '#d33', confirmButtonText: 'Yes, cancel it!' }).then((result) => {
                 if (result.isConfirmed) {
                     const deleteData = async () => {
-                        const res = await axios.delete(`${process.env.NEXT_PUBLIC_BASE_URL}/api/admin/products/deleteProduct?id=${orderId}`, {
+                        const res = await axios.delete(`${process.env.NEXT_PUBLIC_PORT}/api/admin/products/deleteProduct?id=${orderId}`, {
                             headers: {
                                 'Content-Type': 'application/json',
                                 authentication: accessToken
@@ -54,7 +54,7 @@ const Products = () => {
     // get count products
     useEffect(() => {
         const countProducts = async () => {
-            const res = await axios(`${process.env.NEXT_PUBLIC_BASE_URL}/api/admin/products/productsCount`, {
+            const res = await axios(`${process.env.NEXT_PUBLIC_PORT}/api/admin/products/productsCount`, {
                 headers: {
                     'Content-Type': 'application/json',
                     authentication: accessToken
@@ -70,7 +70,7 @@ const Products = () => {
     // get all products
     useEffect(() => {
         const getProducts = async () => {
-            const res = await axios(`${process.env.NEXT_PUBLIC_BASE_URL}/api/admin/products/getProducts?page=${page}&size=${size}`, {
+            const res = await axios(`${process.env.NEXT_PUBLIC_PORT}/api/admin/products/getProducts?page=${page}&size=${size}`, {
                 headers: {
                     'Content-Type': 'application/json',
                     authentication: accessToken

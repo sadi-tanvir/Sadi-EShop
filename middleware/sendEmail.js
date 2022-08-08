@@ -22,7 +22,7 @@ const SendEmail = (name, email, token) => {
         <br/>
         <br/>
         
-        <a style="background-color: '#34d399'; padding: '5px 10px'; color: '#fff'; text-decoration: none " href="${process.env.NEXT_PUBLIC_BASE_URL}/api/user/matchRecoverEmail?token=${token}&email=${email}">Confirm Your Email</a>
+        <a style="background-color: '#34d399'; padding: '5px 10px'; color: '#fff'; text-decoration: none " href="${process.env.NEXT_PUBLIC_PORT}/api/user/matchRecoverEmail?token=${token}&email=${email}">Confirm Your Email</a>
 
         <br/>
         <br/>

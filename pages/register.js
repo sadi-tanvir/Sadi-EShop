@@ -65,7 +65,7 @@ const Register = () => {
         e.preventDefault()
         try {
             const { name, email, password } = info;
-            const res = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/api/user/register`, { name, email, password, img: picture })
+            const res = await axios.post(`${process.env.NEXT_PUBLIC_PORT}/api/user/register`, { name, email, password, img: picture })
             if (res.data.user) {
                 localStorage.setItem("userInfo", JSON.stringify(res.data.user))
                 localStorage.setItem("accessToken", JSON.stringify(res.data.token))

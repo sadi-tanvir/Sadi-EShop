@@ -29,7 +29,7 @@ const Users = () => {
             Swal.fire({ title: 'Are you sure?', icon: 'warning', showCancelButton: true, confirmButtonColor: '#3085d6', cancelButtonColor: '#d33', confirmButtonText: 'Yes, cancel it!' }).then((result) => {
                 if (result.isConfirmed) {
                     const deleteData = async () => {
-                        const res = await axios.delete(`${process.env.NEXT_PUBLIC_BASE_URL}/api/admin/users/deleteUser?id=${userId}`, {
+                        const res = await axios.delete(`${process.env.NEXT_PUBLIC_PORT}/api/admin/users/deleteUser?id=${userId}`, {
                             headers: {
                                 'Content-Type': 'application/json',
                                 authentication: accessToken
@@ -53,7 +53,7 @@ const Users = () => {
     // get count users
     useEffect(() => {
         const countUsers = async () => {
-            const res = await axios(`${process.env.NEXT_PUBLIC_BASE_URL}/api/admin/users/usersCount`, {
+            const res = await axios(`${process.env.NEXT_PUBLIC_PORT}/api/admin/users/usersCount`, {
                 headers: {
                     'Content-Type': 'application/json',
                     authentication: accessToken
@@ -69,7 +69,7 @@ const Users = () => {
     // get all Users
     useEffect(() => {
         const getUsers = async () => {
-            const res = await axios(`${process.env.NEXT_PUBLIC_BASE_URL}/api/admin/users/getUsers?page=${page}&size=${size}`, {
+            const res = await axios(`${process.env.NEXT_PUBLIC_PORT}/api/admin/users/getUsers?page=${page}&size=${size}`, {
                 headers: {
                     'Content-Type': 'application/json',
                     authentication: accessToken

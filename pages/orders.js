@@ -19,7 +19,7 @@ const Orders = () => {
     // get my orders
     useEffect(() => {
         const getMyOrders = async () => {
-            const res = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/order/getMyOrders?email=${userInfo.email}`, {
+            const res = await axios.get(`${process.env.NEXT_PUBLIC_PORT}/api/order/getMyOrders?email=${userInfo.email}`, {
                 headers: {
                     'Content-Type': 'application/json',
                     authentication: accessToken
