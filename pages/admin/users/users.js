@@ -97,7 +97,7 @@ const Users = () => {
                                     User&rsquo;s Information
                                 </h3>
                             </div>
-                            <input onChange={(e) => setSearch(e.target.value)} type="text" placeholder="Search User" className="input input-bordered border-2 input-md input-primary w-full max-w-xs" />
+                            <input onChange={(e) => setSearch(e.target.value)} type="text" placeholder="Search by email/name/phone/role" className="input input-bordered border-2 input-md input-primary w-full max-w-xs" />
                         </div>
                     </div>
                     <div className="">

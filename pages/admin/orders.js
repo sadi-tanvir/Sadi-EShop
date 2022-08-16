@@ -21,6 +21,7 @@ const Orders = () => {
     const [count, setCount] = useState(0)
     const [size, setSize] = useState(5)
     const [page, setPage] = useState(0)
+    const [search, setSearch] = useState("")
 
     // handle Confirm Payment
     const handleConfirmPayment = async (orderId) => {
@@ -113,7 +114,7 @@ const Orders = () => {
     // get all orders
     useEffect(() => {
         const getOrders = async () => {
-            const res = await axios(`${process.env.NEXT_PUBLIC_PORT}/api/admin/orders/getOrders?page=${page}&size=${size}`, {
+            const res = await axios(`${process.env.NEXT_PUBLIC_PORT}/api/admin/orders/getOrders?page=${page}&size=${size}&search=${search}`, {
                 headers: {
                     'Content-Type': 'application/json',
                     authentication: accessToken
@@ -122,7 +123,7 @@ const Orders = () => {
             setOrders(res.data.orders)
         }
         getOrders()
-    }, [isChanged, accessToken, size, page])
+    }, [isChanged, accessToken, size, page, search])
 
 
     return (
@@ -141,13 +142,8 @@ const Orders = () => {
                                 </h3>
                             </div>
 
-                            {/* pagination */}
-                            <Pagination
-                                count={count}
-                                page={page}
-                                setPage={setPage}
-                                setSize={setSize}
-                            />
+                            {/* search orders */}
+                            <input onChange={(e) => setSearch(e.target.value)} type="text" placeholder="Search By Customer&rsquo;s Email/Phone/TRX ID" className="input input-bordered border-2 input-md input-primary w-full max-w-xs" />
                         </div>
                     </div>
                     <div className="">
@@ -157,7 +153,7 @@ const Orders = () => {
                                 <thead>
                                     <tr className="">
                                         <th className={"px-6 align-middle border border-solid py-3 font-bold text-md uppercase border-l-0 border-r-0 whitespace-nowrap text-left bg-blueGray-50 text-secondary border-blueGray-100"}>
-                                            Order Id
+                                            Email/Phone
                                         </th>
                                         <th className={"px-6 align-middle border border-solid py-3 font-bold text-md uppercase border-l-0 border-r-0 whitespace-nowrap text-left bg-blueGray-50 text-secondary border-blueGray-100"}>
                                             Qty
@@ -187,7 +183,7 @@ const Orders = () => {
                                                                     {order.userEmail.slice(0, 20)}
                                                                 </span>
                                                                 <span className="block">
-                                                                    {order._id}
+                                                                    {order.phone}
                                                                 </span>
                                                             </span>
                                                         </th>
@@ -255,6 +251,15 @@ const Orders = () => {
                                 </tbody>
                             </table>
                         </div>
+                    </div>
+                    {/* pagination */}
+                    <div className="py-5">
+                        <Pagination
+                            count={count}
+                            page={page}
+                            setPage={setPage}
+                            setSize={setSize}
+                        />
                     </div>
                 </div>
             </SidebarLayout>
