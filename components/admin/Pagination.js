@@ -3,8 +3,8 @@ import React from 'react';
 const Pagination = ({ count, page, setPage, setSize }) => {
     return (
         <>
-            <div className="flex">
-                <div className="btn-group block mx-auto">
+            <div className="flex justify-center">
+                <div className="btn-group block">
                     {
                         [...Array(count)?.keys()].length > 5 ?
                             [...Array(count)?.keys()]?.splice(0, 5)?.map(num => {

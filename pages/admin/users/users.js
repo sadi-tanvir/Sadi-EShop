@@ -20,6 +20,7 @@ const Users = () => {
     const [count, setCount] = useState(0)
     const [size, setSize] = useState(5)
     const [page, setPage] = useState(0)
+    const [search, setSearch] = useState("")
 
 
 
@@ -69,7 +70,7 @@ const Users = () => {
     // get all Users
     useEffect(() => {
         const getUsers = async () => {
-            const res = await axios(`${process.env.NEXT_PUBLIC_PORT}/api/admin/users/getUsers?page=${page}&size=${size}`, {
+            const res = await axios(`${process.env.NEXT_PUBLIC_PORT}/api/admin/users/getUsers?page=${page}&size=${size}&search=${search}`, {
                 headers: {
                     'Content-Type': 'application/json',
                     authentication: accessToken
@@ -78,7 +79,7 @@ const Users = () => {
             setUsers(res.data.users)
         }
         getUsers()
-    }, [isChanged, accessToken, size, page])
+    }, [isChanged, accessToken, size, page, search])
 
 
     return (
@@ -96,14 +97,7 @@ const Users = () => {
                                     User&rsquo;s Information
                                 </h3>
                             </div>
-
-                            {/* pagination */}
-                            <Pagination
-                                count={count}
-                                page={page}
-                                setPage={setPage}
-                                setSize={setSize}
-                            />
+                            <input onChange={(e) => setSearch(e.target.value)} type="text" placeholder="Search User" className="input input-bordered border-2 input-md input-primary w-full max-w-xs" />
                         </div>
                     </div>
                     <div className="">
@@ -192,6 +186,15 @@ const Users = () => {
                                 </tbody>
                             </table>
                         </div>
+                    </div>
+                    {/* pagination */}
+                    <div className="py-5">
+                        <Pagination
+                            count={count}
+                            page={page}
+                            setPage={setPage}
+                            setSize={setSize}
+                        />
                     </div>
                 </div>
             </SidebarLayout>

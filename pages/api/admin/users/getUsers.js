@@ -8,7 +8,19 @@ const handler = async (req, res) => {
     try {
         if (req.method !== 'GET') return res.status(400).json({ message: 'Method not allowed' });
 
-        const { page, size } = req.query;
+        const { page, size, search } = req.query;
+
+        // user searching query
+        const query = search ?
+            {
+                $or: [
+                    { email: { $regex: search, $options: "i" } },
+                    { name: { $regex: search, $options: "i" } },
+                    { phone: { $regex: search, $options: "i" } },
+                    { role: { $regex: search, $options: "i" } }
+                ]
+            }
+            : {}
 
         // check authentication
         const decoded = jwt.verify(req.headers.authentication, process.env.SECRET_KEY)
@@ -18,7 +30,7 @@ const handler = async (req, res) => {
 
         // get users
         if (page && size) {
-            const users = await User.find().skip(page * size).limit(size)
+            const users = await User.find(query).skip(page * size).limit(size)
             if (!users) return res.status(400).json({ message: 'Failed to find users' });
             res.json({
                 users
