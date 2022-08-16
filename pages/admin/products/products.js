@@ -16,6 +16,7 @@ const Products = () => {
     const [count, setCount] = useState(0)
     const [size, setSize] = useState(5)
     const [page, setPage] = useState(0)
+    const [search, setSearch] = useState("")
 
 
     // state
@@ -70,7 +71,7 @@ const Products = () => {
     // get all products
     useEffect(() => {
         const getProducts = async () => {
-            const res = await axios(`${process.env.NEXT_PUBLIC_PORT}/api/admin/products/getProducts?page=${page}&size=${size}`, {
+            const res = await axios(`${process.env.NEXT_PUBLIC_PORT}/api/admin/products/getProducts?page=${page}&size=${size}&search=${search}`, {
                 headers: {
                     'Content-Type': 'application/json',
                     authentication: accessToken
@@ -79,7 +80,7 @@ const Products = () => {
             setProducts(res.data.products)
         }
         getProducts()
-    }, [isChanged, accessToken, size, page])
+    }, [isChanged, accessToken, size, page, search])
     return (
         <>
             {/* Breadcrumbs & header */}
@@ -87,22 +88,17 @@ const Products = () => {
             <HeadInfo title="Products - Sadi EShop" />
 
             <SidebarLayout>
-                <div className={`px-5 flex flex-col min-w-0 break-words w-full shadow-lg rounded`}>
+                <div className={`md:px-5 flex flex-col min-w-0 break-words w-full shadow-lg rounded`}>
                     <div className="rounded-t mb-0 px-4 pt-3 border-0">
-                        <div className="flex flex-wrap items-center mb-3">
+                        <div className="flex flex-wrap flex-col-reverse md:flex-row items-center mb-3">
                             <div className="mb-4 md:mb-0 w-full px-4 max-w-full flex-grow flex-1">
                                 <h3 className={`font-bold text-2xl text-secondary`} >
                                     Products Management
                                 </h3>
                             </div>
 
-                            {/* pagination */}
-                            <Pagination
-                                count={count}
-                                page={page}
-                                setPage={setPage}
-                                setSize={setSize}
-                            />
+                            {/* search products */}
+                            <input onChange={(e) => setSearch(e.target.value)} type="text" placeholder="Search Product..." className="input input-bordered border-2 input-md input-primary lg:w-3/12 md:w-4/12 ml-auto" />
                         </div>
                     </div>
                     <div className="">
@@ -179,7 +175,15 @@ const Products = () => {
                                 </tbody>
                             </table>
                         </div>
-
+                    </div>
+                    {/* pagination */}
+                    <div className="py-5">
+                        <Pagination
+                            count={count}
+                            page={page}
+                            setPage={setPage}
+                            setSize={setSize}
+                        />
                     </div>
                 </div>
             </SidebarLayout>

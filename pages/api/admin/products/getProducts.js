@@ -9,7 +9,19 @@ const handler = async (req, res) => {
     try {
         if (req.method !== 'GET') return res.status(400).json({ message: 'Method not allowed' });
 
-        const { page, size } = req.query;
+        const { page, size, search } = req.query;
+
+        // products searching query
+        const query = search ?
+            {
+                $or: [
+                    { name: { $regex: search, $options: "i" } },
+                    { category: { $regex: search, $options: "i" } },
+                    { size: { $regex: search, $options: "i" } },
+                    { color: { $regex: search, $options: "i" } },
+                ]
+            }
+            : {};
 
         // check authentication
         const decoded = jwt.verify(req.headers.authentication, process.env.SECRET_KEY)
@@ -18,7 +30,7 @@ const handler = async (req, res) => {
         if (!findUser) return res.status(401).json({ message: 'Unauthorized User.' })
 
         // get products
-        const products = await Product.find().skip(page * size).limit(size)
+        const products = await Product.find(query).skip(page * size).limit(size)
         if (!products) return res.status(400).json({ message: 'Failed to find products' });
 
         res.json({

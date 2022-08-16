@@ -11,7 +11,7 @@ const handler = async (req, res) => {
 
         const { page, size, search } = req.query;
 
-        // user searching query
+        // Orders searching query
         const query = search ?
             {
                 $or: [

@@ -91,13 +91,15 @@ const Users = () => {
             <SidebarLayout>
                 <div className={`px-5 flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded`}>
                     <div className="rounded-t mb-0 px-4 py-3 border-0">
-                        <div className="flex flex-wrap items-center">
-                            <div className="w-full px-4 max-w-full flex-grow flex-1 mb-5 md:mb-0">
+                        <div className="flex flex-wrap flex-col-reverse md:flex-row items-center mb-3">
+                            <div className="mb-4 md:mb-0 w-full px-4 max-w-full flex-grow flex-1">
                                 <h3 className={`font-bold text-2xl text-secondary`} >
                                     User&rsquo;s Information
                                 </h3>
                             </div>
-                            <input onChange={(e) => setSearch(e.target.value)} type="text" placeholder="Search by email/name/phone/role" className="input input-bordered border-2 input-md input-primary w-full max-w-xs" />
+
+                            {/* search products */}
+                            <input onChange={(e) => setSearch(e.target.value)} type="text" placeholder="Search Users..." className="input input-bordered border-2 input-md input-primary lg:w-3/12 md:w-4/12 ml-auto" />
                         </div>
                     </div>
                     <div className="">
