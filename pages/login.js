@@ -48,7 +48,9 @@ const Login = () => {
             }
 
         } catch (error) {
-            toast.error(Object.values(error.response.data)[0]);
+            if (error?.response?.data) {
+                toast.error(Object?.values(error?.response?.data)[0]);
+            }
         }
     }
 
