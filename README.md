@@ -1,13 +1,66 @@
-# Sadi EShop
-This is an e-commerce based website
+# Sadi-EShop
 
-## 🚀 Website Link [Click Here](https://sadi-e-shop.vercel.app/)
+Welcome to **Sadi-EShop**, an innovative e-shop management website that offers a seamless buying and selling experience.
 
+## Table of Contents
 
-## Functionality
-- an admin can add, remove,  and edit products and also can manage user's data.
-- if user forgot his password, he can reset it and he can also change his password.
-- No one can tamper with cart data.
-- Users can choose different types of product sizes & colors variant.
-- Users can pay online with the stripe payment gateway.
-- Users can see their order, payment & delivery status, and also can see previous order history.
+- [Description](#description)
+- [Technologies Used](#technologies-used)
+- [Live Site](#live-site)
+- [Test Credentials](#test-credentials)
+- [Environment Variables](#environment-variables)
+- [Features and Functionality](#features-and-functionality)
+
+## Description
+
+**Sadi-EShop** is a dynamic e-shop management website designed to offer a comprehensive buying and selling platform.
+
+## Technologies Used
+
+- Next.js (Front-end)
+- Next.js (Back-end)
+- Redux Toolkit
+- Tailwind CSS
+- MongoDB
+- Mongoose
+- Nodemailer
+- Jsonwebtoken
+- bcrypt.js
+- Stripe Payment
+- Cloudinary Upload API
+
+## Live Site
+
+Experience the world of e-store: [Sadi-EShop Live Site](https://sadi-e-shop.vercel.app)
+
+## Test Credentials
+
+Explore the website with these test credentials:
+
+- Email: admin@gmail.com
+- Password: 123456
+
+## Environment Variables
+
+Before running the application, set up the following environment variables:
+
+- `MONGO_USER`: Your MongoDB username.
+- `MONGO_PASS`: Your MongoDB password.
+- `SECRET_KEY`: Secret key for JSON Web Token (JWT) encryption.
+- `NEXT_PUBLIC_PORT`: Port number for the Next.js front-end.
+- `STRIPE_SECRET_KEY`: Secret key for Stripe payment gateway integration.
+
+## Features and Functionality
+
+**Admin Capabilities:**
+- Add, remove, and edit products.
+- Manage user data efficiently.
+
+**User Capabilities:**
+- Password reset for enhanced security.
+- Secure cart data protection.
+- Explore varied product options.
+- Experience seamless online payment.
+- Track orders with real-time status updates.
+
+Unlock a world of seamless e-commerce with **Sadi-EShop**. Discover, shop, and sell with confidence!
